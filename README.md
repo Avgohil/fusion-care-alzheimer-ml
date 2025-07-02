@@ -67,23 +67,33 @@ uvicorn apis.Stage2:app --reload
 !!<Make sure all .pkl files are in their correct models/ folders.>
 
 ##🔮 Future Scope
+
 🧘 Yoga + Diet Plan API based on Prakriti
-
-🌐 Full-stack deployment with React frontend
-
-📈 Admin dashboard for clinical analytics
 
 🤖 Convert into real-time chatbot using LLMs
 
+🗣️ Speech Analysis for Cognitive Health
+
+👁️ Eye Movement Tracking
+
+😊 Emotion + Sentiment Detection
+
+🎙️ Real-Time Voice Assistant
+
+🌐 Multilingual & Vernacular Support
+
 ##🧠 Why This Matters
+
 India lacks preventive tools combining mental health + traditional insights.
 This project bridges that gap by making AI interpretable via Ayurveda.
 
 ##📌 Disclaimer
+
 This project is for research & academic purposes.
 Not intended for clinical diagnosis. Always consult a licensed practitioner.
 
 ##💖 Inspired By
+
 Ayurveda texts: Charaka Samhita
 Modern AI in Healthcare trends
 Hackathons + curiosity for fusion science 
