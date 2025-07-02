@@ -63,6 +63,7 @@ pip install -r requirements.txt
 2.🧠 Run the FastAPI backend
 uvicorn apis.Stage1:app --reload
 uvicorn apis.Stage2:app --reload
+
 !!<Make sure all .pkl files are in their correct models/ folders.>
 
 🔮 Future Scope
