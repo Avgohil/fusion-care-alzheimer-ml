@@ -66,7 +66,7 @@ uvicorn apis.Stage2:app --reload
 
 !!<Make sure all .pkl files are in their correct models/ folders.>
 
-##🔮 Future Scope
+## 🔮 Future Scope
 
 🧘 Yoga + Diet Plan API based on Prakriti
 
@@ -82,20 +82,24 @@ uvicorn apis.Stage2:app --reload
 
 🌐 Multilingual & Vernacular Support
 
-##🧠 Why This Matters
+## 🧠 Why This Matters
 
 India lacks preventive tools combining mental health + traditional insights.
+
 This project bridges that gap by making AI interpretable via Ayurveda.
 
-##📌 Disclaimer
+## 📌 Disclaimer
 
 This project is for research & academic purposes.
+
 Not intended for clinical diagnosis. Always consult a licensed practitioner.
 
 ##💖 Inspired By
 
 Ayurveda texts: Charaka Samhita
+
 Modern AI in Healthcare trends
+
 Hackathons + curiosity for fusion science 
 
 
