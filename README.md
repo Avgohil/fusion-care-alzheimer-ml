@@ -56,8 +56,10 @@ fusion-care-alzheimer-ml/
 
 ## 🚀 How to Run This Project
 
-1. 📦 **Install dependencies**
+## 🧪 Run Locally
+1. Clone the repo  
 ```bash
+git clone https://github.com/Avgohil/fusion-care-alzheimer-ml.git
 pip install -r requirements.txt
 ```
 2.🧠 Run the FastAPI backend
@@ -101,12 +103,12 @@ This project is for research & academic purposes.
 
 Not intended for clinical diagnosis. Always consult a licensed practitioner.
 
-##💖 Inspired By
+## 💖 Inspired By
 
-Ayurveda texts: Charaka Samhita
+This project is deeply inspired by the timeless wisdom of Ayurveda and the cutting-edge innovation in AI:
 
-Modern AI in Healthcare trends
-
-Hackathons + curiosity for fusion science (Team Contribution)
+- 📜 *Charaka Samhita* – Ancient Ayurvedic principles on health, balance & diagnosis  
+- 🧠 Modern advancements in AI for early disease detection, especially in neurology  
+- 🤝 Hackathons, late-night brainstorming, and our shared curiosity for combining tradition with technology  
 
 
