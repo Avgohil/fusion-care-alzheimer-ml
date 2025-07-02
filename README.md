@@ -1,4 +1,4 @@
-# 🧠 Care Catalyst : Early Alzheimer Detection using Ayurveda + ML 🌿
+# 🧠 Care Catalyst : Early Alzheimer Detection using Fusion of Ayurveda + Modern Science + ML 🌿
 
 A unique 2-stage machine learning pipeline that combines **Ancient Ayurvedic principles** with **Modern Medical Science** to provide an early screening tool for **Alzheimer's risk prediction**.
 
@@ -66,7 +66,7 @@ uvicorn apis.Stage2:app --reload
 
 !!<Make sure all .pkl files are in their correct models/ folders.>
 
-🔮 Future Scope
+##🔮 Future Scope
 🧘 Yoga + Diet Plan API based on Prakriti
 
 🌐 Full-stack deployment with React frontend
@@ -75,15 +75,15 @@ uvicorn apis.Stage2:app --reload
 
 🤖 Convert into real-time chatbot using LLMs
 
-🧠 Why This Matters
+##🧠 Why This Matters
 India lacks preventive tools combining mental health + traditional insights.
 This project bridges that gap by making AI interpretable via Ayurveda.
 
-📌 Disclaimer
+##📌 Disclaimer
 This project is for research & academic purposes.
 Not intended for clinical diagnosis. Always consult a licensed practitioner.
 
-💖 Inspired By
+##💖 Inspired By
 Ayurveda texts: Charaka Samhita
 Modern AI in Healthcare trends
 Hackathons + curiosity for fusion science 
