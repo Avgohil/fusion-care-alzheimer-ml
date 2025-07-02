@@ -65,6 +65,13 @@ uvicorn apis.Stage1:app --reload
 uvicorn apis.Stage2:app --reload
 
 !!<Make sure all .pkl files are in their correct models/ folders.>
+### Stage 1 API Output (PrakritiType Prediction) :
+![Input](assets/1.png)
+![Output](assets/2.png)
+
+### Stage 2 API Output (RiskScore & RiskLevel Prediction With Recommendations) :
+![Input](assets/3.png)
+![Output](assets/4.png)
 
 ## 🔮 Future Scope
 
@@ -100,6 +107,6 @@ Ayurveda texts: Charaka Samhita
 
 Modern AI in Healthcare trends
 
-Hackathons + curiosity for fusion science 
+Hackathons + curiosity for fusion science (Team Contribution)
 
 
