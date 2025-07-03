@@ -33,7 +33,6 @@ This project was developed during **Hackathon 2.0 (AI/ML in Healthcare)** at
 |----------------|----------------------------|
 | ML Models      | Scikit-learn, Pandas, NumPy |
 | Backend API    | FastAPI                    |
-| Deployment     | AWS-ready                  |
 | Frontend (WIP) | ReactJS + TailwindCSS      |
 | Format         | `.pkl`, `.csv`, `.ipynb`   |
 
