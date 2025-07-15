@@ -90,6 +90,8 @@ uvicorn apis.Stage2:app --reload
 
 🌐 Multilingual & Vernacular Support
 
+- Integrate genetic biomarkers using deep learning models for enhanced risk prediction
+
 ## 🧠 Why This Matters
 
 India lacks preventive tools combining mental health + traditional insights.
