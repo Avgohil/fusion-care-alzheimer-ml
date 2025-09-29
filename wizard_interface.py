@@ -477,6 +477,126 @@ async def home():
                                 <option value="Moderate">Moderate (average sweating)</option>
                             </select>
                         </div>
+
+                        <div class="form-group">
+                            <label>Speech/Voice:</label>
+                            <select name="Speech_Voice" required>
+                                <option value="">Select your speech pattern...</option>
+                                <option value="Fast">Fast (speak quickly)</option>
+                                <option value="Slow">Slow (speak slowly)</option>
+                                <option value="Moderate">Moderate (normal pace)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Energy Levels:</label>
+                            <select name="Energy_Levels" required>
+                                <option value="">Select your energy pattern...</option>
+                                <option value="Variable">Variable (fluctuating energy)</option>
+                                <option value="High">High (consistently energetic)</option>
+                                <option value="Low">Low (generally tired)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Body Temperature:</label>
+                            <select name="Body_Temperature" required>
+                                <option value="">Select your temperature preference...</option>
+                                <option value="Cold">Cold (always feel cold)</option>
+                                <option value="Hot">Hot (always feel warm)</option>
+                                <option value="Variable">Variable (sometimes cold, sometimes hot)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Weather Sensitivity:</label>
+                            <select name="Weather_Sensitivity" required>
+                                <option value="">Select your weather preference...</option>
+                                <option value="Cold">Cold (prefer cold weather)</option>
+                                <option value="Hot">Hot (prefer hot weather)</option>
+                                <option value="Moderate">Moderate (comfortable in most weather)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Memory:</label>
+                            <select name="Memory" required>
+                                <option value="">Select your memory pattern...</option>
+                                <option value="Poor">Poor (forgetful)</option>
+                                <option value="Good">Good (remember most things)</option>
+                                <option value="Variable">Variable (sometimes good, sometimes poor)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Motion Tendencies:</label>
+                            <select name="Motion_Tendencies" required>
+                                <option value="">Select your movement style...</option>
+                                <option value="Quick">Quick (fast, restless movements)</option>
+                                <option value="Slow">Slow (deliberate, steady movements)</option>
+                                <option value="Moderate">Moderate (balanced movements)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mindset/Emotion:</label>
+                            <select name="Mindset_Emotion" required>
+                                <option value="">Select your emotional tendency...</option>
+                                <option value="Anxious">Anxious (worry often)</option>
+                                <option value="Calm">Calm (generally peaceful)</option>
+                                <option value="Irritable">Irritable (get angry easily)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Elimination/Stool:</label>
+                            <select name="Elimination_Stool" required>
+                                <option value="">Select your bowel pattern...</option>
+                                <option value="Irregular">Irregular (constipation tendency)</option>
+                                <option value="Regular">Regular (normal bowel movements)</option>
+                                <option value="Loose">Loose (tendency for diarrhea)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Sleep Requirement:</label>
+                            <select name="Sleep_Requirement" required>
+                                <option value="">Select your sleep needs...</option>
+                                <option value="Less">Less (need less than 6 hours)</option>
+                                <option value="Average">Average (6-8 hours)</option>
+                                <option value="More">More (need more than 8 hours)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Hunger Onset:</label>
+                            <select name="Hunger_Onset" required>
+                                <option value="">Select your hunger pattern...</option>
+                                <option value="Irregular">Irregular (unpredictable hunger)</option>
+                                <option value="Regular">Regular (predictable meal times)</option>
+                                <option value="Strong">Strong (get very hungry)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Speech Pace:</label>
+                            <select name="Speech_Pace" required>
+                                <option value="">Select your speaking speed...</option>
+                                <option value="Fast">Fast (speak rapidly)</option>
+                                <option value="Slow">Slow (speak slowly)</option>
+                                <option value="Moderate">Moderate (normal speed)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Weight Tendency:</label>
+                            <select name="Weight_Tendency" required>
+                                <option value="">Select your weight pattern...</option>
+                                <option value="Hard to Gain">Hard to Gain (stay thin easily)</option>
+                                <option value="Easy to Gain">Easy to Gain (gain weight easily)</option>
+                                <option value="Stable">Stable (weight stays constant)</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 
@@ -558,6 +678,119 @@ async def home():
                                 <option value="No">Socially active</option>
                                 <option value="Sometimes">Sometimes avoid social situations</option>
                                 <option value="Yes">Frequently avoid social activities</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Diet Type:</label>
+                            <select name="diet_type" required>
+                                <option value="">Select your diet preference...</option>
+                                <option value="Vegetarian">Vegetarian</option>
+                                <option value="Non-Vegetarian">Non-Vegetarian</option>
+                                <option value="Vegan">Vegan</option>
+                                <option value="Mixed">Mixed Diet</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Sleep Quality:</label>
+                            <select name="sleep_quality" required>
+                                <option value="">Select your sleep quality...</option>
+                                <option value="Poor">Poor (restless, interrupted)</option>
+                                <option value="Average">Average (decent sleep)</option>
+                                <option value="Good">Good (deep, restful sleep)</option>
+                                <option value="Excellent">Excellent (perfect sleep)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Stress Level:</label>
+                            <select name="stress_level" required>
+                                <option value="">Select your stress level...</option>
+                                <option value="Low">Low (minimal stress)</option>
+                                <option value="Moderate">Moderate (manageable stress)</option>
+                                <option value="High">High (significant stress)</option>
+                                <option value="Very High">Very High (overwhelming stress)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Physical Activity:</label>
+                            <select name="physical_activity" required>
+                                <option value="">Select your activity level...</option>
+                                <option value="Sedentary">Sedentary (little or no exercise)</option>
+                                <option value="Light">Light (light exercise 1-3 days/week)</option>
+                                <option value="Moderate">Moderate (moderate exercise 3-5 days/week)</option>
+                                <option value="Active">Active (intense exercise 6-7 days/week)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Memory Loss:</label>
+                            <select name="memory_loss" required>
+                                <option value="">Select frequency...</option>
+                                <option value="No">No memory loss</option>
+                                <option value="Mild">Mild (occasional forgetfulness)</option>
+                                <option value="Moderate">Moderate (noticeable memory issues)</option>
+                                <option value="Severe">Severe (significant memory loss)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Repetitive Behavior:</label>
+                            <select name="repetition_behavior" required>
+                                <option value="">Select frequency...</option>
+                                <option value="No">No repetitive behaviors</option>
+                                <option value="Sometimes">Sometimes repeat actions/words</option>
+                                <option value="Yes">Frequently repeat behaviors</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mood Swings:</label>
+                            <select name="mood_swings" required>
+                                <option value="">Select frequency...</option>
+                                <option value="No">Stable mood</option>
+                                <option value="Mild">Mild mood changes</option>
+                                <option value="Moderate">Moderate mood swings</option>
+                                <option value="Severe">Severe mood swings</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Chronic Conditions:</label>
+                            <select name="chronic_conditions" required>
+                                <option value="">Select if you have any...</option>
+                                <option value="None">No chronic conditions</option>
+                                <option value="Diabetes">Diabetes</option>
+                                <option value="Hypertension">High Blood Pressure</option>
+                                <option value="Heart Disease">Heart Disease</option>
+                                <option value="Multiple">Multiple conditions</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Systolic Blood Pressure:</label>
+                            <input type="number" name="systolic_bp" min="80" max="200" required placeholder="Enter systolic BP (e.g., 120)">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Blood Sugar Level (mg/dL):</label>
+                            <input type="number" name="blood_sugar" min="70" max="400" required placeholder="Enter blood sugar (e.g., 100)">
+                        </div>
+
+                        <div class="form-group">
+                            <label>BMI (Body Mass Index):</label>
+                            <input type="number" name="bmi" min="15" max="50" step="0.1" required placeholder="Enter BMI (e.g., 24.5)">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Family History of Alzheimer's:</label>
+                            <select name="family_history" required>
+                                <option value="">Select family history...</option>
+                                <option value="No">No family history</option>
+                                <option value="Yes">Yes, family member(s) had Alzheimer's</option>
+                                <option value="Unknown">Unknown/Unsure</option>
                             </select>
                         </div>
                     </div>
