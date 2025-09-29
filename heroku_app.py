@@ -16,12 +16,18 @@ app = FastAPI(title="Care Catalyst - Complete Health Assessment", version="1.0")
 
 # Load models for Prakriti prediction
 try:
+    import os
+    print(f"Current directory: {os.getcwd()}")
+    print(f"Files in model directory: {os.listdir('model') if os.path.exists('model') else 'model directory not found'}")
+    
     prakriti_model = joblib.load("model/prakriti_model_robust.pkl")
     prakriti_encoder = joblib.load("model/prakriti_encoder.pkl")
     models_loaded = True
-except:
+    print("✅ Models loaded successfully!")
+except Exception as e:
     models_loaded = False
-    print("⚠️ Warning: Model files not found. Using mock responses.")
+    print(f"⚠️ Warning: Model loading failed: {str(e)}")
+    print("Using mock responses instead.")
 
 # Label mapping for Prakriti
 label_map = {0: 'Kapha', 1: 'Pitta', 2: 'Vata'}
