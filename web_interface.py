@@ -68,45 +68,181 @@ async def home():
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>🌿 Care Catalyst - Ayurveda + AI Health Assessment 🧠</title>
         <style>
-            body {
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            * {
                 margin: 0;
-                padding: 20px;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body {
+                font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+                background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+                color: #2d3748;
+                line-height: 1.6;
                 min-height: 100vh;
+                padding: 20px 0;
             }
             .container {
-                max-width: 800px;
+                max-width: 900px;
                 margin: 0 auto;
-                background: white;
-                border-radius: 15px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-                padding: 30px;
+                background: #ffffff;
+                border-radius: 16px;
+                box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+                overflow: hidden;
+                border: 1px solid #e2e8f0;
             }
-            .header {
+            .medical-header {
+                background: linear-gradient(135deg, #2b6cb0 0%, #3182ce 100%);
+                color: white;
+                padding: 40px 30px;
                 text-align: center;
-                color: #4a5568;
-                margin-bottom: 30px;
+                position: relative;
+            }
+            .medical-header::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="medical" patternUnits="userSpaceOnUse" width="20" height="20"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23medical)"/></svg>');
+            }
+            .medical-header h1 {
+                font-size: 2.5rem;
+                font-weight: 700;
+                margin-bottom: 10px;
+                position: relative;
+                z-index: 1;
+            }
+            .medical-header p {
+                font-size: 1.1rem;
+                opacity: 0.9;
+                position: relative;
+                z-index: 1;
+            }
+            .form-content {
+                padding: 40px 30px;
             }
             .section {
-                background: #f7fafc;
-                padding: 20px;
-                margin: 20px 0;
-                border-radius: 10px;
-                border-left: 5px solid #667eea;
+                background: #f8fafc;
+                border: 1px solid #e2e8f0;
+                border-radius: 12px;
+                padding: 25px;
+                margin: 25px 0;
+                position: relative;
+                border-left: 4px solid #3182ce;
+            }
+            .section h3 {
+                color: #2b6cb0;
+                font-size: 1.3rem;
+                font-weight: 600;
+                margin-bottom: 20px;
+                display: flex;
+                align-items: center;
+            }
+            .section h3::before {
+                content: '🏥';
+                margin-right: 10px;
+                font-size: 1.2rem;
             }
             .form-group {
-                margin: 15px 0;
+                margin: 18px 0;
+                display: flex;
+                flex-direction: column;
             }
             label {
-                display: block;
                 font-weight: 600;
                 color: #2d3748;
-                margin-bottom: 5px;
+                margin-bottom: 8px;
+                font-size: 0.95rem;
             }
             input, select {
                 width: 100%;
-                padding: 10px;
+                padding: 12px 16px;
+                border: 2px solid #e2e8f0;
+                border-radius: 8px;
+                font-size: 1rem;
+                background: #ffffff;
+                transition: all 0.3s ease;
+                font-family: inherit;
+            }
+            input:focus, select:focus {
+                outline: none;
+                border-color: #3182ce;
+                box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+                background: #fbfcfd;
+            }
+            input:hover, select:hover {
+                border-color: #cbd5e0;
+            }
+            .submit-btn {
+                background: linear-gradient(135deg, #2b6cb0 0%, #3182ce 100%);
+                color: white;
+                padding: 16px 40px;
+                border: none;
+                border-radius: 12px;
+                font-size: 1.1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                margin: 30px auto;
+                display: block;
+                min-width: 200px;
+                position: relative;
+                overflow: hidden;
+            }
+            .submit-btn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+                transition: left 0.5s;
+            }
+            .submit-btn:hover::before {
+                left: 100%;
+            }
+            .submit-btn:hover {
+                background: linear-gradient(135deg, #2c5282 0%, #2b6cb0 100%);
+                box-shadow: 0 8px 25px rgba(43, 108, 176, 0.3);
+                transform: translateY(-2px);
+            }
+            .medical-badge {
+                display: inline-block;
+                background: #e6fffa;
+                color: #234e52;
+                padding: 4px 12px;
+                border-radius: 20px;
+                font-size: 0.85rem;
+                font-weight: 500;
+                border: 1px solid #b2f5ea;
+                margin-left: 10px;
+            }
+            .info-tooltip {
+                color: #718096;
+                font-size: 0.9rem;
+                margin-top: 4px;
+                font-style: italic;
+            }
+            @media (max-width: 768px) {
+                .container {
+                    margin: 10px;
+                    border-radius: 12px;
+                }
+                .medical-header {
+                    padding: 30px 20px;
+                }
+                .medical-header h1 {
+                    font-size: 2rem;
+                }
+                .form-content {
+                    padding: 30px 20px;
+                }
+                .section {
+                    padding: 20px;
+                }
+            }
                 border: 2px solid #e2e8f0;
                 border-radius: 5px;
                 font-size: 14px;
@@ -136,16 +272,18 @@ async def home():
     </head>
     <body>
         <div class="container">
-            <div class="header">
-                <h1>🌿 Care Catalyst 🧠</h1>
-                <h3>Ayurvedic Constitution + Cognitive Health Assessment</h3>
-                <p>Combining Ancient Wisdom with Modern AI</p>
+            <div class="medical-header">
+                <h1>� Care Catalyst Medical Platform</h1>
+                <p>Advanced AI-Driven Health Assessment System</p>
+                <p style="font-size: 0.95rem; opacity: 0.8;">Integrating Ayurvedic Principles with Modern Clinical Analysis</p>
             </div>
             
-            <form method="post" action="/assess">
-                
-                <div class="section">
-                    <h3>🧬 Ayurvedic Constitution Assessment</h3>
+            <div class="form-content">
+                <form method="post" action="/assess">
+                    
+                    <div class="section">
+                        <h3>Constitutional Analysis <span class="medical-badge">Ayurvedic Profile</span></h3>
+                        <p class="info-tooltip">Complete this section for personalized constitutional assessment based on traditional Ayurvedic principles</p>
                     
                     <div class="form-group">
                         <label>Body Frame:</label>
@@ -349,7 +487,8 @@ async def home():
                 </div>
                 
                 <div class="section">
-                    <h3>🧠 Health & Cognitive Assessment</h3>
+                    <h3>Clinical Assessment <span class="medical-badge">Cognitive Screening</span></h3>
+                    <p class="info-tooltip">Comprehensive cognitive health evaluation following clinical assessment protocols</p>
                     
                     <div class="form-group">
                         <label>Age:</label>
@@ -502,8 +641,9 @@ async def home():
                     </div>
                 </div>
                 
-                <button type="submit" class="submit-btn">🔍 Generate Health Assessment</button>
-            </form>
+                <button type="submit" class="submit-btn">⚕️ Generate Comprehensive Medical Assessment</button>
+                </form>
+            </div>
         </div>
         
     </body>

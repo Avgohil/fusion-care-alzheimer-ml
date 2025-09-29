@@ -389,39 +389,121 @@ async def assess_health(request: Request):
     <!DOCTYPE html>
     <html>
     <head>
-        <title>Your Health Assessment Results</title>
+        <title>Medical Assessment Report - Care Catalyst</title>
         <style>
-            body {{ font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }}
-            .container {{ max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; }}
-            .result-section {{ background: #f9f9f9; padding: 20px; margin: 20px 0; border-radius: 8px; }}
-            .score {{ font-size: 2em; font-weight: bold; text-align: center; margin: 15px 0; }}
-            .back-btn {{ background: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }}
+            * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+            body {{ 
+                font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; 
+                background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+                color: #2d3748;
+                line-height: 1.6;
+                padding: 20px 0;
+            }}
+            .container {{ 
+                max-width: 900px; 
+                margin: 0 auto; 
+                background: white; 
+                border-radius: 16px; 
+                box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+                overflow: hidden;
+                border: 1px solid #e2e8f0;
+            }}
+            .medical-header {{
+                background: linear-gradient(135deg, #2b6cb0 0%, #3182ce 100%);
+                color: white;
+                padding: 40px 30px;
+                text-align: center;
+            }}
+            .medical-header h1 {{
+                font-size: 2.5rem;
+                font-weight: 700;
+                margin-bottom: 10px;
+            }}
+            .results-content {{
+                padding: 40px 30px;
+            }}
+            .result-section {{ 
+                background: #f8fafc; 
+                border: 1px solid #e2e8f0;
+                border-radius: 12px;
+                padding: 25px; 
+                margin: 25px 0; 
+                border-left: 4px solid #3182ce;
+            }}
+            .result-section h3 {{
+                color: #2b6cb0;
+                font-size: 1.3rem;
+                font-weight: 600;
+                margin-bottom: 20px;
+                display: flex;
+                align-items: center;
+            }}
+            .score {{ 
+                font-size: 3em; 
+                font-weight: 700; 
+                text-align: center; 
+                margin: 20px 0;
+                color: #2b6cb0;
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }}
+            .back-btn {{ 
+                background: linear-gradient(135deg, #2b6cb0 0%, #3182ce 100%);
+                color: white; 
+                padding: 16px 30px; 
+                text-decoration: none; 
+                border-radius: 12px;
+                font-weight: 600;
+                display: inline-block;
+                margin: 30px auto;
+                transition: all 0.3s ease;
+            }}
+            .back-btn:hover {{
+                background: linear-gradient(135deg, #2c5282 0%, #2b6cb0 100%);
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(43, 108, 176, 0.3);
+            }}
+            .medical-badge {{
+                background: #e6fffa;
+                color: #234e52;
+                padding: 4px 12px;
+                border-radius: 20px;
+                font-size: 0.85rem;
+                font-weight: 500;
+                margin-left: 10px;
+            }}
         </style>
     </head>
     <body>
         <div class="container">
-            <h1>🌿 Your Health Assessment Results 🧠</h1>
+            <div class="medical-header">
+                <h1>� Medical Assessment Report</h1>
+                <p>Comprehensive Health Analysis Results</p>
+            </div>
             
+            <div class="results-content">
             <div class="result-section">
-                <h3>🧬 Ayurvedic Constitution</h3>
+                <h3>⚕️ Constitutional Analysis <span class="medical-badge">Ayurvedic Profile</span></h3>
                 <div class="score">{dominant_prakriti}</div>
-                <p><strong>Verdict:</strong> {prakriti_result.get("Verdict", "")}</p>
+                <p><strong>Clinical Assessment:</strong> {prakriti_result.get("Verdict", "")}</p>
             </div>
             
             <div class="result-section">
-                <h3>🧠 Cognitive Health Risk</h3>
+                <h3>🧠 Cognitive Risk Analysis <span class="medical-badge">Clinical Screening</span></h3>
                 <div class="score">{risk_result.get("Risk Score (out of 100)", 0)}/100</div>
-                <p><strong>Risk Level:</strong> {risk_result.get("Risk Level", "")}</p>
-                <p><strong>Assessment:</strong> {risk_result.get("Verdict", "")}</p>
+                <p><strong>Risk Classification:</strong> {risk_result.get("Risk Level", "")}</p>
+                <p><strong>Clinical Assessment:</strong> {risk_result.get("Verdict", "")}</p>
             </div>
             
             <div class="result-section">
-                <h3>🌿 Recommendations</h3>
-                <p><strong>Ayurvedic:</strong> {risk_result.get("Ayurveda Recommendations", "")}</p>
-                <p><strong>Medical:</strong> {risk_result.get("Allopathy Recommendations", "")}</p>
+                <h3>📋 Treatment Recommendations <span class="medical-badge">Integrated Approach</span></h3>
+                <p><strong>Traditional Medicine:</strong> {risk_result.get("Ayurveda Recommendations", "")}</p>
+                <p><strong>Modern Medicine:</strong> {risk_result.get("Allopathy Recommendations", "")}</p>
             </div>
             
-            <a href="/" class="back-btn">Take Another Assessment</a>
+            <div style="text-align: center; padding: 20px 0;">
+                <a href="/" class="back-btn">⚕️ New Patient Assessment</a>
+            </div>
+            </div>
         </div>
     </body>
     </html>
