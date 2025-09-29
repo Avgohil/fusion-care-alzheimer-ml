@@ -73,9 +73,74 @@ async def home():
                 padding: 0;
                 box-sizing: border-box;
             }
+            
+            /* Keyframe Animations */
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            @keyframes slideInLeft {
+                from {
+                    opacity: 0;
+                    transform: translateX(-50px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            
+            @keyframes pulse {
+                0%, 100% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(1.05);
+                }
+            }
+            
+            @keyframes floating {
+                0%, 100% {
+                    transform: translateY(0px);
+                }
+                50% {
+                    transform: translateY(-10px);
+                }
+            }
+            
+            @keyframes gradient-shift {
+                0% {
+                    background-position: 0% 50%;
+                }
+                50% {
+                    background-position: 100% 50%;
+                }
+                100% {
+                    background-position: 0% 50%;
+                }
+            }
+            
+            @keyframes shimmer {
+                0% {
+                    transform: translateX(-100%);
+                }
+                100% {
+                    transform: translateX(100%);
+                }
+            }
+            
             body {
                 font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
                 background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+                background-size: 400% 400%;
+                animation: gradient-shift 15s ease infinite;
                 color: #2d3748;
                 line-height: 1.6;
                 min-height: 100vh;
@@ -89,13 +154,22 @@ async def home():
                 box-shadow: 0 4px 25px rgba(0,0,0,0.08);
                 overflow: hidden;
                 border: 1px solid #e2e8f0;
+                animation: fadeInUp 1s ease-out;
+                transition: all 0.3s ease;
+            }
+            .container:hover {
+                box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+                transform: translateY(-2px);
             }
             .medical-header {
-                background: linear-gradient(135deg, #2b6cb0 0%, #3182ce 100%);
+                background: linear-gradient(135deg, #2b6cb0 0%, #3182ce 50%, #2b6cb0 100%);
+                background-size: 200% 200%;
+                animation: gradient-shift 8s ease infinite;
                 color: white;
                 padding: 40px 30px;
                 text-align: center;
                 position: relative;
+                overflow: hidden;
             }
             .medical-header::before {
                 content: '';
@@ -112,15 +186,22 @@ async def home():
                 margin-bottom: 10px;
                 position: relative;
                 z-index: 1;
+                animation: slideInLeft 1s ease-out 0.3s both;
+                transition: all 0.3s ease;
+            }
+            .medical-header h1:hover {
+                animation: floating 2s ease-in-out infinite;
             }
             .medical-header p {
                 font-size: 1.1rem;
                 opacity: 0.9;
                 position: relative;
                 z-index: 1;
+                animation: fadeInUp 1s ease-out 0.6s both;
             }
             .form-content {
                 padding: 40px 30px;
+                animation: fadeInUp 1s ease-out 0.4s both;
             }
             .section {
                 background: #f8fafc;
@@ -130,6 +211,20 @@ async def home():
                 margin: 25px 0;
                 position: relative;
                 border-left: 4px solid #3182ce;
+                animation: slideInLeft 0.8s ease-out both;
+                transition: all 0.3s ease;
+                transform-origin: left center;
+            }
+            .section:nth-child(odd) {
+                animation-delay: 0.1s;
+            }
+            .section:nth-child(even) {
+                animation-delay: 0.2s;
+            }
+            .section:hover {
+                transform: translateX(5px);
+                box-shadow: 0 5px 20px rgba(43, 108, 176, 0.15);
+                border-left-width: 6px;
             }
             .section h3 {
                 color: #2b6cb0;
@@ -148,12 +243,23 @@ async def home():
                 margin: 18px 0;
                 display: flex;
                 flex-direction: column;
+                animation: fadeInUp 0.6s ease-out both;
+            }
+            .form-group:nth-child(odd) {
+                animation-delay: 0.05s;
+            }
+            .form-group:nth-child(even) {
+                animation-delay: 0.1s;
             }
             label {
                 font-weight: 600;
                 color: #2d3748;
                 margin-bottom: 8px;
                 font-size: 0.95rem;
+                transition: color 0.3s ease;
+            }
+            .form-group:hover label {
+                color: #2b6cb0;
             }
             input, select {
                 width: 100%;
@@ -162,20 +268,24 @@ async def home():
                 border-radius: 8px;
                 font-size: 1rem;
                 background: #ffffff;
-                transition: all 0.3s ease;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 font-family: inherit;
+                position: relative;
             }
             input:focus, select:focus {
                 outline: none;
                 border-color: #3182ce;
                 box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
                 background: #fbfcfd;
+                transform: translateY(-2px);
             }
             input:hover, select:hover {
                 border-color: #cbd5e0;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             }
             .submit-btn {
-                background: linear-gradient(135deg, #2b6cb0 0%, #3182ce 100%);
+                background: linear-gradient(135deg, #2b6cb0 0%, #3182ce 50%, #2b6cb0 100%);
+                background-size: 200% 200%;
                 color: white;
                 padding: 16px 40px;
                 border: none;
@@ -183,12 +293,13 @@ async def home():
                 font-size: 1.1rem;
                 font-weight: 600;
                 cursor: pointer;
-                transition: all 0.3s ease;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 margin: 30px auto;
                 display: block;
                 min-width: 200px;
                 position: relative;
                 overflow: hidden;
+                animation: pulse 2s ease-in-out infinite;
             }
             .submit-btn::before {
                 content: '';
@@ -197,20 +308,41 @@ async def home():
                 left: -100%;
                 width: 100%;
                 height: 100%;
-                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-                transition: left 0.5s;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+                transition: left 0.6s ease;
+            }
+            .submit-btn::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                background: rgba(255,255,255,0.2);
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                transition: width 0.6s ease, height 0.6s ease;
+            }
+            .submit-btn:hover {
+                background-size: 100% 100%;
+                animation: gradient-shift 1.5s ease infinite;
+                box-shadow: 0 12px 40px rgba(43, 108, 176, 0.4);
+                transform: translateY(-3px) scale(1.02);
             }
             .submit-btn:hover::before {
                 left: 100%;
             }
-            .submit-btn:hover {
-                background: linear-gradient(135deg, #2c5282 0%, #2b6cb0 100%);
+            .submit-btn:hover::after {
+                width: 300px;
+                height: 300px;
+            }
+            .submit-btn:active {
+                transform: translateY(-1px) scale(0.98);
                 box-shadow: 0 8px 25px rgba(43, 108, 176, 0.3);
-                transform: translateY(-2px);
             }
             .medical-badge {
                 display: inline-block;
-                background: #e6fffa;
+                background: linear-gradient(45deg, #e6fffa, #b2f5ea);
                 color: #234e52;
                 padding: 4px 12px;
                 border-radius: 20px;
@@ -218,13 +350,162 @@ async def home():
                 font-weight: 500;
                 border: 1px solid #b2f5ea;
                 margin-left: 10px;
+                transition: all 0.3s ease;
+                animation: fadeInUp 0.8s ease-out both;
+            }
+            .medical-badge:hover {
+                background: linear-gradient(45deg, #b2f5ea, #81e6d9);
+                transform: scale(1.05);
+                box-shadow: 0 3px 10px rgba(178, 245, 234, 0.4);
             }
             .info-tooltip {
                 color: #718096;
                 font-size: 0.9rem;
                 margin-top: 4px;
                 font-style: italic;
+                opacity: 0.7;
+                animation: fadeInUp 1s ease-out 0.3s both;
+                transition: all 0.3s ease;
             }
+            .section:hover .info-tooltip {
+                opacity: 1;
+                transform: translateY(-2px);
+            }
+            
+            /* Wizard Progress Bar Styles */
+            .progress-container {
+                padding: 30px;
+                background: #ffffff;
+                border-bottom: 1px solid #e2e8f0;
+            }
+            .progress-bar {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            .step {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                position: relative;
+                transition: all 0.3s ease;
+            }
+            .step-number {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: #e2e8f0;
+                color: #718096;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 600;
+                font-size: 1.1rem;
+                transition: all 0.3s ease;
+                margin-bottom: 8px;
+            }
+            .step.active .step-number {
+                background: #3182ce;
+                color: white;
+                animation: pulse 2s ease-in-out infinite;
+            }
+            .step.completed .step-number {
+                background: #38a169;
+                color: white;
+            }
+            .step-label {
+                font-size: 0.85rem;
+                color: #4a5568;
+                text-align: center;
+                min-width: 100px;
+            }
+            .step.active .step-label {
+                color: #3182ce;
+                font-weight: 600;
+            }
+            .step-line {
+                height: 2px;
+                width: 100px;
+                background: #e2e8f0;
+                margin: 0 20px;
+                position: relative;
+                top: -25px;
+            }
+            .step.completed + .step-line {
+                background: #38a169;
+            }
+            
+            /* Wizard Step Content */
+            .wizard-step {
+                display: none;
+                animation: fadeInUp 0.6s ease-out;
+            }
+            .wizard-step.active {
+                display: block;
+            }
+            .step-header {
+                text-align: center;
+                margin: 30px 0;
+                padding: 0 20px;
+            }
+            .step-header h2 {
+                color: #2d3748;
+                font-size: 2rem;
+                margin-bottom: 15px;
+                animation: slideInLeft 0.8s ease-out;
+            }
+            .step-description {
+                color: #4a5568;
+                font-size: 1.1rem;
+                line-height: 1.6;
+                max-width: 600px;
+                margin: 0 auto;
+                animation: fadeInUp 0.8s ease-out 0.2s both;
+            }
+            
+            /* Navigation Buttons */
+            .wizard-navigation {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 30px;
+                border-top: 1px solid #e2e8f0;
+                background: #f8fafc;
+            }
+            .nav-btn {
+                padding: 12px 30px;
+                border: 2px solid #3182ce;
+                border-radius: 8px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-decoration: none;
+                display: inline-block;
+            }
+            .nav-btn.primary {
+                background: #3182ce;
+                color: white;
+            }
+            .nav-btn.primary:hover {
+                background: #2c5282;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(49, 130, 206, 0.3);
+            }
+            .nav-btn.secondary {
+                background: transparent;
+                color: #3182ce;
+            }
+            .nav-btn.secondary:hover {
+                background: #3182ce;
+                color: white;
+            }
+            .nav-btn:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+            
             @media (max-width: 768px) {
                 .container {
                     margin: 10px;
@@ -641,7 +922,27 @@ async def home():
                     </div>
                 </div>
                 
-                <button type="submit" class="submit-btn">⚕️ Generate Comprehensive Medical Assessment</button>
+                <button type="submit" class="submit-btn" onclick="showLoading()">⚕️ Generate Comprehensive Medical Assessment</button>
+                
+                <!-- Loading Animation -->
+                <div id="loading" style="display:none; text-align: center; margin: 20px 0;">
+                    <div style="display: inline-block; animation: spin 1s linear infinite; font-size: 2rem;">⚕️</div>
+                    <p style="margin-top: 10px; color: #2b6cb0; font-weight: 600;">Processing your medical assessment...</p>
+                </div>
+                
+                <script>
+                function showLoading() {
+                    document.getElementById('loading').style.display = 'block';
+                    document.querySelector('.submit-btn').style.display = 'none';
+                }
+                </script>
+                
+                <style>
+                @keyframes spin {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                }
+                </style>
                 </form>
             </div>
         </div>
