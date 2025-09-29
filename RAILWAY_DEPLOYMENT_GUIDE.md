@@ -226,7 +226,6 @@ https://your-app.railway.app/
 
 ## 🌐 Live URL Structure:
 
-After deployment, aapka application ye URLs pe available hoga:
 
 ```
 https://your-app.railway.app/                    # Homepage
@@ -241,7 +240,7 @@ https://your-app.railway.app/docs               # API Documentation
 
 ## 🎉 Congratulations!
 
-Aapka **complete Care Catalyst project** ab Railway pe successfully deploy ho jayega with:
+
 
 - 🏥 Professional healthcare interface
 - 🧠 AI-powered health analysis  
@@ -250,14 +249,5 @@ Aapka **complete Care Catalyst project** ab Railway pe successfully deploy ho ja
 - 💻 Full API access
 - 📱 Mobile-responsive design
 
-**Total time for deployment: ~5 minutes** ⚡
 
----
 
-Ready to deploy? Run this command:
-
-```bash
-cd "E:\Alzheimer-Ayurveda-ML" && railway login && railway init && railway up
-```
-
-**Aapka AI-powered healthcare platform live ho jayega! 🚀**

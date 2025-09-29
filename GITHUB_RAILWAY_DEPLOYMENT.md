@@ -1,6 +1,5 @@
-# 🚀 Care Catalyst - GitHub to Railway Deployment
 
-## 🔥 GitHub se Railway Deployment (Best Method!)
+
 
 ### ✅ **GitHub Repository Setup:**
 
@@ -68,7 +67,7 @@ ENABLE_WEBSOCKETS=true
 
 ## ⚡ **Auto-Deploy on Git Push:**
 
-Jab bhi aap code update karke GitHub pe push karenge, **Railway automatically deploy kar dega!**
+
 
 ```bash
 # Code change karne ke baad
@@ -76,7 +75,7 @@ git add .
 git commit -m "Updated features"
 git push origin main
 
-# Railway automatically deploy kar dega! 🚀
+
 ```
 
 ---
@@ -86,4 +85,3 @@ git push origin main
 https://care-catalyst-production.up.railway.app/
 ```
 
-**GitHub method zyada reliable aur professional hai!** 💪
