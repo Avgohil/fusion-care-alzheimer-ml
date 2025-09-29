@@ -1,0 +1,29 @@
+{
+  "name": "Care Catalyst - Ayurveda AI Health Assessment",
+  "description": "A comprehensive health assessment platform combining Ayurvedic principles with modern AI for early cognitive health screening",
+  "image": "heroku/python",
+  "repository": "https://github.com/yourusername/care-catalyst",
+  "keywords": ["python", "fastapi", "ayurveda", "machine-learning", "healthcare", "ai"],
+  "stack": "heroku-22",
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "addons": [],
+  "env": {
+    "PYTHON_VERSION": {
+      "description": "Python runtime version",
+      "value": "3.11.1"
+    }
+  },
+  "scripts": {
+    "postdeploy": "echo 'Care Catalyst deployed successfully!'"
+  }
+}
