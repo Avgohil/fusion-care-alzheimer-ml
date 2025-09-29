@@ -306,10 +306,10 @@ def predict_risk(input_data: RiskInput):
 # Web interface endpoints
 @app.get("/", response_class=HTMLResponse)
 async def home():
-    """Main assessment form"""
-    with open("web_interface.py", "r", encoding="utf-8") as f:
+    """Multi-step wizard assessment form"""
+    with open("wizard_interface.py", "r", encoding="utf-8") as f:
         content = f.read()
-        # Extract HTML content from the web_interface.py file
+        # Extract HTML content from the wizard_interface.py file
         start = content.find('html_content = """') + len('html_content = """')
         end = content.find('"""', start)
         html_content = content[start:end]
