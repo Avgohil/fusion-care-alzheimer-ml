@@ -841,21 +841,318 @@ async def assessment_form():
 
 @app.get("/dashboard", response_class=HTMLResponse)
 async def dynamic_dashboard():
-    """Dynamic interactive dashboard"""
-    # [Previous dashboard HTML code from deploy_dynamic_dashboard.py]
-    with open("deploy_dynamic_dashboard.py", "r") as f:
-        content = f.read()
-        
-    # Extract the dashboard HTML from the previous file
-    start = content.find('return """') + 10
-    end = content.find('"""', start)
-    dashboard_html = content[start:end]
-    
-    return dashboard_html
+    """Dynamic interactive dashboard with working Plotly charts"""
+    return """
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>🏥⚕️ Dynamic Assessment Dashboard</title>
+        <script src="https://cdn.plot.ly/plotly-2.26.0.min.js"></script>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+            }
+            .container {
+                max-width: 1400px;
+                margin: 0 auto;
+                background: white;
+                border-radius: 15px;
+                padding: 30px;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            }
+            .header {
+                text-align: center;
+                margin-bottom: 30px;
+                padding: 20px;
+                background: linear-gradient(90deg, #4CAF50, #2196F3);
+                color: white;
+                border-radius: 10px;
+            }
+            .controls {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 20px;
+                margin-bottom: 30px;
+                padding: 20px;
+                background: #f8f9fa;
+                border-radius: 10px;
+            }
+            .chart-container {
+                margin: 20px 0;
+                border: 1px solid #ddd;
+                border-radius: 10px;
+                padding: 20px;
+                background: white;
+                min-height: 400px;
+            }
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+                gap: 20px;
+            }
+            .slider-container {
+                margin: 10px 0;
+            }
+            .slider-container label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+            .slider {
+                width: 100%;
+                margin: 10px 0;
+            }
+            button {
+                padding: 10px 20px;
+                margin: 5px;
+                border: none;
+                border-radius: 5px;
+                background: #2196F3;
+                color: white;
+                cursor: pointer;
+            }
+            button:hover {
+                background: #1976D2;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>🏥⚕️ Dynamic Assessment Dashboard</h1>
+                <p>Real-time Ayurvedic + Cognitive Health Visualization</p>
+            </div>
+            
+            <div class="controls">
+                <div>
+                    <h3>🏛️ Ayurvedic Constitution</h3>
+                    <div class="slider-container">
+                        <label>Vata Score: <span id="vata-value">65</span>%</label>
+                        <input type="range" id="vata" class="slider" min="0" max="100" value="65">
+                    </div>
+                    <div class="slider-container">
+                        <label>Pitta Score: <span id="pitta-value">45</span>%</label>
+                        <input type="range" id="pitta" class="slider" min="0" max="100" value="45">
+                    </div>
+                    <div class="slider-container">
+                        <label>Kapha Score: <span id="kapha-value">35</span>%</label>
+                        <input type="range" id="kapha" class="slider" min="0" max="100" value="35">
+                    </div>
+                </div>
+                
+                <div>
+                    <h3>💪 Physical Health</h3>
+                    <div class="slider-container">
+                        <label>Sleep Quality: <span id="sleep-value">60</span>%</label>
+                        <input type="range" id="sleep" class="slider" min="0" max="100" value="60">
+                    </div>
+                    <div class="slider-container">
+                        <label>Energy Levels: <span id="energy-value">55</span>%</label>
+                        <input type="range" id="energy" class="slider" min="0" max="100" value="55">
+                    </div>
+                    <div class="slider-container">
+                        <label>Stress Level: <span id="stress-value">75</span>%</label>
+                        <input type="range" id="stress" class="slider" min="0" max="100" value="75">
+                    </div>
+                </div>
+                
+                <div>
+                    <h3>🧠 Cognitive Health</h3>
+                    <div class="slider-container">
+                        <label>Memory: <span id="memory-value">70</span>%</label>
+                        <input type="range" id="memory" class="slider" min="0" max="100" value="70">
+                    </div>
+                    <div class="slider-container">
+                        <label>Attention: <span id="attention-value">65</span>%</label>
+                        <input type="range" id="attention" class="slider" min="0" max="100" value="65">
+                    </div>
+                    <div class="slider-container">
+                        <label>Processing Speed: <span id="processing-value">60</span>%</label>
+                        <input type="range" id="processing" class="slider" min="0" max="100" value="60">
+                    </div>
+                </div>
+                
+                <div>
+                    <button onclick="updateAllCharts()">🔄 Update Charts</button>
+                    <button onclick="generateRandomData()">🎲 Random Data</button>
+                    <button onclick="resetDefaults()">↺ Reset</button>
+                </div>
+            </div>
+            
+            <div class="grid">
+                <div id="risk-gauge" class="chart-container"></div>
+                <div id="constitution-chart" class="chart-container"></div>
+                <div id="health-radar" class="chart-container"></div>
+                <div id="cognitive-chart" class="chart-container"></div>
+            </div>
+        </div>
+
+        <script>
+            // Initialize sliders
+            const sliders = ['vata', 'pitta', 'kapha', 'sleep', 'energy', 'stress', 'memory', 'attention', 'processing'];
+            
+            sliders.forEach(id => {
+                document.getElementById(id).addEventListener('input', function() {
+                    document.getElementById(id + '-value').textContent = this.value;
+                });
+            });
+            
+            function getCurrentData() {
+                return {
+                    vata_score: parseInt(document.getElementById('vata').value),
+                    pitta_score: parseInt(document.getElementById('pitta').value),
+                    kapha_score: parseInt(document.getElementById('kapha').value),
+                    sleep_quality: parseInt(document.getElementById('sleep').value),
+                    energy_levels: parseInt(document.getElementById('energy').value),
+                    stress_level: parseInt(document.getElementById('stress').value),
+                    memory_score: parseInt(document.getElementById('memory').value),
+                    attention_score: parseInt(document.getElementById('attention').value),
+                    processing_speed: parseInt(document.getElementById('processing').value),
+                    executive_function: 60,
+                    digestion_score: 65,
+                    overall_risk_score: Math.round(Math.random() * 100)
+                };
+            }
+            
+            function createRiskGauge(data) {
+                const risk = data.overall_risk_score;
+                const color = risk <= 30 ? '#2ecc71' : risk <= 60 ? '#f39c12' : '#e74c3c';
+                
+                const gauge = {
+                    type: "indicator",
+                    mode: "gauge+number",
+                    value: risk,
+                    title: {text: "Overall Health Risk"},
+                    gauge: {
+                        axis: {range: [0, 100]},
+                        bar: {color: color},
+                        steps: [
+                            {range: [0, 30], color: "rgba(46, 204, 113, 0.2)"},
+                            {range: [30, 60], color: "rgba(243, 156, 18, 0.2)"},
+                            {range: [60, 100], color: "rgba(231, 76, 60, 0.2)"}
+                        ]
+                    }
+                };
+                
+                Plotly.newPlot('risk-gauge', [gauge], {
+                    height: 350,
+                    margin: {t: 50, b: 50, l: 50, r: 50}
+                });
+            }
+            
+            function createConstitutionChart(data) {
+                const trace = {
+                    x: ['Vata', 'Pitta', 'Kapha'],
+                    y: [data.vata_score, data.pitta_score, data.kapha_score],
+                    type: 'bar',
+                    marker: {
+                        color: ['#e74c3c', '#f39c12', '#2ecc71']
+                    },
+                    text: data.vata_score > data.pitta_score && data.vata_score > data.kapha_score ? 
+                          ['Dominant', '', ''] : 
+                          data.pitta_score > data.kapha_score ? 
+                          ['', 'Dominant', ''] : 
+                          ['', '', 'Dominant'],
+                    textposition: 'auto'
+                };
+                
+                Plotly.newPlot('constitution-chart', [trace], {
+                    title: 'Ayurvedic Constitution Balance',
+                    yaxis: {title: 'Imbalance Level (%)'},
+                    height: 350,
+                    margin: {t: 80, b: 50, l: 50, r: 50}
+                });
+            }
+            
+            function createHealthRadar(data) {
+                const trace = {
+                    type: 'scatterpolar',
+                    r: [
+                        data.sleep_quality,
+                        data.energy_levels,
+                        100 - data.stress_level,
+                        data.memory_score,
+                        data.attention_score,
+                        data.processing_speed
+                    ],
+                    theta: ['Sleep', 'Energy', 'Stress Mgmt', 'Memory', 'Attention', 'Processing'],
+                    fill: 'toself',
+                    name: 'Your Health'
+                };
+                
+                Plotly.newPlot('health-radar', [trace], {
+                    polar: {
+                        radialaxis: {
+                            visible: true,
+                            range: [0, 100]
+                        }
+                    },
+                    title: 'Health Overview Radar',
+                    height: 350
+                });
+            }
+            
+            function createCognitiveChart(data) {
+                const trace = {
+                    y: ['Memory', 'Attention', 'Processing Speed'],
+                    x: [data.memory_score, data.attention_score, data.processing_speed],
+                    type: 'bar',
+                    orientation: 'h',
+                    marker: {
+                        color: ['#3498db', '#9b59b6', '#e67e22']
+                    }
+                };
+                
+                Plotly.newPlot('cognitive-chart', [trace], {
+                    title: 'Cognitive Health Assessment',
+                    xaxis: {title: 'Score (%)'},
+                    height: 350,
+                    margin: {t: 80, b: 50, l: 100, r: 50}
+                });
+            }
+            
+            function updateAllCharts() {
+                const data = getCurrentData();
+                createRiskGauge(data);
+                createConstitutionChart(data);
+                createHealthRadar(data);
+                createCognitiveChart(data);
+            }
+            
+            function generateRandomData() {
+                sliders.forEach(id => {
+                    const value = Math.floor(Math.random() * 81) + 20;
+                    document.getElementById(id).value = value;
+                    document.getElementById(id + '-value').textContent = value;
+                });
+                updateAllCharts();
+            }
+            
+            function resetDefaults() {
+                const defaults = {vata: 65, pitta: 45, kapha: 35, sleep: 60, energy: 55, stress: 75, memory: 70, attention: 65, processing: 60};
+                Object.entries(defaults).forEach(([key, value]) => {
+                    document.getElementById(key).value = value;
+                    document.getElementById(key + '-value').textContent = value;
+                });
+                updateAllCharts();
+            }
+            
+            // Initialize charts on load
+            updateAllCharts();
+        </script>
+    </body>
+    </html>
+    """
 
 @app.get("/results", response_class=HTMLResponse)
 async def show_results(request: Request):
-    """Show assessment results"""
+    """Show assessment results with interactive Plotly charts"""
     assessment_id = request.query_params.get("id", "DEMO")
     
     return f"""
@@ -865,7 +1162,7 @@ async def show_results(request: Request):
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>🏥⚕️ Assessment Results - Care Catalyst</title>
-        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-2.26.0.min.js"></script>
         <style>
             body {{
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -890,6 +1187,15 @@ async def show_results(request: Request):
                 color: white;
                 border-radius: 15px;
             }}
+            .summary-box {{
+                background: linear-gradient(90deg, #4CAF50, #45a049);
+                color: white;
+                padding: 30px;
+                border-radius: 15px;
+                margin: 30px 0;
+                text-align: center;
+                font-size: 1.1em;
+            }}
             .charts-grid {{
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
@@ -898,6 +1204,305 @@ async def show_results(request: Request):
             }}
             .chart-container {{
                 border: 2px solid #f0f0f0;
+                border-radius: 15px;
+                padding: 20px;
+                background: #fafafa;
+                min-height: 400px;
+            }}
+            .btn {{
+                display: inline-block;
+                padding: 15px 30px;
+                margin: 10px;
+                background: #2196F3;
+                color: white;
+                text-decoration: none;
+                border-radius: 25px;
+                font-weight: bold;
+                transition: all 0.3s ease;
+            }}
+            .btn:hover {{
+                transform: translateY(-2px);
+                box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            }}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>🏥⚕️ Your Comprehensive Health Analysis</h1>
+                <p>Assessment ID: {assessment_id}</p>
+                <p>Generated on: {datetime.now().strftime('%B %d, %Y at %I:%M %p')}</p>
+            </div>
+            
+            <div class="summary-box" id="summary-box">
+                <h2>📊 Analysis Summary</h2>
+                <div id="summary-content">
+                    <strong>Risk Level:</strong> <span id="risk-text">Moderate Risk (58%)</span> &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <strong>Dominant Constitution:</strong> <span id="constitution-text">Vata</span> &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <strong>Cognitive Health:</strong> <span id="cognitive-text">62%</span>
+                </div>
+            </div>
+            
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3>🎯 Overall Risk Level</h3>
+                    <div id="risk-gauge"></div>
+                </div>
+                
+                <div class="chart-container">
+                    <h3>🏛️ Ayurvedic Constitution</h3>
+                    <div id="constitution-chart"></div>
+                </div>
+                
+                <div class="chart-container">
+                    <h3>🕸️ Health Overview</h3>
+                    <div id="health-radar"></div>
+                </div>
+                
+                <div class="chart-container">
+                    <h3>🧠 Cognitive Assessment</h3>
+                    <div id="cognitive-chart"></div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="/assessment" class="btn">📝 Take Another Assessment</a>
+                <a href="/dashboard" class="btn">📊 View Dynamic Dashboard</a>
+                <a href="/" class="btn">🏠 Return Home</a>
+            </div>
+        </div>
+
+        <script>
+            // Sample assessment data (in real app, this would come from the assessment)
+            const assessmentData = {{
+                vata_score: 65,
+                pitta_score: 45,
+                kapha_score: 35,
+                sleep_quality: 60,
+                energy_levels: 55,
+                stress_level: 75,
+                memory_score: 70,
+                attention_score: 65,
+                processing_speed: 60,
+                executive_function: 55,
+                digestion_score: 65,
+                overall_risk_score: 58,
+                risk_category: 'Moderate Risk',
+                dominant_constitution: 'Vata'
+            }};
+            
+            function createRiskGauge() {{
+                const risk = assessmentData.overall_risk_score;
+                const color = risk <= 30 ? '#2ecc71' : risk <= 60 ? '#f39c12' : '#e74c3c';
+                const status = risk <= 30 ? 'Low Risk ✅' : risk <= 60 ? 'Moderate Risk ⚠️' : 'High Risk ❗';
+                
+                const gauge = {{
+                    type: "indicator",
+                    mode: "gauge+number",
+                    value: risk,
+                    title: {{text: "Overall Health Risk Level"}},
+                    gauge: {{
+                        axis: {{range: [0, 100], tickwidth: 2}},
+                        bar: {{color: color, thickness: 0.3}},
+                        bgcolor: "white",
+                        borderwidth: 2,
+                        bordercolor: "lightgray",
+                        steps: [
+                            {{range: [0, 30], color: "rgba(46, 204, 113, 0.2)"}},
+                            {{range: [30, 60], color: "rgba(243, 156, 18, 0.2)"}},
+                            {{range: [60, 100], color: "rgba(231, 76, 60, 0.2)"}}
+                        ]
+                    }}
+                }};
+                
+                const layout = {{
+                    height: 350,
+                    margin: {{t: 50, b: 50, l: 50, r: 50}},
+                    font: {{family: "Arial", size: 14}},
+                    annotations: [{{
+                        text: status,
+                        x: 0.5, y: 0.15,
+                        font: {{size: 18, color: color}},
+                        showarrow: false
+                    }}]
+                }};
+                
+                Plotly.newPlot('risk-gauge', [gauge], layout);
+            }}
+            
+            function createConstitutionChart() {{
+                const constitutions = ['Vata', 'Pitta', 'Kapha'];
+                const scores = [assessmentData.vata_score, assessmentData.pitta_score, assessmentData.kapha_score];
+                const colors = scores.map(score => 
+                    score <= 40 ? '#2ecc71' : score <= 65 ? '#f39c12' : '#e74c3c'
+                );
+                
+                const trace = {{
+                    x: constitutions,
+                    y: scores,
+                    type: 'bar',
+                    marker: {{color: colors}},
+                    text: scores.map(score => score + '%'),
+                    textposition: 'auto',
+                    hovertemplate: '<b>%{{x}} Constitution</b><br>Imbalance Level: %{{y}}%<extra></extra>'
+                }};
+                
+                const layout = {{
+                    title: 'Ayurvedic Constitution Balance',
+                    xaxis: {{title: 'Constitution Type'}},
+                    yaxis: {{title: 'Imbalance Level (%)', range: [0, 100]}},
+                    height: 350,
+                    margin: {{t: 80, b: 50, l: 50, r: 50}}
+                }};
+                
+                Plotly.newPlot('constitution-chart', [trace], layout);
+            }}
+            
+            function createHealthRadar() {{
+                const parameters = [
+                    'Sleep Quality', 'Energy Levels', 'Stress Management',
+                    'Memory', 'Attention', 'Processing Speed'
+                ];
+                
+                const scores = [
+                    assessmentData.sleep_quality,
+                    assessmentData.energy_levels,
+                    100 - assessmentData.stress_level, // Invert stress
+                    assessmentData.memory_score,
+                    assessmentData.attention_score,
+                    assessmentData.processing_speed
+                ];
+                
+                const userTrace = {{
+                    type: 'scatterpolar',
+                    r: scores,
+                    theta: parameters,
+                    fill: 'toself',
+                    fillcolor: 'rgba(52, 152, 219, 0.3)',
+                    line: {{color: '#3498db', width: 3}},
+                    marker: {{size: 6, color: '#3498db'}},
+                    name: 'Your Results',
+                    hovertemplate: '<b>%{{theta}}</b><br>Score: %{{r}}%<extra></extra>'
+                }};
+                
+                const targetTrace = {{
+                    type: 'scatterpolar',
+                    r: [80, 80, 80, 80, 80, 80],
+                    theta: parameters,
+                    fill: 'toself',
+                    fillcolor: 'rgba(46, 204, 113, 0.1)',
+                    line: {{color: 'rgba(46, 204, 113, 0.6)', width: 2, dash: 'dash'}},
+                    name: 'Target Level',
+                    hovertemplate: 'Target: %{{r}}%<extra></extra>'
+                }};
+                
+                const layout = {{
+                    polar: {{
+                        radialaxis: {{
+                            visible: true,
+                            range: [0, 100],
+                            tickfont: {{size: 10}}
+                        }},
+                        angularaxis: {{
+                            tickfont: {{size: 11}},
+                            rotation: 90
+                        }}
+                    }},
+                    title: 'Health Overview - All Parameters',
+                    height: 400,
+                    showlegend: true,
+                    legend: {{
+                        orientation: "h",
+                        yanchor: "bottom",
+                        y: 1.02,
+                        xanchor: "center",
+                        x: 0.5
+                    }}
+                }};
+                
+                Plotly.newPlot('health-radar', [userTrace, targetTrace], layout);
+            }}
+            
+            function createCognitiveChart() {{
+                const cognitiveParams = ['Memory', 'Attention', 'Processing Speed', 'Executive Function'];
+                const cognitiveScores = [
+                    assessmentData.memory_score,
+                    assessmentData.attention_score,
+                    assessmentData.processing_speed,
+                    assessmentData.executive_function
+                ];
+                
+                const colors = cognitiveScores.map(score => 
+                    score >= 70 ? '#2ecc71' : score >= 40 ? '#f39c12' : '#e74c3c'
+                );
+                
+                const trace = {{
+                    y: cognitiveParams,
+                    x: cognitiveScores,
+                    type: 'bar',
+                    orientation: 'h',
+                    marker: {{color: colors}},
+                    text: cognitiveScores.map(score => score + '%'),
+                    textposition: 'auto',
+                    hovertemplate: '<b>%{{y}}</b><br>Score: %{{x}}%<extra></extra>'
+                }};
+                
+                const layout = {{
+                    title: 'Cognitive Health Assessment',
+                    xaxis: {{title: 'Score (%)', range: [0, 100]}},
+                    height: 350,
+                    margin: {{t: 80, b: 50, l: 120, r: 50}}
+                }};
+                
+                // Add average line
+                const avgCognitive = cognitiveScores.reduce((a, b) => a + b) / cognitiveScores.length;
+                layout.shapes = [{{
+                    type: 'line',
+                    x0: avgCognitive,
+                    x1: avgCognitive,
+                    y0: -0.5,
+                    y1: cognitiveParams.length - 0.5,
+                    line: {{
+                        color: colors[0],
+                        width: 2,
+                        dash: 'dash'
+                    }}
+                }}];
+                
+                layout.annotations = [{{
+                    x: avgCognitive,
+                    y: cognitiveParams.length - 0.2,
+                    text: `Average: ${{avgCognitive.toFixed(0)}}%`,
+                    showarrow: false,
+                    font: {{size: 12}}
+                }}];
+                
+                Plotly.newPlot('cognitive-chart', [trace], layout);
+            }}
+            
+            // Initialize all charts
+            function loadResults() {{
+                createRiskGauge();
+                createConstitutionChart();
+                createHealthRadar();
+                createCognitiveChart();
+                
+                // Update summary
+                const cognitiveAvg = Math.round((assessmentData.memory_score + assessmentData.attention_score + 
+                                               assessmentData.processing_speed + assessmentData.executive_function) / 4);
+                
+                document.getElementById('risk-text').textContent = 
+                    `${{assessmentData.risk_category}} (${{assessmentData.overall_risk_score}}%)`;
+                document.getElementById('constitution-text').textContent = assessmentData.dominant_constitution;
+                document.getElementById('cognitive-text').textContent = cognitiveAvg + '%';
+            }}
+            
+            // Load results when page loads
+            window.addEventListener('load', loadResults);
+        </script>
+    </body>
+    </html>
+    """
                 border-radius: 15px;
                 padding: 20px;
                 background: #fafafa;
