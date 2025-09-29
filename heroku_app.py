@@ -478,7 +478,7 @@ async def assess_health(request: Request):
     <body>
         <div class="container">
             <div class="medical-header">
-                <h1>🏥 ⚕️ Medical Assessment Report</h1>
+                <h1>🏥⚕️ Medical Assessment Report</h1>
                 <p>Comprehensive Health Analysis Results</p>
             </div>
             
