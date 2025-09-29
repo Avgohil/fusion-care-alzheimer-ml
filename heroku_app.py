@@ -17,7 +17,11 @@ app = FastAPI(title="Care Catalyst - Complete Health Assessment", version="1.0")
 # Load models for Prakriti prediction
 try:
     import os
-    print(f"Current directory: {os.getcwd()}")
+    print(f"Curre        <div class="container">
+            <div class="medical-header">
+                <h1>🏥⚕️ Medical Assessment Report</h1>
+                <p>Comprehensive Health Analysis Results</p>
+            </div>rectory: {os.getcwd()}")
     print(f"Files in model directory: {os.listdir('model') if os.path.exists('model') else 'model directory not found'}")
     
     prakriti_model = joblib.load("model/prakriti_model_robust.pkl")
