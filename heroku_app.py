@@ -389,6 +389,8 @@ async def assess_health(request: Request):
     <!DOCTYPE html>
     <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Medical Assessment Report - Care Catalyst</title>
         <style>
             * {{ margin: 0; padding: 0; box-sizing: border-box; }}
@@ -476,7 +478,7 @@ async def assess_health(request: Request):
     <body>
         <div class="container">
             <div class="medical-header">
-                <h1>� Medical Assessment Report</h1>
+                <h1>🏥 ⚕️ Medical Assessment Report</h1>
                 <p>Comprehensive Health Analysis Results</p>
             </div>
             
