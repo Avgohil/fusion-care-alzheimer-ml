@@ -5,11 +5,6 @@ import pandas as pd
 
 app = FastAPI(title="Prakriti Classification API", version="1.0")
 
-@app.get("/health")
-def health_check():
-    """Health check endpoint"""
-    return {"status": "healthy", "service": "Prakriti Classification API"}
-
 # Load model and encoder
 model = joblib.load("model/prakriti_model_robust.pkl")
 encoder = joblib.load("model/prakriti_encoder.pkl")

@@ -1,7 +1,10 @@
- 
-fastapi
-uvicorn
-scikit-learn==1.6.1
-pandas
-joblib
-python-multipart
+# Care Catalyst - Core Dependencies
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+scikit-learn==1.3.2
+pandas==2.1.3
+numpy==1.25.2
+joblib==1.3.2
+plotly==5.17.0
+python-multipart==0.0.6
+pydantic==2.5.0

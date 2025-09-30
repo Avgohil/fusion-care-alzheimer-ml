@@ -1,41 +1,4 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-
-# VS Code
-.vscode/
-
-# Railway
-.railway/
-
-# Mac
-.DS_Store
-
-# Windows
-Thumbs.db
-Desktop.ini
-
-# Temporary files
-*.tmp
-*.temp
-*.log
-
-# IDE files
-.idea/
-
-# Keep ML models for deployment
-!*.pkl
-!*.joblib
-!*.h5
-!*.model
-
-# Keep data files
-!*.csv
+__pycache__/ 
+# *.pkl 
+# *.csv 
+.env 

@@ -4,11 +4,6 @@ from typing import Literal
 
 app = FastAPI()
 
-@app.get("/health")
-def health_check():
-    """Health check endpoint"""
-    return {"status": "healthy", "service": "Risk Assessment API"}
-
 # -----------------------------
 # Define Input Schema
 # -----------------------------

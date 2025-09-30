@@ -12,6 +12,7 @@ import plotly.io as pio
 import pandas as pd
 import numpy as np
 import pickle
+import joblib
 import json
 from datetime import datetime
 from typing import List, Optional
@@ -61,7 +62,7 @@ def load_models():
         ]
         
         model_files = {
-            'prakriti_model': 'prakriti_model.pkl',
+            'prakriti_model': 'prakriti_model_robust.pkl',
             'prakriti_encoder': 'prakriti_encoder.pkl',
             'alzheimers_model': 'alzheimers_stage2_model.pkl',
             'stage2_encoders': 'stage2_encoders.pkl'
@@ -73,8 +74,14 @@ def load_models():
                 try:
                     full_path = Path(path) / filename
                     if full_path.exists():
-                        with open(full_path, 'rb') as f:
-                            models[model_name] = pickle.load(f)
+                        # Try joblib first (preferred for sklearn models)
+                        try:
+                            import joblib
+                            models[model_name] = joblib.load(full_path)
+                        except:
+                            # Fallback to pickle
+                            with open(full_path, 'rb') as f:
+                                models[model_name] = pickle.load(f)
                         logger.info(f"✅ Loaded {model_name} from {full_path}")
                         loaded = True
                         break
