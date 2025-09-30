@@ -506,48 +506,285 @@ async def homepage():
             <div class="header">
                 <h1>🏥⚕️ Care Catalyst</h1>
                 <p>AI-Powered Ayurvedic + Cognitive Health Assessment Platform</p>
-                <p>Integrating Ancient Wisdom with Modern AI Technology</p>
+                <p>Complete Patient Assessment with Interactive Results</p>
             </div>
             
             <div class="features-grid">
                 <div class="feature-card">
                     <h3>🧠 Cognitive Assessment</h3>
-                    <p>Advanced AI algorithms analyze memory, attention, processing speed, and executive function to detect early signs of cognitive decline.</p>
+                    <p>Comprehensive cognitive evaluation including memory, attention, processing speed, and executive function analysis.</p>
                 </div>
                 
                 <div class="feature-card">
                     <h3>🏛️ Ayurvedic Analysis</h3>
-                    <p>Traditional Ayurvedic constitution (Prakriti) analysis using modern machine learning to understand your unique body type.</p>
+                    <p>Traditional Ayurvedic Prakriti assessment using AI to determine constitutional balance and health patterns.</p>
                 </div>
                 
                 <div class="feature-card">
-                    <h3>📊 Dynamic Visualization</h3>
-                    <p>Interactive real-time charts and dashboards that update as you input your health parameters and assessment responses.</p>
+                    <h3>📊 Interactive Results</h3>
+                    <p>Dynamic charts and visualizations showing risk levels, constitution balance, and health recommendations.</p>
                 </div>
                 
                 <div class="feature-card">
                     <h3>🎯 Risk Prediction</h3>
-                    <p>Early detection of Alzheimer's disease risk using validated machine learning models trained on clinical datasets.</p>
+                    <p>AI-powered early detection of cognitive decline and Alzheimer's risk using validated assessment tools.</p>
                 </div>
                 
                 <div class="feature-card">
-                    <h3>💊 Personalized Recommendations</h3>
-                    <p>Customized health recommendations combining Ayurvedic principles with evidence-based modern medicine.</p>
+                    <h3>💊 Treatment Plans</h3>
+                    <p>Personalized recommendations combining Ayurvedic principles with modern medical approaches.</p>
                 </div>
                 
                 <div class="feature-card">
-                    <h3>📱 Real-Time Monitoring</h3>
-                    <p>Live WebSocket-powered dashboard for continuous health monitoring and instant feedback on health changes.</p>
+                    <h3>� Progress Tracking</h3>
+                    <p>Monitor health improvements over time with comprehensive assessment history and trends.</p>
                 </div>
             </div>
             
             <div class="cta-buttons">
-                <a href="/assessment" class="btn primary">📝 Take Full Assessment</a>
-                <a href="/dashboard" class="btn secondary">📊 View Dynamic Dashboard</a>
-                <a href="/quick-test" class="btn">⚡ Quick Health Check</a>
-                <a href="/docs" class="btn">📚 API Documentation</a>
+                <a href="/assessment" class="btn primary">📝 Start Patient Assessment</a>
+                <a href="/patient-records" class="btn secondary">� View Patient Records</a>
+                <a href="/docs" class="btn">📚 Documentation</a>
             </div>
         </div>
+    </body>
+    </html>
+    """
+
+@app.get("/patient-records", response_class=HTMLResponse)
+async def patient_records():
+    """Patient records and history"""
+    return """
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>📋 Patient Records - Care Catalyst</title>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin: 0;
+                padding: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                background: white;
+                border-radius: 20px;
+                padding: 40px;
+                box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+            }
+            .header {
+                text-align: center;
+                margin-bottom: 40px;
+                padding: 30px;
+                background: linear-gradient(90deg, #4CAF50, #2196F3);
+                color: white;
+                border-radius: 15px;
+            }
+            .search-bar {
+                margin: 30px 0;
+                padding: 20px;
+                background: #f8f9fa;
+                border-radius: 10px;
+            }
+            .search-bar input {
+                width: 70%;
+                padding: 12px;
+                border: 2px solid #ddd;
+                border-radius: 8px;
+                font-size: 1em;
+            }
+            .search-btn {
+                padding: 12px 24px;
+                background: #2196F3;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                margin-left: 10px;
+                cursor: pointer;
+                font-weight: bold;
+            }
+            .records-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 30px 0;
+                background: white;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            }
+            .records-table th, .records-table td {
+                padding: 15px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+            .records-table th {
+                background: #f1f3f4;
+                font-weight: bold;
+                color: #333;
+            }
+            .records-table tr:hover {
+                background: #f8f9fa;
+            }
+            .status-badge {
+                padding: 4px 12px;
+                border-radius: 15px;
+                font-size: 0.8em;
+                font-weight: bold;
+            }
+            .status-low { background: #d4edda; color: #155724; }
+            .status-moderate { background: #fff3cd; color: #856404; }
+            .status-high { background: #f8d7da; color: #721c24; }
+            .btn {
+                display: inline-block;
+                padding: 8px 16px;
+                background: #2196F3;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                font-size: 0.9em;
+                transition: all 0.3s ease;
+            }
+            .btn:hover {
+                transform: translateY(-1px);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            }
+            .stats-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+                margin: 30px 0;
+            }
+            .stat-card {
+                background: linear-gradient(135deg, #4CAF50, #45a049);
+                color: white;
+                padding: 20px;
+                border-radius: 10px;
+                text-align: center;
+            }
+            .stat-number {
+                font-size: 2em;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>📋 Patient Records Management</h1>
+                <p>Assessment History & Patient Data</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">247</div>
+                    <div>Total Patients</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">89</div>
+                    <div>This Month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">156</div>
+                    <div>High Risk Cases</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">91</div>
+                    <div>Follow-ups Due</div>
+                </div>
+            </div>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search by Patient ID, Name, or Assessment Date..." id="search">
+                <button class="search-btn" onclick="searchRecords()">🔍 Search</button>
+                <button class="search-btn" onclick="exportRecords()" style="background: #4CAF50;">📊 Export</button>
+            </div>
+            
+            <table class="records-table">
+                <thead>
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Assessment Date</th>
+                        <th>Risk Level</th>
+                        <th>Constitution</th>
+                        <th>Cognitive Score</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="records-body">
+                    <tr>
+                        <td>PT-2025-001</td>
+                        <td>Rajesh Kumar</td>
+                        <td>45</td>
+                        <td>2025-09-28</td>
+                        <td><span class="status-badge status-moderate">Moderate Risk</span></td>
+                        <td>Vata</td>
+                        <td>72%</td>
+                        <td>
+                            <a href="/results?id=PT-2025-001" class="btn">📊 View Results</a>
+                            <a href="/assessment?edit=PT-2025-001" class="btn" style="background: #4CAF50;">✏️ Edit</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PT-2025-002</td>
+                        <td>Priya Sharma</td>
+                        <td>38</td>
+                        <td>2025-09-29</td>
+                        <td><span class="status-badge status-low">Low Risk</span></td>
+                        <td>Pitta</td>
+                        <td>85%</td>
+                        <td>
+                            <a href="/results?id=PT-2025-002" class="btn">📊 View Results</a>
+                            <a href="/assessment?edit=PT-2025-002" class="btn" style="background: #4CAF50;">✏️ Edit</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PT-2025-003</td>
+                        <td>Mohammad Ali</td>
+                        <td>62</td>
+                        <td>2025-09-30</td>
+                        <td><span class="status-badge status-high">High Risk</span></td>
+                        <td>Kapha</td>
+                        <td>45%</td>
+                        <td>
+                            <a href="/results?id=PT-2025-003" class="btn">📊 View Results</a>
+                            <a href="/assessment?edit=PT-2025-003" class="btn" style="background: #4CAF50;">✏️ Edit</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="/assessment" class="btn" style="padding: 15px 30px; font-size: 1.1em;">📝 New Patient Assessment</a>
+                <a href="/" class="btn" style="padding: 15px 30px; font-size: 1.1em; background: #6c757d;">🏠 Return Home</a>
+            </div>
+        </div>
+
+        <script>
+            function searchRecords() {
+                const searchTerm = document.getElementById('search').value.toLowerCase();
+                const rows = document.querySelectorAll('#records-body tr');
+                
+                rows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    row.style.display = text.includes(searchTerm) ? '' : 'none';
+                });
+            }
+            
+            function exportRecords() {
+                // Simulate export functionality
+                alert('📊 Exporting patient records to CSV...');
+            }
+            
+            // Auto-search on typing
+            document.getElementById('search').addEventListener('input', searchRecords);
+        </script>
     </body>
     </html>
     """
@@ -1152,7 +1389,7 @@ async def dynamic_dashboard():
 
 @app.get("/results", response_class=HTMLResponse)
 async def show_results(request: Request):
-    """Show assessment results with interactive Plotly charts"""
+    """Show assessment results with charts based on patient data"""
     assessment_id = request.query_params.get("id", "DEMO")
     
     return f"""
@@ -1187,6 +1424,32 @@ async def show_results(request: Request):
                 color: white;
                 border-radius: 15px;
             }}
+            .patient-info {{
+                background: #f8f9fa;
+                padding: 20px;
+                border-radius: 10px;
+                margin: 20px 0;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+            }}
+            .info-item {{
+                text-align: center;
+                padding: 15px;
+                background: white;
+                border-radius: 8px;
+                border-left: 4px solid #2196F3;
+            }}
+            .info-label {{
+                font-size: 0.9em;
+                color: #666;
+                margin-bottom: 5px;
+            }}
+            .info-value {{
+                font-size: 1.2em;
+                font-weight: bold;
+                color: #333;
+            }}
             .summary-box {{
                 background: linear-gradient(90deg, #4CAF50, #45a049);
                 color: white;
@@ -1209,6 +1472,36 @@ async def show_results(request: Request):
                 background: #fafafa;
                 min-height: 400px;
             }}
+            .chart-title {{
+                font-size: 1.2em;
+                font-weight: bold;
+                margin-bottom: 15px;
+                color: #333;
+                text-align: center;
+            }}
+            .recommendations {{
+                background: #e3f2fd;
+                padding: 25px;
+                border-radius: 15px;
+                margin: 30px 0;
+                border-left: 5px solid #2196F3;
+            }}
+            .recommendations h3 {{
+                color: #1976d2;
+                margin-bottom: 15px;
+            }}
+            .recommendations ul {{
+                list-style-type: none;
+                padding: 0;
+            }}
+            .recommendations li {{
+                padding: 8px 0;
+                border-bottom: 1px solid #bbdefb;
+            }}
+            .recommendations li:before {{
+                content: "💡 ";
+                margin-right: 8px;
+            }}
             .btn {{
                 display: inline-block;
                 padding: 15px 30px;
@@ -1224,57 +1517,107 @@ async def show_results(request: Request):
                 transform: translateY(-2px);
                 box-shadow: 0 8px 16px rgba(0,0,0,0.2);
             }}
+            .btn.print {{
+                background: #4CAF50;
+            }}
+            .btn.email {{
+                background: #FF9800;
+            }}
         </style>
     </head>
     <body>
         <div class="container">
             <div class="header">
-                <h1>🏥⚕️ Your Comprehensive Health Analysis</h1>
+                <h1>🏥⚕️ Patient Assessment Results</h1>
                 <p>Assessment ID: {assessment_id}</p>
                 <p>Generated on: {datetime.now().strftime('%B %d, %Y at %I:%M %p')}</p>
             </div>
             
-            <div class="summary-box" id="summary-box">
-                <h2>📊 Analysis Summary</h2>
-                <div id="summary-content">
-                    <strong>Risk Level:</strong> <span id="risk-text">Moderate Risk (58%)</span> &nbsp;&nbsp;|&nbsp;&nbsp;
-                    <strong>Dominant Constitution:</strong> <span id="constitution-text">Vata</span> &nbsp;&nbsp;|&nbsp;&nbsp;
-                    <strong>Cognitive Health:</strong> <span id="cognitive-text">62%</span>
+            <!-- Patient Information -->
+            <div class="patient-info" id="patient-info">
+                <div class="info-item">
+                    <div class="info-label">Patient Name</div>
+                    <div class="info-value" id="patient-name">Loading...</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Age</div>
+                    <div class="info-value" id="patient-age">--</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Gender</div>
+                    <div class="info-value" id="patient-gender">--</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Assessment Date</div>
+                    <div class="info-value" id="assessment-date">{datetime.now().strftime('%Y-%m-%d')}</div>
                 </div>
             </div>
             
+            <!-- Assessment Summary -->
+            <div class="summary-box" id="summary-box">
+                <h2>📊 Assessment Summary</h2>
+                <div id="summary-content">
+                    <strong>Overall Risk Level:</strong> <span id="risk-text">Moderate Risk (58%)</span><br>
+                    <strong>Dominant Constitution:</strong> <span id="constitution-text">Vata</span><br>
+                    <strong>Cognitive Health Score:</strong> <span id="cognitive-text">62%</span><br>
+                    <strong>Recommendations:</strong> <span id="recommendations-count">5 personalized recommendations</span>
+                </div>
+            </div>
+            
+            <!-- Interactive Charts Based on Patient Assessment -->
             <div class="charts-grid">
                 <div class="chart-container">
-                    <h3>🎯 Overall Risk Level</h3>
+                    <div class="chart-title">🎯 Overall Health Risk Assessment</div>
                     <div id="risk-gauge"></div>
                 </div>
                 
                 <div class="chart-container">
-                    <h3>🏛️ Ayurvedic Constitution</h3>
+                    <div class="chart-title">🏛️ Ayurvedic Constitution Analysis</div>
                     <div id="constitution-chart"></div>
                 </div>
                 
                 <div class="chart-container">
-                    <h3>🕸️ Health Overview</h3>
+                    <div class="chart-title">🕸️ Comprehensive Health Overview</div>
                     <div id="health-radar"></div>
                 </div>
                 
                 <div class="chart-container">
-                    <h3>🧠 Cognitive Assessment</h3>
+                    <div class="chart-title">🧠 Cognitive Function Assessment</div>
                     <div id="cognitive-chart"></div>
                 </div>
             </div>
             
+            <!-- Personalized Recommendations -->
+            <div class="recommendations">
+                <h3>💊 Personalized Treatment Recommendations</h3>
+                <div id="recommendations-list">
+                    <ul>
+                        <li><strong>Ayurvedic:</strong> Brahmi and Ashwagandha supplements for cognitive enhancement</li>
+                        <li><strong>Lifestyle:</strong> Daily meditation and yoga practice to reduce stress levels</li>
+                        <li><strong>Diet:</strong> Include omega-3 rich foods like walnuts and fish</li>
+                        <li><strong>Exercise:</strong> Regular aerobic exercise 30 minutes daily</li>
+                        <li><strong>Follow-up:</strong> Re-assessment recommended in 3 months</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
             <div style="text-align: center; margin-top: 40px;">
-                <a href="/assessment" class="btn">📝 Take Another Assessment</a>
-                <a href="/dashboard" class="btn">📊 View Dynamic Dashboard</a>
-                <a href="/" class="btn">🏠 Return Home</a>
+                <a href="javascript:window.print()" class="btn print">🖨️ Print Report</a>
+                <a href="#" onclick="emailReport()" class="btn email">📧 Email Report</a>
+                <a href="/assessment" class="btn">📝 New Assessment</a>
+                <a href="/patient-records" class="btn">📋 Patient Records</a>
+                <a href="/" class="btn" style="background: #6c757d;">🏠 Home</a>
             </div>
         </div>
 
         <script>
-            // Sample assessment data (in real app, this would come from the assessment)
-            const assessmentData = {{
+            // Sample patient assessment data (this would come from the actual assessment)
+            const patientData = {{
+                name: "Sample Patient",
+                age: 45,
+                gender: "Male",
+                assessment_id: "{assessment_id}",
                 vata_score: 65,
                 pitta_score: 45,
                 kapha_score: 35,
@@ -1291,22 +1634,33 @@ async def show_results(request: Request):
                 dominant_constitution: 'Vata'
             }};
             
-            function createRiskGauge() {{
-                const risk = assessmentData.overall_risk_score;
-                const color = risk <= 30 ? '#2ecc71' : risk <= 60 ? '#f39c12' : '#e74c3c';
-                const status = risk <= 30 ? 'Low Risk ✅' : risk <= 60 ? 'Moderate Risk ⚠️' : 'High Risk ❗';
+            // Load patient information
+            function loadPatientInfo() {{
+                document.getElementById('patient-name').textContent = patientData.name;
+                document.getElementById('patient-age').textContent = patientData.age + ' years';
+                document.getElementById('patient-gender').textContent = patientData.gender;
                 
-                const gauge = {{
+                // Update summary
+                const cognitiveAvg = Math.round((patientData.memory_score + patientData.attention_score + 
+                                               patientData.processing_speed + patientData.executive_function) / 4);
+                
+                document.getElementById('risk-text').textContent = 
+                    `${{patientData.risk_category}} (${{patientData.overall_risk_score}}%)`;
+                document.getElementById('constitution-text').textContent = patientData.dominant_constitution;
+                document.getElementById('cognitive-text').textContent = cognitiveAvg + '%';
+            }}
+            
+            // Create charts based on patient assessment data
+            function createPatientCharts() {{
+                // Risk Gauge
+                const riskGauge = {{
                     type: "indicator",
                     mode: "gauge+number",
-                    value: risk,
-                    title: {{text: "Overall Health Risk Level"}},
+                    value: patientData.overall_risk_score,
+                    title: {{text: "Risk Level"}},
                     gauge: {{
-                        axis: {{range: [0, 100], tickwidth: 2}},
-                        bar: {{color: color, thickness: 0.3}},
-                        bgcolor: "white",
-                        borderwidth: 2,
-                        bordercolor: "lightgray",
+                        axis: {{range: [0, 100]}},
+                        bar: {{color: patientData.overall_risk_score <= 30 ? '#2ecc71' : patientData.overall_risk_score <= 60 ? '#f39c12' : '#e74c3c'}},
                         steps: [
                             {{range: [0, 30], color: "rgba(46, 204, 113, 0.2)"}},
                             {{range: [30, 60], color: "rgba(243, 156, 18, 0.2)"}},
@@ -1315,323 +1669,72 @@ async def show_results(request: Request):
                     }}
                 }};
                 
-                const layout = {{
-                    height: 350,
-                    margin: {{t: 50, b: 50, l: 50, r: 50}},
-                    font: {{family: "Arial", size: 14}},
-                    annotations: [{{
-                        text: status,
-                        x: 0.5, y: 0.15,
-                        font: {{size: 18, color: color}},
-                        showarrow: false
-                    }}]
-                }};
+                Plotly.newPlot('risk-gauge', [riskGauge], {{height: 350}});
                 
-                Plotly.newPlot('risk-gauge', [gauge], layout);
-            }}
-            
-            function createConstitutionChart() {{
-                const constitutions = ['Vata', 'Pitta', 'Kapha'];
-                const scores = [assessmentData.vata_score, assessmentData.pitta_score, assessmentData.kapha_score];
-                const colors = scores.map(score => 
-                    score <= 40 ? '#2ecc71' : score <= 65 ? '#f39c12' : '#e74c3c'
-                );
-                
-                const trace = {{
-                    x: constitutions,
-                    y: scores,
+                // Constitution Chart
+                const constitutionTrace = {{
+                    x: ['Vata', 'Pitta', 'Kapha'],
+                    y: [patientData.vata_score, patientData.pitta_score, patientData.kapha_score],
                     type: 'bar',
-                    marker: {{color: colors}},
-                    text: scores.map(score => score + '%'),
-                    textposition: 'auto',
-                    hovertemplate: '<b>%{{x}} Constitution</b><br>Imbalance Level: %{{y}}%<extra></extra>'
+                    marker: {{color: ['#e74c3c', '#f39c12', '#2ecc71']}},
+                    text: [patientData.vata_score + '%', patientData.pitta_score + '%', patientData.kapha_score + '%'],
+                    textposition: 'auto'
                 }};
                 
-                const layout = {{
-                    title: 'Ayurvedic Constitution Balance',
-                    xaxis: {{title: 'Constitution Type'}},
-                    yaxis: {{title: 'Imbalance Level (%)', range: [0, 100]}},
-                    height: 350,
-                    margin: {{t: 80, b: 50, l: 50, r: 50}}
-                }};
+                Plotly.newPlot('constitution-chart', [constitutionTrace], {{
+                    title: 'Constitution Balance',
+                    yaxis: {{title: 'Imbalance Level (%)'}},
+                    height: 350
+                }});
                 
-                Plotly.newPlot('constitution-chart', [trace], layout);
-            }}
-            
-            function createHealthRadar() {{
-                const parameters = [
-                    'Sleep Quality', 'Energy Levels', 'Stress Management',
-                    'Memory', 'Attention', 'Processing Speed'
-                ];
-                
-                const scores = [
-                    assessmentData.sleep_quality,
-                    assessmentData.energy_levels,
-                    100 - assessmentData.stress_level, // Invert stress
-                    assessmentData.memory_score,
-                    assessmentData.attention_score,
-                    assessmentData.processing_speed
-                ];
-                
-                const userTrace = {{
+                // Health Radar
+                const radarTrace = {{
                     type: 'scatterpolar',
-                    r: scores,
-                    theta: parameters,
+                    r: [
+                        patientData.sleep_quality,
+                        patientData.energy_levels,
+                        100 - patientData.stress_level,
+                        patientData.memory_score,
+                        patientData.attention_score,
+                        patientData.processing_speed
+                    ],
+                    theta: ['Sleep', 'Energy', 'Stress Mgmt', 'Memory', 'Attention', 'Processing'],
                     fill: 'toself',
-                    fillcolor: 'rgba(52, 152, 219, 0.3)',
-                    line: {{color: '#3498db', width: 3}},
-                    marker: {{size: 6, color: '#3498db'}},
-                    name: 'Your Results',
-                    hovertemplate: '<b>%{{theta}}</b><br>Score: %{{r}}%<extra></extra>'
+                    name: 'Patient Results'
                 }};
                 
-                const targetTrace = {{
-                    type: 'scatterpolar',
-                    r: [80, 80, 80, 80, 80, 80],
-                    theta: parameters,
-                    fill: 'toself',
-                    fillcolor: 'rgba(46, 204, 113, 0.1)',
-                    line: {{color: 'rgba(46, 204, 113, 0.6)', width: 2, dash: 'dash'}},
-                    name: 'Target Level',
-                    hovertemplate: 'Target: %{{r}}%<extra></extra>'
-                }};
+                Plotly.newPlot('health-radar', [radarTrace], {{
+                    polar: {{radialaxis: {{visible: true, range: [0, 100]}}}},
+                    height: 350
+                }});
                 
-                const layout = {{
-                    polar: {{
-                        radialaxis: {{
-                            visible: true,
-                            range: [0, 100],
-                            tickfont: {{size: 10}}
-                        }},
-                        angularaxis: {{
-                            tickfont: {{size: 11}},
-                            rotation: 90
-                        }}
-                    }},
-                    title: 'Health Overview - All Parameters',
-                    height: 400,
-                    showlegend: true,
-                    legend: {{
-                        orientation: "h",
-                        yanchor: "bottom",
-                        y: 1.02,
-                        xanchor: "center",
-                        x: 0.5
-                    }}
-                }};
-                
-                Plotly.newPlot('health-radar', [userTrace, targetTrace], layout);
-            }}
-            
-            function createCognitiveChart() {{
-                const cognitiveParams = ['Memory', 'Attention', 'Processing Speed', 'Executive Function'];
-                const cognitiveScores = [
-                    assessmentData.memory_score,
-                    assessmentData.attention_score,
-                    assessmentData.processing_speed,
-                    assessmentData.executive_function
-                ];
-                
-                const colors = cognitiveScores.map(score => 
-                    score >= 70 ? '#2ecc71' : score >= 40 ? '#f39c12' : '#e74c3c'
-                );
-                
-                const trace = {{
-                    y: cognitiveParams,
-                    x: cognitiveScores,
+                // Cognitive Chart
+                const cognitiveTrace = {{
+                    y: ['Memory', 'Attention', 'Processing Speed', 'Executive Function'],
+                    x: [patientData.memory_score, patientData.attention_score, patientData.processing_speed, patientData.executive_function],
                     type: 'bar',
                     orientation: 'h',
-                    marker: {{color: colors}},
-                    text: cognitiveScores.map(score => score + '%'),
-                    textposition: 'auto',
-                    hovertemplate: '<b>%{{y}}</b><br>Score: %{{x}}%<extra></extra>'
+                    marker: {{color: ['#3498db', '#9b59b6', '#e67e22', '#1abc9c']}},
+                    text: [patientData.memory_score + '%', patientData.attention_score + '%', patientData.processing_speed + '%', patientData.executive_function + '%'],
+                    textposition: 'auto'
                 }};
                 
-                const layout = {{
-                    title: 'Cognitive Health Assessment',
+                Plotly.newPlot('cognitive-chart', [cognitiveTrace], {{
+                    title: 'Cognitive Function Scores',
                     xaxis: {{title: 'Score (%)', range: [0, 100]}},
-                    height: 350,
-                    margin: {{t: 80, b: 50, l: 120, r: 50}}
-                }};
-                
-                // Add average line
-                const avgCognitive = cognitiveScores.reduce((a, b) => a + b) / cognitiveScores.length;
-                layout.shapes = [{{
-                    type: 'line',
-                    x0: avgCognitive,
-                    x1: avgCognitive,
-                    y0: -0.5,
-                    y1: cognitiveParams.length - 0.5,
-                    line: {{
-                        color: colors[0],
-                        width: 2,
-                        dash: 'dash'
-                    }}
-                }}];
-                
-                layout.annotations = [{{
-                    x: avgCognitive,
-                    y: cognitiveParams.length - 0.2,
-                    text: `Average: ${{avgCognitive.toFixed(0)}}%`,
-                    showarrow: false,
-                    font: {{size: 12}}
-                }}];
-                
-                Plotly.newPlot('cognitive-chart', [trace], layout);
+                    height: 350
+                }});
             }}
             
-            // Initialize all charts
-            function loadResults() {{
-                createRiskGauge();
-                createConstitutionChart();
-                createHealthRadar();
-                createCognitiveChart();
-                
-                // Update summary
-                const cognitiveAvg = Math.round((assessmentData.memory_score + assessmentData.attention_score + 
-                                               assessmentData.processing_speed + assessmentData.executive_function) / 4);
-                
-                document.getElementById('risk-text').textContent = 
-                    `${{assessmentData.risk_category}} (${{assessmentData.overall_risk_score}}%)`;
-                document.getElementById('constitution-text').textContent = assessmentData.dominant_constitution;
-                document.getElementById('cognitive-text').textContent = cognitiveAvg + '%';
+            function emailReport() {{
+                alert('📧 Sending report to patient email address...');
             }}
             
-            // Load results when page loads
-            window.addEventListener('load', loadResults);
-        </script>
-    </body>
-    </html>
-    """
-                border-radius: 15px;
-                padding: 20px;
-                background: #fafafa;
-            }}
-            .summary-box {{
-                background: linear-gradient(90deg, #4CAF50, #45a049);
-                color: white;
-                padding: 30px;
-                border-radius: 15px;
-                margin: 30px 0;
-                text-align: center;
-            }}
-            .btn {{
-                display: inline-block;
-                padding: 15px 30px;
-                margin: 10px;
-                background: #2196F3;
-                color: white;
-                text-decoration: none;
-                border-radius: 25px;
-                font-weight: bold;
-                transition: all 0.3s ease;
-            }}
-            .btn:hover {{
-                transform: translateY(-2px);
-                box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            }}
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="header">
-                <h1>🏥⚕️ Your Comprehensive Health Analysis</h1>
-                <p>Assessment ID: {assessment_id}</p>
-                <p>Generated on: {datetime.now().strftime('%B %d, %Y at %I:%M %p')}</p>
-            </div>
-            
-            <div class="summary-box" id="summary-box">
-                <h2>📊 Analysis Summary</h2>
-                <p id="summary-text">Loading your personalized health analysis...</p>
-            </div>
-            
-            <div class="charts-grid" id="results-charts">
-                <div id="risk-gauge-chart" class="chart-container">
-                    <h3>🎯 Overall Risk Level</h3>
-                    <div>Loading risk assessment...</div>
-                </div>
-                
-                <div id="constitution-chart" class="chart-container">
-                    <h3>🏛️ Ayurvedic Constitution</h3>
-                    <div>Loading constitution analysis...</div>
-                </div>
-                
-                <div id="health-radar-chart" class="chart-container">
-                    <h3>🕸️ Health Overview</h3>
-                    <div>Loading health radar...</div>
-                </div>
-                
-                <div id="cognitive-chart" class="chart-container">
-                    <h3>🧠 Cognitive Assessment</h3>
-                    <div>Loading cognitive analysis...</div>
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="/assessment" class="btn">📝 Take Another Assessment</a>
-                <a href="/dashboard" class="btn">📊 View Dynamic Dashboard</a>
-                <a href="/" class="btn">🏠 Return Home</a>
-            </div>
-        </div>
-
-        <script>
-            async function loadResults() {{
-                try {{
-                    // Get assessment data from URL or use demo data
-                    const demoData = {{
-                        vata_score: 65,
-                        pitta_score: 45,
-                        kapha_score: 35,
-                        sleep_quality: 60,
-                        digestion_score: 70,
-                        energy_levels: 55,
-                        stress_level: 75,
-                        memory_score: 65,
-                        attention_score: 60,
-                        processing_speed: 55,
-                        executive_function: 50,
-                        overall_risk_score: 58,
-                        risk_category: 'Moderate Risk',
-                        dominant_constitution: 'Vata'
-                    }};
-                    
-                    // Generate charts
-                    const response = await fetch('/api/charts/generate', {{
-                        method: 'POST',
-                        headers: {{'Content-Type': 'application/json'}},
-                        body: JSON.stringify(demoData)
-                    }});
-                    
-                    const result = await response.json();
-                    
-                    if (result.charts) {{
-                        // Update summary
-                        const summaryText = `
-                            <strong>Risk Level:</strong> ${{demoData.risk_category}} (${{demoData.overall_risk_score}}%) &nbsp;&nbsp;|&nbsp;&nbsp;
-                            <strong>Dominant Constitution:</strong> ${{demoData.dominant_constitution}} &nbsp;&nbsp;|&nbsp;&nbsp;
-                            <strong>Cognitive Health:</strong> ${{Math.round((demoData.memory_score + demoData.attention_score + demoData.processing_speed + demoData.executive_function) / 4)}}%
-                        `;
-                        document.getElementById('summary-text').innerHTML = summaryText;
-                        
-                        // Update charts
-                        Object.entries(result.charts).forEach(([chartType, chartHtml]) => {{
-                            if (chartType !== 'data' && chartHtml) {{
-                                const container = document.getElementById(chartType + '-chart');
-                                if (container) {{
-                                    container.innerHTML = chartHtml;
-                                }}
-                            }}
-                        }});
-                    }}
-                    
-                }} catch (error) {{
-                    console.error('Results loading error:', error);
-                    document.getElementById('summary-text').innerHTML = 'Error loading results. Please try again.';
-                }}
-            }}
-            
-            // Load results when page loads
-            loadResults();
+            // Initialize everything when page loads
+            window.addEventListener('load', function() {{
+                loadPatientInfo();
+                createPatientCharts();
+            }});
         </script>
     </body>
     </html>
