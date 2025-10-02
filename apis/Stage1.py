@@ -6,8 +6,11 @@ import pandas as pd
 app = FastAPI(title="Prakriti Classification API", version="1.0")
 
 # Load model and encoder
-model = joblib.load("model/prakriti_model_robust.pkl")
-encoder = joblib.load("model/prakriti_encoder.pkl")
+import os
+model_path = os.path.join(os.path.dirname(__file__), "..", "model", "prakriti_model_robust.pkl")
+encoder_path = os.path.join(os.path.dirname(__file__), "..", "model", "prakriti_encoder.pkl")
+model = joblib.load(model_path)
+encoder = joblib.load(encoder_path)
 
 # Label mapping
 label_map = {0: 'Kapha', 1: 'Pitta', 2: 'Vata'}

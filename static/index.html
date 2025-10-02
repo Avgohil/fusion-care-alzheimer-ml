@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Care Catalyst - Ayurveda & Alzheimer's Assessment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+        /* Custom glassmorphism styles */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+        
+        /* Custom animation styles */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .slide-right {
+            transform: translateX(100%);
+        }
+        
+        .slide-left {
+            transform: translateX(-100%);
+        }
+        
+        /* Loader styles */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Progress bar styles */
+        .progress-bar {
+            transition: width 2s ease-in-out;
+        }
+        
+        /* Form step indicator */
+        .step-indicator {
+            position: relative;
+        }
+        
+        .step-indicator::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: 50px;
+            height: 2px;
+            background: #e5e7eb;
+            transform: translateY(-50%);
+        }
+        
+        .step-indicator.active::after {
+            background: #3b82f6;
+        }
+        
+        .step-indicator:last-child::after {
+            display: none;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8 fade-in" id="header">
+            <h1 class="text-4xl font-bold text-white mb-2">Care Catalyst</h1>
+            <p class="text-xl text-white opacity-80">Ayurvedic Constitution & Alzheimer's Risk Assessment</p>
+            <div class="mt-4 flex justify-center space-x-4">
+                <span class="bg-white bg-opacity-20 text-white px-3 py-1 rounded-full text-sm">🌿 Ayurveda</span>
+                <span class="bg-white bg-opacity-20 text-white px-3 py-1 rounded-full text-sm">🧠 Modern Science</span>
+                <span class="bg-white bg-opacity-20 text-white px-3 py-1 rounded-full text-sm">🔬 AI-Powered</span>
+            </div>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="flex justify-center mb-8 fade-in" id="progress-steps">
+            <div class="flex items-center space-x-4">
+                <div class="step-indicator active flex items-center justify-center w-10 h-10 bg-blue-500 text-white rounded-full font-bold">1</div>
+                <div class="step-indicator flex items-center justify-center w-10 h-10 bg-gray-300 text-gray-600 rounded-full font-bold">2</div>
+                <div class="step-indicator flex items-center justify-center w-10 h-10 bg-gray-300 text-gray-600 rounded-full font-bold">3</div>
+                <div class="step-indicator flex items-center justify-center w-10 h-10 bg-gray-300 text-gray-600 rounded-full font-bold">4</div>
+            </div>
+        </div>
+
+        <!-- Assessment Form -->
+        <div class="max-w-4xl mx-auto">
+            <form id="assessmentForm" class="space-y-6">
+                
+                <!-- Step 1: Ayurvedic Constitution (Prakriti) Assessment -->
+                <div class="form-step glass rounded-2xl p-8 card-shadow" id="step-1">
+                    <div class="text-center mb-6">
+                        <h2 class="text-2xl font-bold text-white mb-2">🌿 Ayurvedic Constitution Assessment</h2>
+                        <p class="text-white opacity-80">Answer these questions about your natural physical and mental characteristics</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Body Frame -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Body Frame</label>
+                            <select name="Body_Frame" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select body frame</option>
+                                <option value="Thin, light">Thin, light</option>
+                                <option value="Medium, muscular">Medium, muscular</option>
+                                <option value="Heavy, broad">Heavy, broad</option>
+                            </select>
+                        </div>
+
+                        <!-- Skin Texture -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Skin Texture</label>
+                            <select name="Skin_Texture" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select skin texture</option>
+                                <option value="Dry, rough, cold">Dry, rough, cold</option>
+                                <option value="Warm, oily, reddish">Warm, oily, reddish</option>
+                                <option value="Smooth, moist, thick">Smooth, moist, thick</option>
+                            </select>
+                        </div>
+
+                        <!-- Hair Type -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Hair Type</label>
+                            <select name="Hair_Type" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select hair type</option>
+                                <option value="Dry, frizzy, brittle">Dry, frizzy, brittle</option>
+                                <option value="Soft, oily, reddish/brown">Soft, oily, reddish/brown</option>
+                                <option value="Thick, strong, oily">Thick, strong, oily</option>
+                            </select>
+                        </div>
+
+                        <!-- Eyes -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Eyes</label>
+                            <select name="Eyes" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select eye characteristics</option>
+                                <option value="Small, dry, dull">Small, dry, dull</option>
+                                <option value="Sharp, intense, reddish">Sharp, intense, reddish</option>
+                                <option value="Large, calm, watery">Large, calm, watery</option>
+                            </select>
+                        </div>
+
+                        <!-- Sleep Pattern -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Sleep Pattern</label>
+                            <select name="Sleep_Pattern" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select sleep pattern</option>
+                                <option value="Light, interrupted">Light, interrupted</option>
+                                <option value="Moderate">Moderate</option>
+                                <option value="Deep, prolonged">Deep, prolonged</option>
+                            </select>
+                        </div>
+
+                        <!-- Appetite -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Appetite</label>
+                            <select name="Appetite" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select appetite pattern</option>
+                                <option value="Irregular">Irregular</option>
+                                <option value="Strong, frequent hunger">Strong, frequent hunger</option>
+                                <option value="Slow, steady">Slow, steady</option>
+                            </select>
+                        </div>
+
+                        <!-- Digestion -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Digestion</label>
+                            <select name="Digestion" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select digestion pattern</option>
+                                <option value="Variable, bloating">Variable, bloating</option>
+                                <option value="Fast, prone to acidity">Fast, prone to acidity</option>
+                                <option value="Slow, sluggish">Slow, sluggish</option>
+                            </select>
+                        </div>
+
+                        <!-- Sweating -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Sweating</label>
+                            <select name="Sweating" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select sweating pattern</option>
+                                <option value="Less">Less</option>
+                                <option value="Profuse, with odor">Profuse, with odor</option>
+                                <option value="Moderate, little odor">Moderate, little odor</option>
+                            </select>
+                        </div>
+
+                        <!-- Speech Voice -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Speech/Voice</label>
+                            <select name="Speech_Voice" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select speech pattern</option>
+                                <option value="Fast, low pitch">Fast, low pitch</option>
+                                <option value="Sharp, loud">Sharp, loud</option>
+                                <option value="Slow, deep">Slow, deep</option>
+                            </select>
+                        </div>
+
+                        <!-- Energy Levels -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Energy Levels</label>
+                            <select name="Energy_Levels" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select energy pattern</option>
+                                <option value="Variable, quick bursts">Variable, quick bursts</option>
+                                <option value="High, sustained">High, sustained</option>
+                                <option value="Steady, enduring">Steady, enduring</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end mt-6">
+                        <button type="button" onclick="nextStep(1)" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors duration-200">
+                            Next: More Characteristics →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: More Ayurvedic Characteristics -->
+                <div class="form-step glass rounded-2xl p-8 card-shadow slide-right" id="step-2" style="display: none;">
+                    <div class="text-center mb-6">
+                        <h2 class="text-2xl font-bold text-white mb-2">🌿 Additional Characteristics</h2>
+                        <p class="text-white opacity-80">Complete your Ayurvedic constitution profile</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Body Temperature -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Body Temperature</label>
+                            <select name="Body_Temperature" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select body temperature</option>
+                                <option value="Cold hands/feet">Cold hands/feet</option>
+                                <option value="Warm/hot">Warm/hot</option>
+                                <option value="Generally cool">Generally cool</option>
+                            </select>
+                        </div>
+
+                        <!-- Weather Sensitivity -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Weather Sensitivity</label>
+                            <select name="Weather_Sensitivity" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select weather sensitivity</option>
+                                <option value="Dislikes cold/wind">Dislikes cold/wind</option>
+                                <option value="Dislikes heat/sun">Dislikes heat/sun</option>
+                                <option value="Dislikes cold/damp">Dislikes cold/damp</option>
+                            </select>
+                        </div>
+
+                        <!-- Memory -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Memory</label>
+                            <select name="Memory" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select memory pattern</option>
+                                <option value="Quick to learn, forget">Quick to learn, forget</option>
+                                <option value="Sharp, clear">Sharp, clear</option>
+                                <option value="Slow to learn, retains">Slow to learn, retains</option>
+                            </select>
+                        </div>
+
+                        <!-- Motion Tendencies -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Motion Tendencies</label>
+                            <select name="Motion_Tendencies" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select motion pattern</option>
+                                <option value="Quick, restless">Quick, restless</option>
+                                <option value="Moderate, purposeful">Moderate, purposeful</option>
+                                <option value="Slow, steady">Slow, steady</option>
+                            </select>
+                        </div>
+
+                        <!-- Mindset Emotion -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Mindset/Emotion</label>
+                            <select name="Mindset_Emotion" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select emotional pattern</option>
+                                <option value="Anxious, worried">Anxious, worried</option>
+                                <option value="Intense, irritable">Intense, irritable</option>
+                                <option value="Calm, attached">Calm, attached</option>
+                            </select>
+                        </div>
+
+                        <!-- Elimination Stool -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Elimination/Stool</label>
+                            <select name="Elimination_Stool" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select elimination pattern</option>
+                                <option value="Irregular, dry">Irregular, dry</option>
+                                <option value="Regular, loose">Regular, loose</option>
+                                <option value="Slow, heavy">Slow, heavy</option>
+                            </select>
+                        </div>
+
+                        <!-- Sleep Requirement -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Sleep Requirement</label>
+                            <select name="Sleep_Requirement" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select sleep needs</option>
+                                <option value="Light sleeper">Light sleeper</option>
+                                <option value="Moderate sleep needs">Moderate sleep needs</option>
+                                <option value="Heavy sleeper">Heavy sleeper</option>
+                            </select>
+                        </div>
+
+                        <!-- Hunger Onset -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Hunger Onset</label>
+                            <select name="Hunger_Onset" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select hunger pattern</option>
+                                <option value="Irregular timing">Irregular timing</option>
+                                <option value="Gets hungry quickly">Gets hungry quickly</option>
+                                <option value="Can skip meals">Can skip meals</option>
+                            </select>
+                        </div>
+
+                        <!-- Speech Pace -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Speech Pace</label>
+                            <select name="Speech_Pace" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select speech pace</option>
+                                <option value="Fast, erratic">Fast, erratic</option>
+                                <option value="Moderate, clear">Moderate, clear</option>
+                                <option value="Slow, deliberate">Slow, deliberate</option>
+                            </select>
+                        </div>
+
+                        <!-- Weight Tendency -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Weight Tendency</label>
+                            <select name="Weight_Tendency" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select weight tendency</option>
+                                <option value="Underweight">Underweight</option>
+                                <option value="Normal weight">Normal weight</option>
+                                <option value="Tendency to gain weight">Tendency to gain weight</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button type="button" onclick="prevStep(2)" class="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors duration-200">
+                            ← Back
+                        </button>
+                        <button type="button" onclick="nextStep(2)" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors duration-200">
+                            Next: Health Assessment →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Health & Lifestyle Assessment -->
+                <div class="form-step glass rounded-2xl p-8 card-shadow slide-right" id="step-3" style="display: none;">
+                    <div class="text-center mb-6">
+                        <h2 class="text-2xl font-bold text-white mb-2">🧠 Health & Lifestyle Assessment</h2>
+                        <p class="text-white opacity-80">Provide information about your health and cognitive function</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Age -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Age</label>
+                            <input type="number" name="age" min="18" max="120" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter your age">
+                        </div>
+
+                        <!-- Gender -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Gender</label>
+                            <select name="gender" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+
+                        <!-- Diet Type -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Diet Type</label>
+                            <select name="diet_type" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select diet type</option>
+                                <option value="Balanced">Balanced</option>
+                                <option value="Vegetarian">Vegetarian</option>
+                                <option value="Irregular">Irregular</option>
+                            </select>
+                        </div>
+
+                        <!-- Sleep Quality -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Sleep Quality</label>
+                            <select name="sleep_quality" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select sleep quality</option>
+                                <option value="Good">Good</option>
+                                <option value="Average">Average</option>
+                                <option value="Poor">Poor</option>
+                            </select>
+                        </div>
+
+                        <!-- Stress Level -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Stress Level</label>
+                            <select name="stress_level" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select stress level</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+
+                        <!-- Physical Activity -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Physical Activity</label>
+                            <select name="physical_activity" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select activity level</option>
+                                <option value="High">High</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+
+                        <!-- Memory Loss -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Memory Loss</label>
+                            <select name="memory_loss" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select memory status</option>
+                                <option value="None">None</option>
+                                <option value="Sometimes">Sometimes</option>
+                                <option value="Mild">Mild</option>
+                                <option value="Severe">Severe</option>
+                            </select>
+                        </div>
+
+                        <!-- Confusion -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Confusion</label>
+                            <select name="confusion" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select confusion level</option>
+                                <option value="None">None</option>
+                                <option value="Sometimes">Sometimes</option>
+                                <option value="Often">Often</option>
+                            </select>
+                        </div>
+
+                        <!-- Language Difficulty -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Language Difficulty</label>
+                            <select name="language_difficulty" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select language status</option>
+                                <option value="None">None</option>
+                                <option value="Mild">Mild</option>
+                                <option value="Yes">Yes</option>
+                            </select>
+                        </div>
+
+                        <!-- Decision Making -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Decision Making</label>
+                            <select name="decision_making" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select decision making ability</option>
+                                <option value="Good">Good</option>
+                                <option value="Indecisive">Indecisive</option>
+                                <option value="Poor">Poor</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button type="button" onclick="prevStep(3)" class="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors duration-200">
+                            ← Back
+                        </button>
+                        <button type="button" onclick="nextStep(3)" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors duration-200">
+                            Next: Final Details →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Final Health Details -->
+                <div class="form-step glass rounded-2xl p-8 card-shadow slide-right" id="step-4" style="display: none;">
+                    <div class="text-center mb-6">
+                        <h2 class="text-2xl font-bold text-white mb-2">🏥 Final Health Details</h2>
+                        <p class="text-white opacity-80">Complete your health profile for accurate assessment</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Repetition Behavior -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Repetition Behavior</label>
+                            <select name="repetition_behavior" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select repetition behavior</option>
+                                <option value="None">None</option>
+                                <option value="Sometimes">Sometimes</option>
+                                <option value="Often">Often</option>
+                            </select>
+                        </div>
+
+                        <!-- Social Withdrawal -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Social Withdrawal</label>
+                            <select name="social_withdrawal" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select social behavior</option>
+                                <option value="None">None</option>
+                                <option value="Sometimes">Sometimes</option>
+                                <option value="Often">Often</option>
+                            </select>
+                        </div>
+
+                        <!-- Mood Swings -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Mood Swings</label>
+                            <select name="mood_swings" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select mood patterns</option>
+                                <option value="None">None</option>
+                                <option value="Sometimes">Sometimes</option>
+                                <option value="Often">Often</option>
+                            </select>
+                        </div>
+
+                        <!-- Chronic Conditions -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Chronic Conditions</label>
+                            <select name="chronic_conditions" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select chronic conditions</option>
+                                <option value="None">None</option>
+                                <option value="Diabetes">Diabetes</option>
+                                <option value="Hypertension">Hypertension</option>
+                                <option value="Heart Disease">Heart Disease</option>
+                            </select>
+                        </div>
+
+                        <!-- Systolic BP -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Systolic Blood Pressure</label>
+                            <input type="number" name="systolic_bp" min="80" max="200" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="e.g., 120">
+                        </div>
+
+                        <!-- Blood Sugar -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Blood Sugar (mg/dL)</label>
+                            <input type="number" name="blood_sugar" min="50" max="400" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="e.g., 100">
+                        </div>
+
+                        <!-- BMI -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">BMI (Body Mass Index)</label>
+                            <input type="number" name="bmi" min="15" max="50" step="0.1" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="e.g., 23.5">
+                        </div>
+
+                        <!-- Family History -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Family History of Alzheimer's</label>
+                            <select name="family_history" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select family history</option>
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button type="button" onclick="prevStep(4)" class="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors duration-200">
+                            ← Back
+                        </button>
+                        <button type="submit" class="px-8 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors duration-200">
+                            🔬 Analyze Results
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Loading Screen -->
+        <div id="loadingScreen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" style="display: none;">
+            <div class="glass rounded-2xl p-8 text-center card-shadow">
+                <div class="loader mx-auto mb-4"></div>
+                <h3 class="text-xl font-bold text-white mb-2">Analyzing Your Results</h3>
+                <p class="text-white opacity-80">Processing your Ayurvedic constitution and health data...</p>
+                <div class="mt-4">
+                    <div id="loadingProgress" class="text-white text-sm"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Display -->
+        <div id="resultsSection" class="max-w-4xl mx-auto mt-8 fade-in" style="display: none;">
+            <div class="glass rounded-2xl p-8 card-shadow">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-white mb-2">🎯 Your Assessment Results</h2>
+                    <p class="text-white opacity-80">Based on Ayurvedic principles and modern health science</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Prakriti Result -->
+                    <div class="space-y-6">
+                        <div class="bg-white bg-opacity-10 rounded-xl p-6">
+                            <h3 class="text-xl font-bold text-white mb-4">🌿 Your Ayurvedic Constitution</h3>
+                            <div id="prakritiResult" class="text-center">
+                                <div id="prakritiType" class="text-3xl font-bold text-white mb-2"></div>
+                                <div id="prakritiScores" class="space-y-2"></div>
+                            </div>
+                        </div>
+
+                        <!-- Alzheimer's Risk -->
+                        <div class="bg-white bg-opacity-10 rounded-xl p-6">
+                            <h3 class="text-xl font-bold text-white mb-4">🧠 Alzheimer's Risk Assessment</h3>
+                            <div id="riskResult" class="text-center">
+                                <div id="riskLevel" class="text-2xl font-bold mb-2"></div>
+                                <div id="riskScore" class="text-lg text-white opacity-80 mb-4"></div>
+                                <div id="riskProgressBar" class="w-full bg-gray-300 rounded-full h-4 mb-2">
+                                    <div id="riskProgress" class="progress-bar bg-blue-500 h-4 rounded-full" style="width: 0%;"></div>
+                                </div>
+                                <div id="verdict" class="text-white opacity-80"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart Display -->
+                    <div class="bg-white bg-opacity-10 rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-white mb-4">📊 Risk Visualization</h3>
+                        <div id="chartContainer" class="text-center">
+                            <img id="riskChart" class="mx-auto rounded-lg" alt="Risk Assessment Chart" style="max-width: 100%; height: auto;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-white bg-opacity-10 rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-white mb-4">🌿 Ayurvedic Recommendations</h3>
+                        <div id="ayurvedaRecommendations" class="text-white opacity-90"></div>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-10 rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-white mb-4">🏥 Medical Recommendations</h3>
+                        <div id="allopathyRecommendations" class="text-white opacity-90"></div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="text-center mt-8">
+                    <button onclick="resetAssessment()" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors duration-200 mr-4">
+                        🔄 Take Another Assessment
+                    </button>
+                    <button onclick="window.print()" class="px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors duration-200">
+                        🖨️ Print Results
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            anime({
+                targets: '.fade-in',
+                opacity: [0, 1],
+                translateY: [20, 0],
+                duration: 1000,
+                delay: anime.stagger(200)
+            });
+        });
+
+        function updateProgressSteps(step) {
+            const steps = document.querySelectorAll('.step-indicator');
+            steps.forEach((stepEl, index) => {
+                if (index < step) {
+                    stepEl.classList.add('active');
+                    stepEl.classList.remove('bg-gray-300', 'text-gray-600');
+                    stepEl.classList.add('bg-blue-500', 'text-white');
+                } else {
+                    stepEl.classList.remove('active', 'bg-blue-500', 'text-white');
+                    stepEl.classList.add('bg-gray-300', 'text-gray-600');
+                }
+            });
+        }
+
+        function nextStep(step) {
+            // Validate current step
+            const currentStepEl = document.getElementById(`step-${step}`);
+            const inputs = currentStepEl.querySelectorAll('input[required], select[required]');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.classList.add('ring-red-500');
+                } else {
+                    input.classList.remove('ring-red-500');
+                }
+            });
+
+            if (!isValid) {
+                anime({
+                    targets: currentStepEl,
+                    scale: [1, 1.02, 1],
+                    duration: 300,
+                    easing: 'easeInOutQuad'
+                });
+                return;
+            }
+
+            // Animate out current step
+            anime({
+                targets: `#step-${step}`,
+                translateX: [0, -100],
+                opacity: [1, 0],
+                duration: 500,
+                easing: 'easeInOutQuad',
+                complete: function() {
+                    document.getElementById(`step-${step}`).style.display = 'none';
+                    
+                    // Show next step
+                    const nextStepEl = document.getElementById(`step-${step + 1}`);
+                    nextStepEl.style.display = 'block';
+                    nextStepEl.style.transform = 'translateX(100%)';
+                    nextStepEl.style.opacity = '0';
+                    
+                    anime({
+                        targets: nextStepEl,
+                        translateX: [100, 0],
+                        opacity: [0, 1],
+                        duration: 500,
+                        easing: 'easeInOutQuad'
+                    });
+                }
+            });
+
+            currentStep = step + 1;
+            updateProgressSteps(currentStep);
+        }
+
+        function prevStep(step) {
+            // Animate out current step
+            anime({
+                targets: `#step-${step}`,
+                translateX: [0, 100],
+                opacity: [1, 0],
+                duration: 500,
+                easing: 'easeInOutQuad',
+                complete: function() {
+                    document.getElementById(`step-${step}`).style.display = 'none';
+                    
+                    // Show previous step
+                    const prevStepEl = document.getElementById(`step-${step - 1}`);
+                    prevStepEl.style.display = 'block';
+                    prevStepEl.style.transform = 'translateX(-100%)';
+                    prevStepEl.style.opacity = '0';
+                    
+                    anime({
+                        targets: prevStepEl,
+                        translateX: [-100, 0],
+                        opacity: [0, 1],
+                        duration: 500,
+                        easing: 'easeInOutQuad'
+                    });
+                }
+            });
+
+            currentStep = step - 1;
+            updateProgressSteps(currentStep);
+        }
+
+        // Handle form submission
+        document.getElementById('assessmentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading screen
+            document.getElementById('loadingScreen').style.display = 'flex';
+            
+            // Animate loading messages
+            const loadingMessages = [
+                "Analyzing Ayurvedic constitution...",
+                "Processing health indicators...",
+                "Calculating risk factors...",
+                "Generating personalized recommendations...",
+                "Creating visualization charts..."
+            ];
+            
+            let messageIndex = 0;
+            const loadingInterval = setInterval(() => {
+                if (messageIndex < loadingMessages.length) {
+                    document.getElementById('loadingProgress').textContent = loadingMessages[messageIndex];
+                    messageIndex++;
+                } else {
+                    clearInterval(loadingInterval);
+                }
+            }, 1000);
+
+            try {
+                // Collect form data
+                const formData = new FormData(this);
+                const data = {};
+                for (let [key, value] of formData.entries()) {
+                    // Convert numeric fields
+                    if (['age', 'systolic_bp', 'blood_sugar'].includes(key)) {
+                        data[key] = parseInt(value);
+                    } else if (key === 'bmi') {
+                        data[key] = parseFloat(value);
+                    } else {
+                        data[key] = value;
+                    }
+                }
+
+                // Send to backend
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                
+                // Hide loading screen
+                setTimeout(() => {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                    displayResults(result);
+                }, 2000);
+
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('loadingScreen').style.display = 'none';
+                alert('An error occurred while processing your assessment. Please try again.');
+            }
+        });
+
+        function displayResults(result) {
+            // Hide form
+            document.getElementById('assessmentForm').style.display = 'none';
+            document.getElementById('progress-steps').style.display = 'none';
+            
+            // Show results
+            const resultsSection = document.getElementById('resultsSection');
+            resultsSection.style.display = 'block';
+
+            // Display Prakriti result
+            const prakritiEmojis = {
+                'Vata': '💨',
+                'Pitta': '🔥',
+                'Kapha': '🌿'
+            };
+            
+            let prakritiDisplay = result.prakriti_result;
+            let emoji = '';
+            
+            // Add appropriate emojis
+            Object.keys(prakritiEmojis).forEach(dosha => {
+                if (prakritiDisplay.includes(dosha)) {
+                    emoji += prakritiEmojis[dosha] + ' ';
+                }
+            });
+            
+            document.getElementById('prakritiType').innerHTML = `${emoji}${prakritiDisplay}`;
+            
+            // Display Prakriti scores
+            const scoresHTML = Object.entries(result.prakriti_scores)
+                .sort(([,a], [,b]) => b - a)
+                .map(([dosha, score]) => `
+                    <div class="flex justify-between items-center">
+                        <span>${prakritiEmojis[dosha] || ''} ${dosha}</span>
+                        <span class="font-bold">${score}%</span>
+                    </div>
+                `).join('');
+            document.getElementById('prakritiScores').innerHTML = scoresHTML;
+
+            // Display Alzheimer's risk
+            const riskColors = {
+                'Low': 'text-green-400',
+                'Medium': 'text-yellow-400',
+                'High': 'text-red-400'
+            };
+            
+            document.getElementById('riskLevel').innerHTML = `
+                <span class="${riskColors[result.alzheimer_risk]}">${result.alzheimer_risk} Risk</span>
+            `;
+            document.getElementById('riskScore').textContent = `Score: ${result.risk_score}/100`;
+            document.getElementById('verdict').textContent = result.verdict;
+            
+            // Animate risk progress bar
+            setTimeout(() => {
+                document.getElementById('riskProgress').style.width = `${result.risk_score}%`;
+                
+                // Change color based on risk level
+                const progressBar = document.getElementById('riskProgress');
+                if (result.risk_score <= 40) {
+                    progressBar.className = 'progress-bar bg-green-500 h-4 rounded-full';
+                } else if (result.risk_score <= 60) {
+                    progressBar.className = 'progress-bar bg-yellow-500 h-4 rounded-full';
+                } else {
+                    progressBar.className = 'progress-bar bg-red-500 h-4 rounded-full';
+                }
+            }, 500);
+
+            // Display chart
+            document.getElementById('riskChart').src = result.chart;
+
+            // Display recommendations
+            if (typeof result.prakriti_recommendations === 'object') {
+                const prakritiRecsHTML = Object.entries(result.prakriti_recommendations)
+                    .map(([category, recommendation]) => `
+                        <div class="mb-3">
+                            <strong>${category}:</strong> ${recommendation}
+                        </div>
+                    `).join('');
+                document.getElementById('ayurvedaRecommendations').innerHTML = prakritiRecsHTML;
+            } else {
+                document.getElementById('ayurvedaRecommendations').textContent = result.ayurveda_recommendations;
+            }
+            
+            document.getElementById('allopathyRecommendations').textContent = result.allopathy_recommendations;
+
+            // Animate results appearance
+            anime({
+                targets: '#resultsSection',
+                opacity: [0, 1],
+                translateY: [50, 0],
+                duration: 1000,
+                easing: 'easeOutQuad'
+            });
+
+            // Animate individual result cards
+            anime({
+                targets: '#resultsSection .bg-white',
+                opacity: [0, 1],
+                translateY: [30, 0],
+                duration: 800,
+                delay: anime.stagger(200),
+                easing: 'easeOutQuad'
+            });
+        }
+
+        function resetAssessment() {
+            // Reset form
+            document.getElementById('assessmentForm').reset();
+            
+            // Hide results and show form
+            document.getElementById('resultsSection').style.display = 'none';
+            document.getElementById('assessmentForm').style.display = 'block';
+            document.getElementById('progress-steps').style.display = 'flex';
+            
+            // Reset to first step
+            for (let i = 2; i <= totalSteps; i++) {
+                document.getElementById(`step-${i}`).style.display = 'none';
+            }
+            document.getElementById('step-1').style.display = 'block';
+            document.getElementById('step-1').style.transform = 'translateX(0)';
+            document.getElementById('step-1').style.opacity = '1';
+            
+            currentStep = 1;
+            updateProgressSteps(currentStep);
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize progress steps
+        updateProgressSteps(currentStep);
+    </script>
+</body>
+</html>

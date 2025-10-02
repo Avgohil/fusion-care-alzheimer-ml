@@ -1,438 +1,294 @@
-# 🏥⚕️ Care Catalyst - AI-Powered Ayurvedic Health Assessment Platform
+# Care Catalyst 🌿🧠
 
-**Integrating Ancient Wisdom with Modern AI Technology for Early Alzheimer's Detection**
+**Ayurvedic Constitution & Alzheimer's Risk Assessment Platform**
 
-[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com)
-[![Railway](https://img.shields.io/badge/Deployed%20on-Railway-purple.svg)](https://railway.app)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+Care Catalyst is an innovative web application that combines traditional Ayurvedic medicine with modern AI/ML technology to provide personalized health assessments. The platform performs two-stage analysis: first determining your Ayurvedic constitution (Prakriti), then evaluating Alzheimer's disease risk factors.
 
-## 🌟 Overview
+![Care Catalyst Demo](assets/demo-screenshot.png)
 
-Care Catalyst is a comprehensive AI-powered healthcare platform that combines traditional Ayurvedic principles with modern machine learning algorithms for early detection of cognitive decline and Alzheimer's disease risk assessment.
+## ✨ Features
 
-### 🎯 Key Features
+### 🎯 Two-Stage Assessment Pipeline
+1. **Stage 1: Ayurvedic Prakriti Classification**
+   - Analyzes 20 physical and behavioral characteristics
+   - Determines constitution: Vata (💨), Pitta (🔥), Kapha (🌿), or combinations
+   - Provides personalized Ayurvedic recommendations
 
-- **🧠 Cognitive Assessment** - Memory, attention, processing speed, and executive function analysis
-- **🏛️ Ayurvedic Analysis** - Traditional Prakriti (constitution) classification using AI
-- **📊 Interactive Visualizations** - Dynamic charts and real-time health dashboards
-- **🎯 Risk Prediction** - Early Alzheimer's disease detection using validated ML models
-- **💊 Personalized Recommendations** - Treatment plans combining Ayurveda and modern medicine
-- **📋 Patient Management** - Complete patient records and assessment history tracking
+2. **Stage 2: Alzheimer's Risk Prediction**
+   - Evaluates 18 health and lifestyle factors
+   - Generates risk score (0-100) with Low/Medium/High classification
+   - Combines Prakriti type with modern health indicators
 
-## 🚀 Live Demo
+### 🎨 Beautiful UI/UX
+- **Glassmorphism Design**: Modern, translucent card-based interface
+- **Smooth Animations**: Powered by Anime.js for fluid transitions
+- **Multi-Step Form**: Progressive disclosure with visual progress indicators
+- **Responsive Layout**: Works seamlessly on desktop and mobile devices
+- **Real-time Validation**: Instant feedback on form inputs
 
-**🌐 Production URL:** [https://web-production-95627.up.railway.app/](https://web-production-95627.up.railway.app/)
+### 📊 Interactive Results
+- **Dynamic Risk Gauge**: Animated progress bars and risk visualization
+- **Personalized Recommendations**: Both Ayurvedic and modern medical advice
+- **Beautiful Charts**: Plotly-generated risk assessment charts
+- **Downloadable Results**: Print-friendly results page
 
-### Quick Navigation:
-- **📝 Patient Assessment:** `/assessment`
-- **📊 Sample Results:** `/results`
-- **📋 Patient Records:** `/patient-records`
-- **🔧 API Health:** `/api/health`
-- **📚 API Docs:** `/docs`
+## 🏗️ Technical Architecture
 
-## 🏗️ Architecture
-
-### Technology Stack
-
-#### Backend
-- **FastAPI** - Modern Python web framework with automatic API documentation
-- **Uvicorn** - High-performance ASGI server
-- **Pandas & NumPy** - Data processing and numerical computations
-- **Scikit-learn** - Machine learning algorithms and model training
-- **Plotly** - Interactive data visualizations
-
-#### Frontend
-- **HTML5/CSS3** - Semantic markup and responsive design
-- **JavaScript (Vanilla)** - Client-side interactivity
-- **Plotly.js** - Interactive charts and graphs
-- **Bootstrap-inspired** - Mobile-first responsive design
-
-#### ML Models
-- **Prakriti Classification** - Ayurvedic constitution analysis
-- **Cognitive Assessment** - Multi-parameter brain health evaluation
-- **Risk Prediction** - Alzheimer's disease early detection
-- **Feature Engineering** - Advanced data preprocessing pipelines
-
-#### Deployment
-- **Railway** - Cloud platform for automatic deployments
-- **GitHub Actions** - CI/CD pipeline for seamless updates
-- **Docker** - Containerized application deployment
-
-## 📁 Project Structure
-
+### Backend (FastAPI)
 ```
-Care-Catalyst/
-├── 📄 main.py                              # Main FastAPI application
-├── 📄 requirements_railway.txt             # Production dependencies
-├── 📄 Procfile                            # Railway deployment configuration
-├── 📄 railway.json                        # Railway settings
-├── 📄 .env.example                        # Environment variables template
-├── 📄 .gitignore                          # Git ignore rules
-│
-├── 🗂️ apis/                                # API endpoint modules
-│   ├── Stage1.py                          # Prakriti classification API
-│   └── Stage2.py                          # Alzheimer's risk prediction API
-│
-├── 🗂️ stage_1_prakriti_classification/     # Ayurvedic analysis module
-│   ├── 📊 data/
-│   │   ├── Ayurveda_Prakriti_Dataset.csv
-│   │   └── stage1_input_features.csv
-│   ├── 🤖 models/
-│   │   ├── prakriti_encoder.pkl
-│   │   ├── prakriti_model.pkl
-│   │   └── stage1_input_features.pkl
-│   ├── 📓 notebooks/
-│   │   └── Stage1.ipynb
-│   └── 📄 app.py                          # Standalone Prakriti app
-│
-├── 🗂️ stage_2_alzheimer_risk_prediction/   # Cognitive analysis module
-│   ├── 📊 data/
-│   │   └── alzheimers_risk_dataset_stage2.csv
-│   ├── 🤖 models/                          # (Models moved to root level)
-│   ├── 📓 notebooks/
-│   │   └── Stage2.ipynb
-│   └── 📄 scripts/                        # Data processing scripts
-│
-├── 🗂️ model/                               # ML model files
-│   ├── prakriti_encoder.pkl              # Ayurvedic feature encoder
-│   └── prakriti_model_robust.pkl         # Robust Prakriti classifier
-│
-├── 🗂️ assets/                              # UI/UX assets
-│   ├── 1.png                             # Demo screenshots
-│   ├── 2.png
-│   ├── 3.png
-│   └── 4.png
-│
-└── 📚 Documentation/
-    ├── README.md                          # This file
-    ├── RAILWAY_DEPLOYMENT_GUIDE.md        # Deployment instructions
-    └── GITHUB_RAILWAY_DEPLOYMENT.md       # GitHub integration guide
+care_catalyst_demo.py
+├── /predict (POST) - Main assessment endpoint
+├── / (GET) - Serves frontend
+└── /static/* - Static file serving
 ```
 
-## 🔬 Machine Learning Models
-
-### 1. Ayurvedic Constitution Classification (Stage 1)
-- **Algorithm:** Random Forest Classifier with hyperparameter optimization
-- **Features:** Sleep patterns, digestion, energy levels, stress indicators
-- **Output:** Vata, Pitta, Kapha dominance with confidence scores
-- **Accuracy:** 89.2% on validation dataset
-- **Dataset:** 3,700+ traditional Ayurvedic assessments
-
-### 2. Alzheimer's Risk Prediction (Stage 2)
-- **Algorithm:** Ensemble model (Random Forest + Gradient Boosting)
-- **Features:** Cognitive test scores, demographic data, lifestyle factors
-- **Output:** Risk probability and categorization (Low/Moderate/High)
-- **Accuracy:** 91.7% with AUC-ROC of 0.94
-- **Dataset:** 2,100+ clinical assessments with longitudinal follow-up
-
-### 3. Feature Engineering Pipeline
-- **Data Preprocessing:** Standardization, missing value imputation
-- **Feature Selection:** Recursive feature elimination with cross-validation
-- **Model Validation:** 5-fold cross-validation with stratified sampling
-- **Performance Monitoring:** Continuous model performance tracking
-
-## 🎨 User Interface Features
-
-### Professional Medical Design
-- **Clean, Modern Interface** - Hospital-grade UI/UX design
-- **Responsive Layout** - Mobile-first approach for all devices
-- **Accessibility Compliant** - WCAG 2.1 AA standards
-- **Professional Color Scheme** - Medical industry standard colors
-
-### Interactive Visualizations
-- **Risk Gauge Charts** - Color-coded health risk indicators
-- **Constitution Analysis** - Ayurvedic balance visualization
-- **Health Radar Plots** - Multi-parameter health overview
-- **Cognitive Assessment Graphs** - Brain function analysis charts
-
-### Patient Management Features
-- **Assessment Forms** - Comprehensive health questionnaires
-- **Results Dashboard** - Interactive analysis and recommendations
-- **Patient Records** - Complete history and progress tracking
-- **Report Generation** - PDF export and email functionality
-
-## 📊 API Endpoints
-
-### Core Assessment APIs
-```bash
-POST /api/assessment/complete      # Process complete patient assessment
-POST /api/charts/generate         # Generate interactive visualizations
-GET  /api/health                  # Application health check
-GET  /api/patients                # Patient records management
+### Frontend (Vanilla HTML/JS)
+```
+static/index.html
+├── TailwindCSS - Styling framework
+├── Anime.js - Animation library
+└── Vanilla JavaScript - Form handling & API communication
 ```
 
-### Real-time Features
-```bash
-WebSocket /ws                     # Real-time chart updates
-GET  /api/models/status          # ML model status and performance
-POST /api/predictions/batch      # Batch processing for multiple patients
+### Data Flow
 ```
-
-### Documentation
-```bash
-GET  /docs                       # Interactive API documentation (Swagger UI)
-GET  /redoc                      # Alternative API documentation (ReDoc)
+User Input → Stage 1 (Prakriti) → Stage 2 (Risk) → Results + Chart
 ```
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- **Python 3.11+**
-- **Git**
-- **Railway CLI** (for deployment)
+- Python 3.8+
+- pip package manager
 
-### Local Development Setup
+### Installation
 
-1. **Clone the Repository**
+1. **Clone/Download the project**
    ```bash
-   git clone https://github.com/Avgohil/fusion-care-alzheimer-ml.git
-   cd fusion-care-alzheimer-ml
+   cd Alzheimer-Ayurveda-ML
    ```
 
-2. **Create Virtual Environment**
+2. **Install dependencies**
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt
    ```
 
-3. **Install Dependencies**
+3. **Start the server**
    ```bash
-   pip install -r requirements_railway.txt
+   python care_catalyst_demo.py
    ```
 
-4. **Run the Application**
-   ```bash
-   python -m uvicorn main:app --reload --port 8000
+4. **Open your browser**
+   ```
+   http://localhost:8000
    ```
 
-5. **Access the Application**
-   - **Local URL:** http://localhost:8000
-   - **API Docs:** http://localhost:8000/docs
-
-### Production Deployment (Railway)
-
-1. **Install Railway CLI**
-   ```bash
-   npm install -g @railway/cli
-   ```
-
-2. **Login to Railway**
-   ```bash
-   railway login
-   ```
-
-3. **Deploy the Application**
-   ```bash
-   railway up
-   ```
-
-4. **Set Environment Variables**
-   ```bash
-   railway variables set PORT=8000
-   railway variables set ENVIRONMENT=production
-   ```
-
-## 🔧 Configuration
-
-### Environment Variables
-
-Create a `.env` file based on `.env.example`:
-
+### Alternative: Using Uvicorn
 ```bash
-# Application Settings
-PORT=8000
-ENVIRONMENT=production
-SECRET_KEY=your_secret_key_here
-
-# ML Model Settings
-MODEL_CACHE_SIZE=100
-PREDICTION_TIMEOUT=30
-
-# Feature Flags
-ENABLE_WEBSOCKETS=true
-ENABLE_ML_PREDICTIONS=true
-ENABLE_AYURVEDIC_ANALYSIS=true
-ENABLE_COGNITIVE_ASSESSMENT=true
-
-# Logging Configuration
-LOG_LEVEL=INFO
-LOG_FORMAT=json
-
-# CORS Settings
-ALLOWED_ORIGINS=*
-ALLOW_CREDENTIALS=true
+uvicorn care_catalyst_demo:app --host 0.0.0.0 --port 8000
 ```
 
-### Railway Configuration
+## 📋 Assessment Fields
 
-The `railway.json` file contains deployment settings:
+### Ayurvedic Constitution (20 fields)
+- **Physical**: Body frame, skin texture, hair type, eyes
+- **Physiological**: Sleep pattern, appetite, digestion, sweating
+- **Behavioral**: Speech, energy levels, memory, motion tendencies
+- **Environmental**: Body temperature, weather sensitivity
 
+### Health Assessment (18 fields)
+- **Demographics**: Age, gender
+- **Lifestyle**: Diet, sleep quality, stress level, physical activity
+- **Cognitive**: Memory loss, confusion, language difficulty, decision making
+- **Behavioral**: Repetition, social withdrawal, mood swings
+- **Medical**: Blood pressure, blood sugar, BMI, family history, chronic conditions
+
+## 🎨 UI Components
+
+### Form Steps
+1. **Step 1**: Basic Ayurvedic characteristics (Body frame, skin, hair, etc.)
+2. **Step 2**: Additional constitution factors (Temperature, memory, emotions)
+3. **Step 3**: Health & lifestyle assessment (Age, diet, symptoms)
+4. **Step 4**: Final health details (Vitals, family history)
+
+### Animations
+- **Slide Transitions**: Smooth left/right slide between form steps
+- **Fade Effects**: Gentle opacity transitions for results display
+- **Progress Indicators**: Animated step completion states
+- **Loading Animation**: Spinner with progressive text updates
+- **Result Reveals**: Staggered animations for result cards
+
+### Styling Features
+- **Glassmorphism Cards**: Semi-transparent backgrounds with blur effects
+- **Gradient Backgrounds**: Beautiful color gradients for visual appeal
+- **Responsive Grid**: Auto-adjusting layouts for different screen sizes
+- **Interactive Elements**: Hover effects and focus states
+- **Color Coding**: Risk levels represented by colors (Green/Yellow/Red)
+
+## 🔬 Assessment Logic
+
+### Prakriti Classification
+The demo version uses rule-based scoring:
+- Analyzes key characteristics (body frame, skin, hair, etc.)
+- Assigns points to each dosha based on responses
+- Determines dominant constitution or mixed type
+- Provides appropriate recommendations for the determined type
+
+### Risk Score Calculation
+```python
+# Age factors
+age > 65: +10 points
+age > 55: +5 points
+
+# Cognitive symptoms
+memory_loss: 0-20 points
+confusion: 0-15 points
+language_difficulty: 0-10 points
+
+# Lifestyle factors
+poor_sleep: +5 points
+high_stress: +5 points
+low_activity: +5 points
+
+# Health indicators
+systolic_bp > 140: +8 points
+blood_sugar > 126: +8 points
+bmi > 30: +6 points
+
+# Family history: +15 points
+```
+
+### Risk Levels
+- **Low (0-40)**: "Healthy but monitor"
+- **Medium (41-60)**: "Needs attention"
+- **High (61-100)**: "High risk, take action"
+
+## 📊 Chart Generation
+
+The application generates interactive risk visualization using Plotly:
+- **Gauge Chart**: Shows risk score on a 0-100 scale
+- **Color Zones**: Green (low), Yellow (medium), Red (high)
+- **Base64 Encoding**: Charts converted to images for frontend display
+
+## 🎯 API Endpoints
+
+### POST /predict
+**Request Body:**
 ```json
 {
-  "$schema": "https://railway.app/railway.schema.json",
-  "build": {
-    "builder": "NIXPACKS"
-  },
-  "deploy": {
-    "numReplicas": 1,
-    "restartPolicyType": "ON_FAILURE"
-  }
+  "Body_Frame": "Medium, muscular",
+  "Skin_Texture": "Warm, oily, reddish",
+  "age": 45,
+  "gender": "Male",
+  "systolic_bp": 120,
+  "blood_sugar": 100,
+  "bmi": 23.5,
+  ...
+}
+```
+
+**Response:**
+```json
+{
+  "prakriti_result": "Pitta-Vata",
+  "prakriti_scores": {"Vata": 35, "Pitta": 45, "Kapha": 20},
+  "alzheimer_risk": "Low",
+  "risk_score": 25,
+  "verdict": "Healthy but monitor",
+  "ayurveda_recommendations": "Shankhpushpi, Gotu Kola...",
+  "allopathy_recommendations": "Annual wellness exam...",
+  "chart": "data:image/png;base64,..."
 }
 ```
 
 ## 🧪 Testing
 
-### Running Tests
+Test the API endpoint:
 ```bash
-# Unit tests
-python -m pytest tests/
-
-# API testing
-python -m pytest tests/test_api.py
-
-# Model performance tests
-python -m pytest tests/test_models.py
+python test_api.py
 ```
 
-### Manual Testing Checklist
-- [ ] Homepage loads correctly
-- [ ] Assessment form validation works
-- [ ] Charts render properly with sample data
-- [ ] Patient records system functions
-- [ ] API endpoints respond correctly
-- [ ] Mobile responsiveness verified
+## 📁 Project Structure
 
-## 📈 Performance Metrics
+```
+Alzheimer-Ayurveda-ML/
+├── care_catalyst_demo.py      # Main FastAPI application
+├── care_catalyst_app.py       # Full version (requires ML models)
+├── test_api.py               # API testing script
+├── requirements.txt          # Python dependencies
+├── static/
+│   └── index.html           # Frontend application
+├── model/                   # ML models (for full version)
+│   ├── prakriti_model_robust.pkl
+│   └── prakriti_encoder.pkl
+└── README.md               # This file
+```
 
-### Application Performance
-- **Response Time:** < 200ms for API endpoints
-- **Page Load Time:** < 2 seconds for all pages
-- **Chart Rendering:** < 500ms for complex visualizations
-- **Model Inference:** < 100ms per prediction
+## 🔧 Dependencies
 
-### ML Model Performance
-- **Prakriti Classification:** 89.2% accuracy, 0.91 F1-score
-- **Alzheimer's Risk Prediction:** 91.7% accuracy, 0.94 AUC-ROC
-- **Feature Processing:** < 50ms for complete assessment
-- **Model Loading Time:** < 2 seconds on application startup
+```
+fastapi==0.104.1      # Web framework
+uvicorn==0.24.0       # ASGI server
+pandas==2.1.3         # Data manipulation
+scikit-learn==1.3.2   # ML library (for full version)
+joblib==1.3.2         # Model serialization
+pydantic==2.5.0       # Data validation
+numpy==1.25.2         # Numerical computing
+matplotlib==3.7.2     # Plotting library
+plotly==5.17.0        # Interactive charts
+kaleido==0.2.1        # Static image export
+```
 
-## 🔒 Security Features
+## 🌟 Key Features Breakdown
 
-### Data Protection
-- **Input Validation** - Server-side validation for all user inputs
-- **SQL Injection Prevention** - Parameterized queries and ORM usage
-- **XSS Protection** - Content Security Policy and input sanitization
-- **CSRF Protection** - Token-based request validation
+### Frontend Highlights
+- **Progressive Enhancement**: Works without JavaScript (graceful degradation)
+- **Accessibility**: ARIA labels and keyboard navigation support
+- **Performance**: Optimized animations and minimal external dependencies
+- **Mobile First**: Responsive design that works on all devices
 
-### Privacy Compliance
-- **HIPAA Considerations** - Healthcare data protection guidelines
-- **Data Anonymization** - Personal identifiers removed from ML training
-- **Secure Storage** - Encrypted data storage and transmission
-- **Access Controls** - Role-based permission system
+### Backend Highlights
+- **Fast Performance**: Async FastAPI with optimized endpoints
+- **Error Handling**: Comprehensive error messages and validation
+- **Scalable Architecture**: Modular design for easy extension
+- **Documentation**: Auto-generated API docs at `/docs`
+
+### Integration Points
+- **Seamless Data Flow**: Form → API → Results without page refresh
+- **Real-time Updates**: Live progress indicators during processing
+- **Smooth UX**: No jarring transitions or loading states
+
+## 🚀 Future Enhancements
+
+1. **Database Integration**: Store user assessments and historical data
+2. **User Accounts**: Personal profiles and assessment history
+3. **Advanced Analytics**: Trend analysis and population insights
+4. **Mobile App**: React Native or Flutter mobile application
+5. **Multilingual Support**: Multiple language options
+6. **Real ML Models**: Integration with actual trained models
+7. **Telemedicine Integration**: Connect with healthcare providers
+8. **Wearable Data**: Integration with fitness trackers and health devices
 
 ## 🤝 Contributing
 
-We welcome contributions from the community! Here's how you can help:
-
-### Getting Started
-1. **Fork the Repository**
-2. **Create a Feature Branch**
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-3. **Make Your Changes**
-4. **Add Tests** (if applicable)
-5. **Submit a Pull Request**
-
-### Contribution Guidelines
-- Follow Python PEP 8 style guidelines
-- Write comprehensive tests for new features
-- Update documentation for API changes
-- Ensure all tests pass before submitting PR
-
-### Areas for Contribution
-- **ML Model Improvements** - Enhanced algorithms and feature engineering
-- **UI/UX Enhancements** - Better user experience and accessibility
-- **API Extensions** - Additional endpoints and functionality
-- **Documentation** - Improved guides and tutorials
-- **Testing** - Comprehensive test coverage
-- **Internationalization** - Multi-language support
-
-## 📚 Research & References
-
-### Academic Papers
-1. "Early Detection of Alzheimer's Disease using Machine Learning" - Journal of Medical AI, 2024
-2. "Ayurvedic Constitution Classification using Modern AI" - International Journal of Traditional Medicine, 2024
-3. "Integrative Medicine Approaches to Cognitive Health" - Nature Medicine, 2023
-
-### Datasets
-- **Ayurveda Prakriti Dataset** - 3,700 traditional assessments
-- **Alzheimer's Risk Dataset** - 2,100 clinical evaluations with follow-up
-- **Cognitive Assessment Battery** - Standardized neuropsychological tests
-
-### Validation Studies
-- **Clinical Validation** - 6-month prospective study with 500 participants
-- **Cross-cultural Validation** - Multi-site validation across diverse populations
-- **Longitudinal Analysis** - 2-year follow-up for prediction accuracy
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is for educational and research purposes. Please consult healthcare professionals for medical advice.
 
-## 👥 Team
+## 🙏 Acknowledgments
 
-### Core Development Team
-- **Lead Developer** - Full-stack development and ML implementation
-- **ML Research** - Algorithm development and model optimization
-- **UI/UX Design** - Interface design and user experience
-- **DevOps** - Deployment and infrastructure management
-
-### Advisory Board
-- **Clinical Advisors** - Medical professionals providing domain expertise
-- **Ayurvedic Experts** - Traditional medicine practitioners
-- **AI Researchers** - Machine learning and data science specialists
-
-## 🌟 Acknowledgments
-
-Special thanks to:
-- **Railway** for providing excellent deployment platform
-- **FastAPI** community for the amazing framework
-- **Plotly** team for powerful visualization tools
-- **Ayurvedic practitioners** who provided domain knowledge
-- **Clinical researchers** who contributed to validation studies
-
-## 📞 Support
-
-### Getting Help
-- **Documentation** - Check this README and deployment guides
-- **Issues** - Create GitHub issues for bugs and feature requests
-- **Discussions** - Use GitHub Discussions for questions and ideas
-
-### Contact Information
-- **Project Repository** - [GitHub](https://github.com/Avgohil/fusion-care-alzheimer-ml)
-- **Live Application** - [Care Catalyst Platform](https://web-production-95627.up.railway.app/)
-- **API Documentation** - [FastAPI Docs](https://web-production-95627.up.railway.app/docs)
+- **Ayurveda Community**: For traditional knowledge and practices
+- **Open Source Libraries**: FastAPI, TailwindCSS, Anime.js, Plotly
+- **Healthcare Research**: Studies on Alzheimer's risk factors
 
 ---
 
-## 🎯 Future Roadmap
+**Built with ❤️ by the Care Catalyst Team**
 
-### Planned Features
-- **Multi-language Support** - Internationalization for global use
-- **Mobile Application** - Native iOS and Android apps
-- **Telemedicine Integration** - Video consultation capabilities
-- **Wearable Device Support** - Integration with health monitoring devices
-- **Advanced Analytics** - Population health insights and trends
-
-### Research Initiatives
-- **Federated Learning** - Collaborative model training across institutions
-- **Explainable AI** - Interpretable machine learning for clinical use
-- **Real-time Monitoring** - Continuous health assessment capabilities
-- **Personalized Medicine** - Individual treatment optimization
-
----
-
-**🏥⚕️ Care Catalyst - Bridging Ancient Wisdom and Modern AI for Better Health Outcomes**
-
-*Last Updated: September 30, 2025*
+*Bridging ancient wisdom with modern technology for better health outcomes.*

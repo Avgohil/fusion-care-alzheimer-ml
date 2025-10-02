@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Care Catalyst - Ayurveda & Alzheimer's Assessment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+        /* Enhanced glassmorphism styles */
+        .glass {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.4);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+            animation: gradient-shift 8s ease infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0%, 100% { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%); }
+            50% { background: linear-gradient(135deg, #60a5fa 0%, #1e3a8a 50%, #3b82f6 100%); }
+        }
+        
+        .card-shadow {
+            box-shadow: 0 20px 60px 0 rgba(31, 38, 135, 0.5);
+        }
+        
+        /* Enhanced animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .slide-right {
+            transform: translateX(100%);
+        }
+        
+        .slide-left {
+            transform: translateX(-100%);
+        }
+        
+        /* Beautiful loader */
+        .modern-loader {
+            width: 60px;
+            height: 60px;
+            border: 3px solid transparent;
+            border-top: 3px solid #1e40af;
+            border-right: 3px solid #3b82f6;
+            border-bottom: 3px solid #60a5fa;
+            border-left: 3px solid #1d4ed8;
+            border-radius: 50%;
+            animation: rainbow-spin 1.5s linear infinite;
+        }
+        
+        @keyframes rainbow-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Animated CSS Gauge Chart */
+        .gauge-container {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            margin: 0 auto;
+        }
+        
+        .gauge-bg {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #10B981 0deg 144deg,
+                #F59E0B 144deg 216deg,
+                #EF4444 216deg 360deg
+            );
+            position: relative;
+            animation: gauge-glow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes gauge-glow {
+            0% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+            100% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.6); }
+        }
+        
+        .gauge-inner {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 190px;
+            height: 190px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(240, 248, 255, 0.9));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gauge-score {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.25rem;
+            animation: score-pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes score-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .gauge-text {
+            font-size: 0.95rem;
+            color: #4a5568;
+            text-align: center;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Animated progress bar */
+        .progress-bar {
+            transition: width 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.4),
+                transparent
+            );
+            transform: translateX(-100%);
+            animation: progress-shine 2s ease-in-out infinite;
+        }
+        
+        @keyframes progress-shine {
+            0% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Enhanced form inputs */
+        .form-input {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(30, 64, 175, 0.5);
+            box-shadow: 0 0 20px rgba(30, 64, 175, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .form-input:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+        
+        /* Select options styling */
+        .form-input option {
+            background-color: #1f2937;
+            color: #ffffff;
+            padding: 8px;
+            border: none;
+        }
+        
+        .form-input option:hover {
+            background-color: #374151;
+        }
+        
+        .form-input option:checked {
+            background-color: #3b82f6;
+            color: #ffffff;
+        }
+        
+        /* Global select option styling for all selects */
+        select option {
+            background-color: #1f2937 !important;
+            color: #ffffff !important;
+            padding: 8px !important;
+        }
+        
+        select option:hover {
+            background-color: #374151 !important;
+        }
+        
+        select option:checked,
+        select option:focus {
+            background-color: #1e40af !important;
+            color: #ffffff !important;
+        }
+        
+        /* Ensure dropdown appears with black background */
+        select {
+            color-scheme: dark;
+        }
+        
+        /* Additional styling for better appearance */
+        select:focus option:checked {
+            background: linear-gradient(135deg, #1e40af, #1d4ed8) !important;
+        }
+        
+        /* Force black background on all option elements */
+        option {
+            background-color: #111827 !important;
+            color: #ffffff !important;
+        }
+        
+        /* WebKit specific styles for better browser support */
+        select::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        select::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+        
+        select::-webkit-scrollbar-thumb {
+            background: #374151;
+            border-radius: 4px;
+        }
+        
+        /* Enhanced buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            border: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-primary:active::after {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-secondary {
+            background: rgba(107, 114, 128, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(107, 114, 128, 0.9);
+            transform: translateY(-2px);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #059669, #10b981);
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+        }
+        
+        /* Step indicator enhancements */
+        .step-indicator {
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        
+        .step-indicator.active {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(30, 64, 175, 0.6);
+        }
+        
+        .step-indicator::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #e5e7eb, transparent);
+            transform: translateY(-50%);
+            transition: all 0.4s ease;
+        }
+        
+        .step-indicator.active::after {
+            background: linear-gradient(90deg, #1e40af, #e5e7eb);
+        }
+        
+        .step-indicator:last-child::after {
+            display: none;
+        }
+
+        /* Pulse animation for fast loading */
+        .pulse-fast {
+            animation: pulse-fast 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-fast {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+        
+        /* Floating particles background */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(120deg); }
+            66% { transform: translateY(10px) rotate(240deg); }
+        }
+        
+        /* Result cards animations */
+        .result-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+        }
+        
+        .result-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 40px rgba(31, 38, 135, 0.3);
+        }
+        
+        /* Dosha badges */
+        .dosha-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            margin: 0.25rem;
+            transition: all 0.3s ease;
+            animation: badge-glow 3s ease-in-out infinite alternate;
+        }
+        
+        .dosha-vata {
+            background: linear-gradient(135deg, #60a5fa, #1e40af);
+            color: white;
+        }
+        
+        .dosha-pitta {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: white;
+        }
+        
+        .dosha-kapha {
+            background: linear-gradient(135deg, #34d399, #10b981);
+            color: white;
+        }
+        
+        @keyframes badge-glow {
+            0% { box-shadow: 0 0 10px rgba(30, 64, 175, 0.3); }
+            100% { box-shadow: 0 0 20px rgba(30, 64, 175, 0.6); }
+        }
+        
+        /* Loading screen enhancements */
+        .loading-overlay {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(31, 41, 55, 0.8));
+            backdrop-filter: blur(20px);
+        }
+        
+        .loading-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: loading-float 3s ease-in-out infinite;
+        }
+        
+        @keyframes loading-float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Header enhancements */
+        .header-title {
+            background: linear-gradient(135deg, #fff, #f8fafc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+        }
+        
+        .feature-badge {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-badge:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Floating particles background -->
+        <div class="particles">
+            <div class="particle" style="left: 10%; top: 20%; width: 8px; height: 8px; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 20%; top: 50%; width: 6px; height: 6px; animation-delay: 1s;"></div>
+            <div class="particle" style="left: 80%; top: 30%; width: 10px; height: 10px; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 90%; top: 70%; width: 7px; height: 7px; animation-delay: 3s;"></div>
+            <div class="particle" style="left: 60%; top: 10%; width: 9px; height: 9px; animation-delay: 4s;"></div>
+        </div>
+        
+        <!-- Enhanced Header -->
+        <div class="text-center mb-8 fade-in" id="header">
+            <h1 class="text-5xl font-bold header-title mb-4">Care Catalyst ⚡</h1>
+            <p class="text-2xl text-white opacity-90 mb-6">Lightning-Fast Ayurvedic Constitution & Alzheimer's Risk Assessment</p>
+            <div class="mt-6 flex justify-center space-x-4">
+                <span class="feature-badge text-white px-4 py-2 rounded-full text-sm font-semibold">🌿 Ancient Wisdom</span>
+                <span class="feature-badge text-white px-4 py-2 rounded-full text-sm font-semibold">🧠 Modern Science</span>
+                <span class="feature-badge text-white px-4 py-2 rounded-full text-sm font-semibold">⚡ AI-Powered</span>
+                <span class="feature-badge text-white px-4 py-2 rounded-full text-sm font-semibold">🚀 Ultra-Fast</span>
+            </div>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="flex justify-center mb-8 fade-in" id="progress-steps">
+            <div class="flex items-center space-x-4">
+                <div class="step-indicator active flex items-center justify-center w-10 h-10 bg-blue-500 text-white rounded-full font-bold">1</div>
+                <div class="step-indicator flex items-center justify-center w-10 h-10 bg-gray-300 text-gray-600 rounded-full font-bold">2</div>
+                <div class="step-indicator flex items-center justify-center w-10 h-10 bg-gray-300 text-gray-600 rounded-full font-bold">3</div>
+                <div class="step-indicator flex items-center justify-center w-10 h-10 bg-gray-300 text-gray-600 rounded-full font-bold">4</div>
+            </div>
+        </div>
+
+        <!-- Assessment Form -->
+        <div class="max-w-4xl mx-auto">
+            <form id="assessmentForm" class="space-y-6">
+                
+                <!-- Step 1: Ayurvedic Constitution (Prakriti) Assessment -->
+                <div class="form-step glass rounded-2xl p-8 card-shadow" id="step-1">
+                    <div class="text-center mb-6">
+                        <h2 class="text-2xl font-bold text-white mb-2">🌿 Ayurvedic Constitution Assessment</h2>
+                        <p class="text-white opacity-80">Answer these questions about your natural physical and mental characteristics</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Body Frame -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Body Frame</label>
+                            <select name="Body_Frame" required class="form-input w-full px-4 py-3 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select body frame</option>
+                                <option value="Thin, light">Thin, light</option>
+                                <option value="Medium, muscular">Medium, muscular</option>
+                                <option value="Heavy, broad">Heavy, broad</option>
+                            </select>
+                        </div>
+
+                        <!-- Skin Texture -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Skin Texture</label>
+                            <select name="Skin_Texture" required class="form-input w-full px-4 py-3 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select skin texture</option>
+                                <option value="Dry, rough, cold">Dry, rough, cold</option>
+                                <option value="Warm, oily, reddish">Warm, oily, reddish</option>
+                                <option value="Smooth, moist, thick">Smooth, moist, thick</option>
+                            </select>
+                        </div>
+
+                        <!-- Hair Type -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Hair Type</label>
+                            <select name="Hair_Type" required class="form-input w-full px-4 py-3 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select hair type</option>
+                                <option value="Dry, frizzy, brittle">Dry, frizzy, brittle</option>
+                                <option value="Soft, oily, reddish/brown">Soft, oily, reddish/brown</option>
+                                <option value="Thick, strong, oily">Thick, strong, oily</option>
+                            </select>
+                        </div>
+
+                        <!-- Eyes -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Eyes</label>
+                            <select name="Eyes" required class="form-input w-full px-4 py-3 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select eye characteristics</option>
+                                <option value="Small, dry, dull">Small, dry, dull</option>
+                                <option value="Sharp, intense, reddish">Sharp, intense, reddish</option>
+                                <option value="Large, calm, watery">Large, calm, watery</option>
+                            </select>
+                        </div>
+
+                        <!-- Sleep Pattern -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Sleep Pattern</label>
+                            <select name="Sleep_Pattern" required class="form-input w-full px-4 py-3 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select sleep pattern</option>
+                                <option value="Light, interrupted">Light, interrupted</option>
+                                <option value="Moderate">Moderate</option>
+                                <option value="Deep, prolonged">Deep, prolonged</option>
+                            </select>
+                        </div>
+
+                        <!-- Appetite -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Appetite</label>
+                            <select name="Appetite" required class="form-input w-full px-4 py-3 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select appetite pattern</option>
+                                <option value="Irregular">Irregular</option>
+                                <option value="Strong, frequent hunger">Strong, frequent hunger</option>
+                                <option value="Slow, steady">Slow, steady</option>
+                            </select>
+                        </div>
+
+                        <!-- Digestion -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Digestion</label>
+                            <select name="Digestion" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select digestion pattern</option>
+                                <option value="Variable, bloating">Variable, bloating</option>
+                                <option value="Fast, prone to acidity">Fast, prone to acidity</option>
+                                <option value="Slow, sluggish">Slow, sluggish</option>
+                            </select>
+                        </div>
+
+                        <!-- Sweating -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Sweating</label>
+                            <select name="Sweating" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select sweating pattern</option>
+                                <option value="Less">Less</option>
+                                <option value="Profuse, with odor">Profuse, with odor</option>
+                                <option value="Moderate, little odor">Moderate, little odor</option>
+                            </select>
+                        </div>
+
+                        <!-- Speech Voice -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Speech/Voice</label>
+                            <select name="Speech_Voice" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select speech pattern</option>
+                                <option value="Fast, low pitch">Fast, low pitch</option>
+                                <option value="Sharp, loud">Sharp, loud</option>
+                                <option value="Slow, deep">Slow, deep</option>
+                            </select>
+                        </div>
+
+                        <!-- Energy Levels -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Energy Levels</label>
+                            <select name="Energy_Levels" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select energy pattern</option>
+                                <option value="Variable, quick bursts">Variable, quick bursts</option>
+                                <option value="High, sustained">High, sustained</option>
+                                <option value="Steady, enduring">Steady, enduring</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end mt-6">
+                        <button type="button" onclick="nextStep(1)" class="btn-primary px-8 py-3 text-white font-semibold rounded-xl transition-all duration-300">
+                            Next: More Characteristics →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: More Ayurvedic Characteristics -->
+                <div class="form-step glass rounded-2xl p-8 card-shadow slide-right" id="step-2" style="display: none;">
+                    <div class="text-center mb-6">
+                        <h2 class="text-2xl font-bold text-white mb-2">🌿 Additional Characteristics</h2>
+                        <p class="text-white opacity-80">Complete your Ayurvedic constitution profile</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Body Temperature -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Body Temperature</label>
+                            <select name="Body_Temperature" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select body temperature</option>
+                                <option value="Cold hands/feet">Cold hands/feet</option>
+                                <option value="Warm/hot">Warm/hot</option>
+                                <option value="Generally cool">Generally cool</option>
+                            </select>
+                        </div>
+
+                        <!-- Weather Sensitivity -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Weather Sensitivity</label>
+                            <select name="Weather_Sensitivity" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select weather sensitivity</option>
+                                <option value="Dislikes cold/wind">Dislikes cold/wind</option>
+                                <option value="Dislikes heat/sun">Dislikes heat/sun</option>
+                                <option value="Dislikes cold/damp">Dislikes cold/damp</option>
+                            </select>
+                        </div>
+
+                        <!-- Memory -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Memory</label>
+                            <select name="Memory" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select memory pattern</option>
+                                <option value="Quick to learn, forget">Quick to learn, forget</option>
+                                <option value="Sharp, clear">Sharp, clear</option>
+                                <option value="Slow to learn, retains">Slow to learn, retains</option>
+                            </select>
+                        </div>
+
+                        <!-- Motion Tendencies -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Motion Tendencies</label>
+                            <select name="Motion_Tendencies" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select motion pattern</option>
+                                <option value="Quick, restless">Quick, restless</option>
+                                <option value="Moderate, purposeful">Moderate, purposeful</option>
+                                <option value="Slow, steady">Slow, steady</option>
+                            </select>
+                        </div>
+
+                        <!-- Mindset Emotion -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Mindset/Emotion</label>
+                            <select name="Mindset_Emotion" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select emotional pattern</option>
+                                <option value="Anxious, worried">Anxious, worried</option>
+                                <option value="Intense, irritable">Intense, irritable</option>
+                                <option value="Calm, attached">Calm, attached</option>
+                            </select>
+                        </div>
+
+                        <!-- Elimination Stool -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Elimination/Stool</label>
+                            <select name="Elimination_Stool" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select elimination pattern</option>
+                                <option value="Irregular, dry">Irregular, dry</option>
+                                <option value="Regular, loose">Regular, loose</option>
+                                <option value="Slow, heavy">Slow, heavy</option>
+                            </select>
+                        </div>
+
+                        <!-- Sleep Requirement -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Sleep Requirement</label>
+                            <select name="Sleep_Requirement" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select sleep needs</option>
+                                <option value="Light sleeper">Light sleeper</option>
+                                <option value="Moderate sleep needs">Moderate sleep needs</option>
+                                <option value="Heavy sleeper">Heavy sleeper</option>
+                            </select>
+                        </div>
+
+                        <!-- Hunger Onset -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Hunger Onset</label>
+                            <select name="Hunger_Onset" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select hunger pattern</option>
+                                <option value="Irregular timing">Irregular timing</option>
+                                <option value="Gets hungry quickly">Gets hungry quickly</option>
+                                <option value="Can skip meals">Can skip meals</option>
+                            </select>
+                        </div>
+
+                        <!-- Speech Pace -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Speech Pace</label>
+                            <select name="Speech_Pace" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select speech pace</option>
+                                <option value="Fast, erratic">Fast, erratic</option>
+                                <option value="Moderate, clear">Moderate, clear</option>
+                                <option value="Slow, deliberate">Slow, deliberate</option>
+                            </select>
+                        </div>
+
+                        <!-- Weight Tendency -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Weight Tendency</label>
+                            <select name="Weight_Tendency" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select weight tendency</option>
+                                <option value="Underweight">Underweight</option>
+                                <option value="Normal weight">Normal weight</option>
+                                <option value="Tendency to gain weight">Tendency to gain weight</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button type="button" onclick="prevStep(2)" class="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors duration-200">
+                            ← Back
+                        </button>
+                        <button type="button" onclick="nextStep(2)" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors duration-200">
+                            Next: Health Assessment →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Health & Lifestyle Assessment -->
+                <div class="form-step glass rounded-2xl p-8 card-shadow slide-right" id="step-3" style="display: none;">
+                    <div class="text-center mb-6">
+                        <h2 class="text-2xl font-bold text-white mb-2">🧠 Health & Lifestyle Assessment</h2>
+                        <p class="text-white opacity-80">Provide information about your health and cognitive function</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Age -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Age</label>
+                            <input type="number" name="age" min="18" max="120" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter your age">
+                        </div>
+
+                        <!-- Gender -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Gender</label>
+                            <select name="gender" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+
+                        <!-- Diet Type -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Diet Type</label>
+                            <select name="diet_type" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select diet type</option>
+                                <option value="Balanced">Balanced</option>
+                                <option value="Vegetarian">Vegetarian</option>
+                                <option value="Irregular">Irregular</option>
+                            </select>
+                        </div>
+
+                        <!-- Sleep Quality -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Sleep Quality</label>
+                            <select name="sleep_quality" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select sleep quality</option>
+                                <option value="Good">Good</option>
+                                <option value="Average">Average</option>
+                                <option value="Poor">Poor</option>
+                            </select>
+                        </div>
+
+                        <!-- Stress Level -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Stress Level</label>
+                            <select name="stress_level" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select stress level</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+
+                        <!-- Physical Activity -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Physical Activity</label>
+                            <select name="physical_activity" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select activity level</option>
+                                <option value="High">High</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+
+                        <!-- Memory Loss -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Memory Loss</label>
+                            <select name="memory_loss" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select memory status</option>
+                                <option value="None">None</option>
+                                <option value="Sometimes">Sometimes</option>
+                                <option value="Mild">Mild</option>
+                                <option value="Severe">Severe</option>
+                            </select>
+                        </div>
+
+                        <!-- Confusion -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Confusion</label>
+                            <select name="confusion" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select confusion level</option>
+                                <option value="None">None</option>
+                                <option value="Sometimes">Sometimes</option>
+                                <option value="Often">Often</option>
+                            </select>
+                        </div>
+
+                        <!-- Language Difficulty -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Language Difficulty</label>
+                            <select name="language_difficulty" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select language status</option>
+                                <option value="None">None</option>
+                                <option value="Mild">Mild</option>
+                                <option value="Yes">Yes</option>
+                            </select>
+                        </div>
+
+                        <!-- Decision Making -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Decision Making</label>
+                            <select name="decision_making" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select decision making ability</option>
+                                <option value="Good">Good</option>
+                                <option value="Indecisive">Indecisive</option>
+                                <option value="Poor">Poor</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button type="button" onclick="prevStep(3)" class="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors duration-200">
+                            ← Back
+                        </button>
+                        <button type="button" onclick="nextStep(3)" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors duration-200">
+                            Next: Final Details →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Final Health Details -->
+                <div class="form-step glass rounded-2xl p-8 card-shadow slide-right" id="step-4" style="display: none;">
+                    <div class="text-center mb-6">
+                        <h2 class="text-2xl font-bold text-white mb-2">🏥 Final Health Details</h2>
+                        <p class="text-white opacity-80">Complete your health profile for accurate assessment</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Repetition Behavior -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Repetition Behavior</label>
+                            <select name="repetition_behavior" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select repetition behavior</option>
+                                <option value="None">None</option>
+                                <option value="Sometimes">Sometimes</option>
+                                <option value="Often">Often</option>
+                            </select>
+                        </div>
+
+                        <!-- Social Withdrawal -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Social Withdrawal</label>
+                            <select name="social_withdrawal" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select social behavior</option>
+                                <option value="None">None</option>
+                                <option value="Sometimes">Sometimes</option>
+                                <option value="Often">Often</option>
+                            </select>
+                        </div>
+
+                        <!-- Mood Swings -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Mood Swings</label>
+                            <select name="mood_swings" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select mood patterns</option>
+                                <option value="None">None</option>
+                                <option value="Sometimes">Sometimes</option>
+                                <option value="Often">Often</option>
+                            </select>
+                        </div>
+
+                        <!-- Chronic Conditions -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Chronic Conditions</label>
+                            <select name="chronic_conditions" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select chronic conditions</option>
+                                <option value="None">None</option>
+                                <option value="Diabetes">Diabetes</option>
+                                <option value="Hypertension">Hypertension</option>
+                                <option value="Heart Disease">Heart Disease</option>
+                            </select>
+                        </div>
+
+                        <!-- Systolic BP -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Systolic Blood Pressure</label>
+                            <input type="number" name="systolic_bp" min="80" max="200" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="e.g., 120">
+                        </div>
+
+                        <!-- Blood Sugar -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Blood Sugar (mg/dL)</label>
+                            <input type="number" name="blood_sugar" min="50" max="400" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="e.g., 100">
+                        </div>
+
+                        <!-- BMI -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">BMI (Body Mass Index)</label>
+                            <input type="number" name="bmi" min="15" max="50" step="0.1" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="e.g., 23.5">
+                        </div>
+
+                        <!-- Family History -->
+                        <div class="space-y-2">
+                            <label class="block text-white font-medium">Family History of Alzheimer's</label>
+                            <select name="family_history" required class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 text-white border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="">Select family history</option>
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between mt-6">
+                        <button type="button" onclick="prevStep(4)" class="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors duration-200">
+                            ← Back
+                        </button>
+                        <button type="submit" class="px-8 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors duration-200">
+                            ⚡ Fast Analysis
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Enhanced Fast Loading Screen -->
+        <div id="loadingScreen" class="loading-overlay fixed inset-0 flex items-center justify-center z-50" style="display: none;">
+            <div class="loading-content rounded-3xl p-10 text-center card-shadow">
+                <div class="modern-loader mx-auto mb-6"></div>
+                <h3 class="text-2xl font-bold text-white mb-3">⚡ Lightning-Fast Analysis</h3>
+                <p class="text-white opacity-90 mb-4">Processing your comprehensive assessment...</p>
+                <div class="mt-6">
+                    <div id="loadingProgress" class="text-white text-base pulse-fast font-medium">Analyzing data...</div>
+                </div>
+                <div class="mt-4 w-64 bg-gray-200 bg-opacity-20 rounded-full h-2 mx-auto">
+                    <div class="bg-gradient-to-r from-blue-600 to-blue-800 h-2 rounded-full animate-pulse" style="width: 70%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enhanced Results Display -->
+        <div id="resultsSection" class="max-w-6xl mx-auto mt-8 fade-in" style="display: none;">
+            <div class="glass-card rounded-3xl p-10 card-shadow">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-bold text-white mb-3">🎯 Your Assessment Results</h2>
+                    <p class="text-xl text-white opacity-90">Based on Ayurvedic principles and modern health science</p>
+                    <div id="processingTime" class="text-sm text-white opacity-70 mt-3 font-medium"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    <!-- Enhanced Prakriti Result -->
+                    <div class="space-y-8">
+                        <div class="result-card rounded-2xl p-8">
+                            <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
+                                🌿 Your Ayurvedic Constitution
+                                <span class="ml-3 text-sm bg-green-500 bg-opacity-20 text-green-300 px-3 py-1 rounded-full">Personalized</span>
+                            </h3>
+                            <div id="prakritiResult" class="text-center">
+                                <div id="prakritiType" class="text-4xl font-bold text-white mb-4"></div>
+                                <div id="prakritiScores" class="space-y-3"></div>
+                            </div>
+                        </div>
+
+                        <!-- Enhanced Alzheimer's Risk -->
+                        <div class="result-card rounded-2xl p-8">
+                            <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
+                                🧠 Alzheimer's Risk Assessment
+                                <span class="ml-3 text-sm bg-blue-500 bg-opacity-20 text-blue-300 px-3 py-1 rounded-full">AI-Powered</span>
+                            </h3>
+                            <div id="riskResult" class="text-center">
+                                <div id="riskLevel" class="text-3xl font-bold mb-3"></div>
+                                <div id="riskScore" class="text-xl text-white opacity-90 mb-6"></div>
+                                <div id="riskProgressBar" class="w-full bg-gray-300 bg-opacity-30 rounded-full h-6 mb-4">
+                                    <div id="riskProgress" class="progress-bar bg-blue-500 h-6 rounded-full flex items-center justify-end pr-3" style="width: 0%;">
+                                        <span class="text-white text-sm font-bold" id="progressText"></span>
+                                    </div>
+                                </div>
+                                <div id="verdict" class="text-white opacity-90 text-lg"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Enhanced Animated Chart Display -->
+                    <div class="result-card rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
+                            📊 Risk Visualization
+                            <span class="ml-3 text-sm bg-purple-500 bg-opacity-20 text-purple-300 px-3 py-1 rounded-full">Interactive</span>
+                        </h3>
+                        <div id="chartContainer" class="text-center">
+                            <div id="cssGauge" class="gauge-container">
+                                <div class="gauge-bg">
+                                    <div class="gauge-inner">
+                                        <div class="gauge-score" id="gaugeScore">0</div>
+                                        <div class="gauge-text" id="gaugeText">Risk Score</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-6 text-center">
+                                <div class="flex justify-center space-x-4 text-sm">
+                                    <div class="flex items-center">
+                                        <div class="w-4 h-4 bg-green-500 rounded-full mr-2"></div>
+                                        <span class="text-white opacity-80">Low (0-40)</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-4 h-4 bg-yellow-500 rounded-full mr-2"></div>
+                                        <span class="text-white opacity-80">Medium (41-60)</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-4 h-4 bg-red-500 rounded-full mr-2"></div>
+                                        <span class="text-white opacity-80">High (61-100)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Recommendations -->
+                <div class="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="result-card rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
+                            🌿 Ayurvedic Recommendations
+                            <span class="ml-3 text-sm bg-green-500 bg-opacity-20 text-green-300 px-3 py-1 rounded-full">Holistic</span>
+                        </h3>
+                        <div id="ayurvedaRecommendations" class="text-white opacity-95 leading-relaxed"></div>
+                    </div>
+                    
+                    <div class="result-card rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
+                            🏥 Medical Recommendations
+                            <span class="ml-3 text-sm bg-red-500 bg-opacity-20 text-red-300 px-3 py-1 rounded-full">Clinical</span>
+                        </h3>
+                        <div id="allopathyRecommendations" class="text-white opacity-95 leading-relaxed"></div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Action Buttons -->
+                <div class="text-center mt-12">
+                    <button onclick="resetAssessment()" class="btn-primary px-8 py-4 text-white font-semibold rounded-xl transition-all duration-300 mr-6">
+                        🔄 Take Another Assessment
+                    </button>
+                    <button onclick="window.print()" class="btn-success px-8 py-4 text-white font-semibold rounded-xl transition-all duration-300">
+                        🖨️ Print Results
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        // Initialize enhanced animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Staggered fade-in animations
+            anime({
+                targets: '.fade-in',
+                opacity: [0, 1],
+                translateY: [40, 0],
+                duration: 1200,
+                delay: anime.stagger(200),
+                easing: 'easeOutCubic'
+            });
+            
+            // Animate particles
+            anime({
+                targets: '.particle',
+                translateY: [-20, 20],
+                scale: [0.8, 1.2],
+                opacity: [0.3, 0.7],
+                duration: 4000,
+                direction: 'alternate',
+                loop: true,
+                easing: 'easeInOutSine',
+                delay: anime.stagger(500)
+            });
+            
+            // Feature badges hover animation
+            document.querySelectorAll('.feature-badge').forEach(badge => {
+                badge.addEventListener('mouseenter', () => {
+                    anime({
+                        targets: badge,
+                        scale: 1.1,
+                        duration: 300,
+                        easing: 'easeOutCubic'
+                    });
+                });
+                
+                badge.addEventListener('mouseleave', () => {
+                    anime({
+                        targets: badge,
+                        scale: 1,
+                        duration: 300,
+                        easing: 'easeOutCubic'
+                    });
+                });
+            });
+        });
+
+        function updateProgressSteps(step) {
+            const steps = document.querySelectorAll('.step-indicator');
+            steps.forEach((stepEl, index) => {
+                if (index < step) {
+                    stepEl.classList.add('active');
+                    stepEl.classList.remove('bg-gray-300', 'text-gray-600');
+                    stepEl.classList.add('bg-blue-500', 'text-white');
+                } else {
+                    stepEl.classList.remove('active', 'bg-blue-500', 'text-white');
+                    stepEl.classList.add('bg-gray-300', 'text-gray-600');
+                }
+            });
+        }
+
+        function nextStep(step) {
+            // Validate current step with enhanced feedback
+            const currentStepEl = document.getElementById(`step-${step}`);
+            const inputs = currentStepEl.querySelectorAll('input[required], select[required]');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.classList.add('ring-red-500', 'ring-2');
+                    // Shake animation for invalid inputs
+                    anime({
+                        targets: input,
+                        translateX: [-10, 10, -5, 5, 0],
+                        duration: 500,
+                        easing: 'easeInOutQuad'
+                    });
+                } else {
+                    input.classList.remove('ring-red-500', 'ring-2');
+                }
+            });
+
+            if (!isValid) {
+                // Enhanced error feedback
+                anime({
+                    targets: currentStepEl,
+                    scale: [1, 1.02, 1],
+                    duration: 400,
+                    easing: 'easeInOutQuad'
+                });
+                return;
+            }
+
+            // Smooth step transition
+            anime({
+                targets: `#step-${step}`,
+                translateX: [0, -100],
+                opacity: [1, 0],
+                duration: 500,
+                easing: 'easeInCubic',
+                complete: function() {
+                    document.getElementById(`step-${step}`).style.display = 'none';
+                    
+                    // Show next step with slide-in animation
+                    const nextStepEl = document.getElementById(`step-${step + 1}`);
+                    nextStepEl.style.display = 'block';
+                    nextStepEl.style.transform = 'translateX(100px)';
+                    nextStepEl.style.opacity = '0';
+                    
+                    anime({
+                        targets: nextStepEl,
+                        translateX: [100, 0],
+                        opacity: [0, 1],
+                        duration: 600,
+                        easing: 'easeOutCubic'
+                    });
+                }
+            });
+
+            currentStep = step + 1;
+            updateProgressSteps(currentStep);
+        }
+
+        function prevStep(step) {
+            // Fast animate out current step
+            anime({
+                targets: `#step-${step}`,
+                translateX: [0, 50],
+                opacity: [1, 0],
+                duration: 300,
+                easing: 'easeInOutQuad',
+                complete: function() {
+                    document.getElementById(`step-${step}`).style.display = 'none';
+                    
+                    // Show previous step
+                    const prevStepEl = document.getElementById(`step-${step - 1}`);
+                    prevStepEl.style.display = 'block';
+                    prevStepEl.style.transform = 'translateX(-50px)';
+                    prevStepEl.style.opacity = '0';
+                    
+                    anime({
+                        targets: prevStepEl,
+                        translateX: [-50, 0],
+                        opacity: [0, 1],
+                        duration: 300,
+                        easing: 'easeInOutQuad'
+                    });
+                }
+            });
+
+            currentStep = step - 1;
+            updateProgressSteps(currentStep);
+        }
+
+        // Handle form submission
+        document.getElementById('assessmentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show fast loading screen
+            document.getElementById('loadingScreen').style.display = 'flex';
+            
+            // Fast loading messages
+            const loadingMessages = [
+                "Analyzing constitution...",
+                "Processing health data...",
+                "Calculating risk...",
+                "Generating results..."
+            ];
+            
+            let messageIndex = 0;
+            const loadingInterval = setInterval(() => {
+                if (messageIndex < loadingMessages.length) {
+                    document.getElementById('loadingProgress').textContent = loadingMessages[messageIndex];
+                    messageIndex++;
+                } else {
+                    clearInterval(loadingInterval);
+                }
+            }, 200);
+
+            try {
+                // Collect form data
+                const formData = new FormData(this);
+                const data = {};
+                for (let [key, value] of formData.entries()) {
+                    // Convert numeric fields
+                    if (['age', 'systolic_bp', 'blood_sugar'].includes(key)) {
+                        data[key] = parseInt(value);
+                    } else if (key === 'bmi') {
+                        data[key] = parseFloat(value);
+                    } else {
+                        data[key] = value;
+                    }
+                }
+
+                // Send to fast backend
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                
+                // Hide loading screen quickly
+                setTimeout(() => {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                    displayResults(result);
+                }, 500);
+
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('loadingScreen').style.display = 'none';
+                alert('An error occurred while processing your assessment. Please try again.');
+            }
+        });
+
+        function displayResults(result) {
+            // Hide form
+            document.getElementById('assessmentForm').style.display = 'none';
+            document.getElementById('progress-steps').style.display = 'none';
+            
+            // Show results
+            const resultsSection = document.getElementById('resultsSection');
+            resultsSection.style.display = 'block';
+
+            // Display processing time if available
+            if (result.processing_time) {
+                document.getElementById('processingTime').textContent = `Processed in ${result.processing_time}`;
+            }
+
+            // Display Prakriti result
+            const prakritiEmojis = {
+                'Vata': '💨',
+                'Pitta': '🔥',
+                'Kapha': '🌿'
+            };
+            
+            let prakritiDisplay = result.prakriti_result;
+            let emoji = '';
+            
+            // Add appropriate emojis
+            Object.keys(prakritiEmojis).forEach(dosha => {
+                if (prakritiDisplay.includes(dosha)) {
+                    emoji += prakritiEmojis[dosha] + ' ';
+                }
+            });
+            
+            document.getElementById('prakritiType').innerHTML = `${emoji}${prakritiDisplay}`;
+            
+            // Enhanced Prakriti scores display with animations
+            const scoresHTML = Object.entries(result.prakriti_scores)
+                .sort(([,a], [,b]) => b - a)
+                .map(([dosha, score]) => {
+                    let badgeClass = 'dosha-badge ';
+                    if (dosha === 'Vata') badgeClass += 'dosha-vata';
+                    else if (dosha === 'Pitta') badgeClass += 'dosha-pitta';
+                    else if (dosha === 'Kapha') badgeClass += 'dosha-kapha';
+                    
+                    return `
+                        <div class="flex justify-between items-center py-3">
+                            <span class="${badgeClass}">${prakritiEmojis[dosha] || ''} ${dosha}</span>
+                            <div class="flex items-center">
+                                <div class="w-32 bg-gray-300 bg-opacity-30 rounded-full h-3 mr-3">
+                                    <div class="bg-gradient-to-r from-blue-500 to-blue-700 h-3 rounded-full transition-all duration-1000" style="width: 0%;"></div>
+                                </div>
+                                <span class="font-bold text-white">${score}%</span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            document.getElementById('prakritiScores').innerHTML = scoresHTML;
+
+            // Animate prakriti bars
+            setTimeout(() => {
+                const bars = document.querySelectorAll('#prakritiScores .bg-gradient-to-r');
+                const scores = Object.entries(result.prakriti_scores).sort(([,a], [,b]) => b - a);
+                
+                bars.forEach((bar, index) => {
+                    anime({
+                        targets: bar,
+                        width: `${scores[index][1]}%`,
+                        duration: 1500,
+                        delay: index * 300,
+                        easing: 'easeOutCubic'
+                    });
+                });
+            }, 200);
+
+            // Display Alzheimer's risk
+            const riskColors = {
+                'Low': 'text-green-400',
+                'Medium': 'text-yellow-400',
+                'High': 'text-red-400'
+            };
+            
+            document.getElementById('riskLevel').innerHTML = `
+                <span class="${riskColors[result.alzheimer_risk]}">${result.alzheimer_risk} Risk</span>
+            `;
+            document.getElementById('riskScore').textContent = `Score: ${result.risk_score}/100`;
+            document.getElementById('verdict').textContent = result.verdict;
+            
+            // Enhanced animated risk progress bar
+            setTimeout(() => {
+                const progressEl = document.getElementById('riskProgress');
+                const progressTextEl = document.getElementById('progressText');
+                
+                // Animate width with counter
+                anime({
+                    targets: progressEl,
+                    width: `${result.risk_score}%`,
+                    duration: 2000,
+                    easing: 'easeOutCubic',
+                    update: function(anim) {
+                        const currentValue = Math.round((anim.progress / 100) * result.risk_score);
+                        if (progressTextEl) progressTextEl.textContent = `${currentValue}%`;
+                    }
+                });
+                
+                // Change color based on risk level with animation
+                setTimeout(() => {
+                    if (result.risk_score <= 40) {
+                        progressEl.className = 'progress-bar bg-gradient-to-r from-green-400 to-green-600 h-6 rounded-full flex items-center justify-end pr-3';
+                    } else if (result.risk_score <= 60) {
+                        progressEl.className = 'progress-bar bg-gradient-to-r from-yellow-400 to-yellow-600 h-6 rounded-full flex items-center justify-end pr-3';
+                    } else {
+                        progressEl.className = 'progress-bar bg-gradient-to-r from-red-400 to-red-600 h-6 rounded-full flex items-center justify-end pr-3';
+                    }
+                }, 1000);
+            }, 500);
+
+            // Enhanced animated CSS gauge
+            setTimeout(() => {
+                const gaugeScore = document.getElementById('gaugeScore');
+                const gaugeText = document.getElementById('gaugeText');
+                
+                // Animate score counter
+                anime({
+                    targets: { value: 0 },
+                    value: result.risk_score,
+                    duration: 2500,
+                    easing: 'easeOutCubic',
+                    update: function(anim) {
+                        gaugeScore.textContent = Math.round(anim.animatables[0].target.value);
+                    }
+                });
+                
+                // Update gauge text
+                if (result.chart_data) {
+                    gaugeText.textContent = result.chart_data.risk_text;
+                }
+            }, 300);
+
+            // Display recommendations
+            if (typeof result.prakriti_recommendations === 'object') {
+                const prakritiRecsHTML = Object.entries(result.prakriti_recommendations)
+                    .map(([category, recommendation]) => `
+                        <div class="mb-3">
+                            <strong>${category}:</strong> ${recommendation}
+                        </div>
+                    `).join('');
+                document.getElementById('ayurvedaRecommendations').innerHTML = prakritiRecsHTML;
+            } else {
+                document.getElementById('ayurvedaRecommendations').textContent = result.ayurveda_recommendations;
+            }
+            
+            document.getElementById('allopathyRecommendations').textContent = result.allopathy_recommendations;
+
+            // Enhanced animate results appearance
+            anime({
+                targets: '#resultsSection',
+                opacity: [0, 1],
+                translateY: [50, 0],
+                duration: 1000,
+                easing: 'easeOutCubic'
+            });
+
+            // Animate individual result cards with stagger
+            anime({
+                targets: '#resultsSection .result-card',
+                opacity: [0, 1],
+                translateY: [30, 0],
+                scale: [0.9, 1],
+                duration: 800,
+                delay: anime.stagger(200),
+                easing: 'easeOutCubic'
+            });
+        }
+
+        function resetAssessment() {
+            // Reset form
+            document.getElementById('assessmentForm').reset();
+            
+            // Hide results and show form
+            document.getElementById('resultsSection').style.display = 'none';
+            document.getElementById('assessmentForm').style.display = 'block';
+            document.getElementById('progress-steps').style.display = 'flex';
+            
+            // Reset to first step
+            for (let i = 2; i <= totalSteps; i++) {
+                document.getElementById(`step-${i}`).style.display = 'none';
+            }
+            document.getElementById('step-1').style.display = 'block';
+            document.getElementById('step-1').style.transform = 'translateX(0)';
+            document.getElementById('step-1').style.opacity = '1';
+            
+            currentStep = 1;
+            updateProgressSteps(currentStep);
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize progress steps
+        updateProgressSteps(currentStep);
+    </script>
+</body>
+</html>
