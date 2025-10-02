@@ -313,6 +313,11 @@ This project is for educational and research purposes. Please consult healthcare
 
 ## 🔮 Future Enhancements
 
+### 🔬 **Advanced Ayurvedic Integration**
+- [ ] **Nadi Pariksha Integration**: Currently exploring pulse diagnosis (Nadi Pariksha) integration with IoT sensors for more accurate Prakriti assessment
+- [ ] **Neuro-Imaging Analysis**: Research in progress to combine traditional Ayurvedic assessment with modern neuroimaging data for enhanced Alzheimer's prediction
+
+### 📱 **Platform Enhancements**
 - [ ] Database integration for user history
 - [ ] User authentication system
 - [ ] Mobile app (React Native/Flutter)
@@ -320,6 +325,11 @@ This project is for educational and research purposes. Please consult healthcare
 - [ ] Integration with wearable devices
 - [ ] Telemedicine provider connections
 - [ ] Advanced ML models with real training data
+
+### 🧠 **AI/ML Research**
+- [ ] Deep learning models for EEG/fMRI pattern recognition
+- [ ] Computer vision for traditional diagnostic methods
+- [ ] Real-time biometric data fusion algorithms
 
 ---
 
