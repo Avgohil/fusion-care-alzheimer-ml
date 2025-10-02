@@ -329,6 +329,4 @@ If you encounter any issues or have questions:
 - Check the documentation
 - Review the API endpoints
 
-**Live Demo**: [Add your deployed URL here]
-
-**Documentation**: [Add docs URL if available]
+**Live Demo**: [https://fusion-care-alzheimer-ml-production.up.railway.app/]
