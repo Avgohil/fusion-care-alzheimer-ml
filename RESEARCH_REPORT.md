@@ -175,6 +175,9 @@ The fusion approach combines:
 | Accuracy | - | - | - | **92%** |
 
 **Confusion Matrix - Stage 1:**
+
+*Detailed confusion matrix visualization available in: `stage_1_prakriti_classification/data/confusion_matrix_comparison.png`*
+
 ```
               Predicted
 Actual    Vata  Pitta  Kapha
@@ -182,6 +185,8 @@ Vata       89     6      5
 Pitta       4    93      3
 Kapha       3     2     95
 ```
+
+*Figure 1: Confusion matrix showing high classification accuracy across all three Prakriti types with minimal cross-classification errors.*
 
 #### 3.1.2 Stage 2: Alzheimer's Risk Prediction Results
 
@@ -244,12 +249,13 @@ Kapha       3     2     95
 ### 4.1 Interpretation of Results
 
 #### 4.1.1 Prakriti Classification Effectiveness
-The 92% accuracy in Prakriti classification demonstrates the feasibility of digitizing traditional Ayurvedic assessment methods. The rule-based approach, validated through machine learning, successfully captures constitutional patterns that align with traditional diagnosis methods.
+The 92% accuracy in Prakriti classification demonstrates the feasibility of digitizing traditional Ayurvedic assessment methods. The rule-based approach, validated through machine learning, successfully captures constitutional patterns that align with traditional diagnosis methods. Detailed performance visualization is provided in the confusion matrix comparison (see `stage_1_prakriti_classification/data/confusion_matrix_comparison.png`).
 
 **Key Observations:**
 - Kapha constitution showed highest recall (94%), suggesting clear distinctive features
 - Vata constitution demonstrated highest precision (94%), indicating well-defined boundaries
 - Cross-constitutional misclassification was minimal (2-6%), supporting the validity of the approach
+- The confusion matrix visualization clearly demonstrates the strong diagonal pattern indicating accurate classification
 
 #### 4.1.2 Alzheimer's Risk Prediction Insights
 The 85% accuracy in risk prediction, with Prakriti as the second most important feature (18% importance), validates the hypothesis that constitutional analysis contributes significantly to predictive models.
@@ -397,15 +403,21 @@ The successful implementation of Fusion Care Catalyst could revolutionize:
 
 ## 7. Appendix
 
-### Appendix A: System Screenshots
+### Appendix A: Visualizations and Screenshots
 
-#### A.1 User Interface - Assessment Form
+#### A.1 Model Performance Visualizations
+- **Confusion Matrix:** `stage_1_prakriti_classification/data/confusion_matrix_comparison.png`
+  - Detailed visualization of Prakriti classification performance
+  - Shows precision, recall, and F1-score comparisons across constitutional types
+  - Demonstrates minimal misclassification between Vata, Pitta, and Kapha types
+
+#### A.2 User Interface - Assessment Form
 [Screenshot of multi-step form interface showing Ayurvedic assessment questions]
 
-#### A.2 Results Dashboard
+#### A.3 Results Dashboard
 [Screenshot of results page with animated charts and recommendations]
 
-#### A.3 API Documentation
+#### A.4 API Documentation
 [Screenshot of FastAPI Swagger documentation interface]
 
 ### Appendix B: Technical Specifications
