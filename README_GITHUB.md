@@ -2,6 +2,11 @@
 
 **Ayurvedic Constitution & Alzheimer's Risk Assessment Platform**
 
+## 🌐 **Live Demo**
+🚀 **Try the live application**: [https://fusion-care-alzheimer-ml-production.up.railway.app](https://fusion-care-alzheimer-ml-production.up.railway.app)
+
+📚 **API Documentation**: [https://fusion-care-alzheimer-ml-production.up.railway.app/docs](https://fusion-care-alzheimer-ml-production.up.railway.app/docs)
+
 > **Note**: This repository contains the **ML Pipeline & Backend Implementation** that I led during our hackathon project. The complete Care Catalyst full-stack application was built collaboratively by our team during the hackathon, but this specific implementation focuses on the machine learning pipeline, data processing, and API development components.
 
 A modern web application that combines traditional Ayurvedic medicine with AI/ML technology to provide personalized health assessments through two-stage analysis.
