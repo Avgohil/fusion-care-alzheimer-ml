@@ -2,6 +2,8 @@
 
 **Ayurvedic Constitution & Alzheimer's Risk Assessment Platform**
 
+> **Note**: This repository contains the **ML Pipeline & Backend Implementation** that I led during our hackathon project. The complete Care Catalyst full-stack application was built collaboratively by our team during the hackathon, but this specific implementation focuses on the machine learning pipeline, data processing, and API development components.
+
 A modern web application that combines traditional Ayurvedic medicine with AI/ML technology to provide personalized health assessments through two-stage analysis.
 
 ![Care Catalyst](https://img.shields.io/badge/Healthcare-AI%20Powered-blue?style=for-the-badge)
@@ -9,9 +11,21 @@ A modern web application that combines traditional Ayurvedic medicine with AI/ML
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
+## 🏆 Hackathon Project Context
+
+This implementation represents the **Machine Learning Pipeline & Backend Development** component of our Care Catalyst project, originally built during a hackathon. While the complete full-stack application was developed collaboratively by our team, this repository specifically showcases:
+
+- **ML Model Development & Training** 🤖
+- **Data Pipeline & Feature Engineering** 📊  
+- **FastAPI Backend Architecture** 🚀
+- **API Design & Integration** 🔗
+- **Performance Optimization** ⚡
+
+The full-stack version included additional components like advanced frontend frameworks, database integration, user authentication, and deployment infrastructure that were developed by other team members.
+
 ## ✨ Features
 
-### 🎯 Two-Stage Assessment Pipeline
+### 🎯 Two-Stage ML Assessment Pipeline
 1. **Stage 1: Ayurvedic Prakriti Classification**
    - Analyzes 20 physical and behavioral characteristics
    - Determines constitution: Vata (💨), Pitta (🔥), Kapha (🌿), or combinations
@@ -35,6 +49,28 @@ A modern web application that combines traditional Ayurvedic medicine with AI/ML
 - **Personalized Recommendations**: Both Ayurvedic and modern medical advice
 - **Beautiful Charts**: Real-time animated risk assessment visualizations
 - **Print-friendly Results**: Professional results page
+
+## 🎯 My Contribution & Technical Leadership
+
+As the **ML Pipeline Lead** for this hackathon project, I was responsible for:
+
+### 🤖 Machine Learning Development
+- Designed and implemented the two-stage ML assessment pipeline
+- Developed Ayurvedic Prakriti classification algorithm with 20+ features
+- Built Alzheimer's risk prediction model with 18 health indicators
+- Optimized model performance and accuracy
+
+### ⚡ Backend Architecture & Optimization  
+- Designed FastAPI backend with efficient API endpoints
+- Implemented performance optimizations (reduced response time from 30s to <1s)
+- Replaced heavy Plotly image generation with lightweight CSS-based charts
+- Built robust data validation and error handling
+
+### 📊 Data Engineering
+- Created comprehensive data preprocessing pipelines
+- Designed feature engineering for both Ayurvedic and modern health metrics
+- Implemented data encoders and model serialization
+- Ensured data quality and validation
 
 ## 🚀 Quick Start
 
