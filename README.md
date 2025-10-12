@@ -87,7 +87,7 @@ As the **ML Pipeline Lead** for this hackathon project, I was responsible for:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/care-catalyst.git
+   git clone https://github.com/Avgohil/fusion-care-alzheimer-ml.git
    cd care-catalyst
    ```
 
