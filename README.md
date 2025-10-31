@@ -4,6 +4,7 @@
 
 ## 🌐 **Live Demo**
 🚀 **Try the live application**: [https://fusion-care-alzheimer-ml-production.up.railway.app](https://fusion-care-alzheimer-ml-production.up.railway.app)
+> **Note** : i deployed this website on railways but my  trial was expired so right now it can't live but i'll fix it and update futher  and also api documantion documentation is not working but i upload images of both stage api in assest folder.
 
 📚 **API Documentation**: [https://fusion-care-alzheimer-ml-production.up.railway.app/docs](https://fusion-care-alzheimer-ml-production.up.railway.app/docs)
 
