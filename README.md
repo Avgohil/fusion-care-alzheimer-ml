@@ -4,7 +4,11 @@
 
 ## 🌐 **Live Demo**
 🚀 **Try the live application**: [https://fusion-care-alzheimer-ml-production.up.railway.app](https://fusion-care-alzheimer-ml-production.up.railway.app)
-> **Note** : i deployed this website on railways but my  trial was expired so right now it can't live but i'll fix it and update futher  and also api documantion documentation is not working but i upload images of both stage api in assest folder.
+> **Note** :  The application backend and API logic are fully implemented in this repository.
+The UI was handled by my teammates during the hackathon, while I focused on 
+the two-stage ML pipeline and FastAPI backend. The live demo (previously on Railway) 
+expired due to trial limits, but the API responses and test scripts are included 
+in the assets folder for review.
 
 📚 **API Documentation**: [https://fusion-care-alzheimer-ml-production.up.railway.app/docs](https://fusion-care-alzheimer-ml-production.up.railway.app/docs)
 
