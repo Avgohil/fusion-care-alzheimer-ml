@@ -1,6 +1,8 @@
 # Care Catalyst 🌿🧠
 
 **Ayurvedic Constitution & Alzheimer's Risk Assessment Platform**
+## **Problem & Motivation**
+Early detection of Alzheimer’s disease is difficult in South Asian settings due to limited access to advanced diagnostics, late clinical presentation, and low awareness of mild cognitive changes. Traditional Ayurvedic frameworks like Prakriti assessment capture subtle, constitution-specific risk patterns that are not reflected in routine clinical screening. Care Catalyst bridges this gap by combining Ayurvedic constitution profiling with modern health and lifestyle indicators into a unified, low-cost digital assessment pipeline. This prototype is designed as an accessible, culturally grounded starting point for future data-driven models and real-world clinical validation.
 
 ## 🌐 **Live Demo**
 🚀 **Try the live application**: [https://fusion-care-alzheimer-ml-production.up.railway.app](https://fusion-care-alzheimer-ml-production.up.railway.app)
