@@ -14,7 +14,7 @@ in the assets folder for review.
 
 📚 **API Documentation**: [https://fusion-care-alzheimer-ml-production.up.railway.app/docs](https://fusion-care-alzheimer-ml-production.up.railway.app/docs)
 
-> **Note**: This repository contains the **ML Pipeline & Backend Implementation** that I led during our hackathon project. The complete Care Catalyst full-stack application was built collaboratively by our team during the hackathon, but this specific implementation focuses on the machine learning pipeline, data processing, and API development components. you can find complete project 
+> **Note**: This repository contains the **ML Pipeline & Backend Implementation** that I led during our hackathon project. The complete Care Catalyst full-stack application was built collaboratively by our team during the hackathon, but this specific implementation focuses on the machine learning pipeline, data processing, and API development components. you can find complete project here ![Fusion-Care](https://github.com/Avgohil/Fusion_Care)
 
 A modern web application that combines traditional Ayurvedic medicine with AI/ML technology to provide personalized health assessments through two-stage analysis.
 
