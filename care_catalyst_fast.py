@@ -3,9 +3,6 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import Literal, Optional
-import pandas as pd
-import numpy as np
-import base64
 import os
 import random
 import time
