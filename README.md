@@ -2,85 +2,60 @@
   <img src="assets/image.png" alt="Fusion Care banner" width="100%" />
 </p>
 
-<h1 align="center">🧠 Fusion Care</h1>
+# Fusion Care
 
-<h3 align="center">
-AI-Powered Early Alzheimer's Disease Risk Assessment<br/>
-using Ayurvedic Phenotyping &amp; Modern Clinical Intelligence
-</h3>
+AI-based framework for early Alzheimer's disease risk assessment, integrating Ayurvedic constitutional phenotyping with clinical and lifestyle data.
 
-<p align="center">
-  <em>Ayurveda × Clinical Intelligence × Machine Learning</em><br/>
-  🏆 Presented at AAIC 2026
+**Presented at the Alzheimer's Association International Conference (AAIC) 2026** — Virtual Poster.
+
+**Repository type:** Implementation. Research background, literature review, and the conference poster are maintained in the companion repository: [Ayu-Allo Dementia Research](https://github.com/Avgohil/Ayu-Allo-Dementia-Research).
+
+<p align="left">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python"/>
+  <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI"/>
+  <img src="https://img.shields.io/badge/Domain-Healthcare%20AI-blue?style=flat-square" alt="Healthcare AI"/>
+  <img src="https://img.shields.io/badge/Conference-AAIC%202026-6f42c1?style=flat-square" alt="AAIC 2026"/>
+  <img src="https://img.shields.io/badge/License-Educational%2FResearch-lightgrey?style=flat-square" alt="License"/>
+  <img src="https://img.shields.io/github/stars/Avgohil/fusion-care-alzheimer-ml?style=flat-square" alt="Stars"/>
+  <img src="https://img.shields.io/github/last-commit/Avgohil/fusion-care-alzheimer-ml?style=flat-square" alt="Last commit"/>
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"/>
-  <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI"/>
-  <img src="https://img.shields.io/badge/Machine-Learning-orange?style=for-the-badge" alt="Machine Learning"/>
-  <img src="https://img.shields.io/badge/Healthcare-AI-blue?style=for-the-badge" alt="Healthcare AI"/>
-  <img src="https://img.shields.io/badge/Research-Repository-6f42c1?style=for-the-badge" alt="Research"/>
-  <img src="https://img.shields.io/badge/AAIC-2026-purple?style=for-the-badge" alt="AAIC 2026"/>
-  <img src="https://img.shields.io/badge/Open-Source-2ea44f?style=for-the-badge" alt="Open Source"/>
-  <br/>
-  <img src="https://img.shields.io/badge/License-Educational%2FResearch-lightgrey?style=for-the-badge" alt="License"/>
-  <img src="https://img.shields.io/github/stars/Avgohil/fusion-care-alzheimer-ml?style=for-the-badge&color=yellow" alt="GitHub Stars"/>
-  <img src="https://img.shields.io/github/last-commit/Avgohil/fusion-care-alzheimer-ml?style=for-the-badge&color=informational" alt="Last Commit"/>
-</p>
+## Research Summary
 
----
-
-## 🏆 Recognition
-
-**Presented at the Alzheimer's Association International Conference (AAIC) 2026**
-
-| | |
+| Category | Details |
 |---|---|
-| **Presentation Type** | Virtual Poster |
-| **Abstract Title** | *A Two-Stage AI/ML Framework Integrating Ayurvedic Phenotyping and Clinical Data for Early Alzheimer's Risk Detection* |
+| Domain | Healthcare AI, Clinical Decision Support |
+| Conference | AAIC 2026 (Virtual Poster) |
+| Framework | Two-stage AI/ML pipeline |
+| Stage 1 | Ayurvedic Prakriti classification (rule-based, 20 features) |
+| Stage 2 | Alzheimer's risk prediction (factor-weighted scoring, 18 features) |
+| Backend | FastAPI |
+| Repository role | Implementation (ML pipeline + backend) |
+| Research companion | [Ayu-Allo Dementia Research](https://github.com/Avgohil/Ayu-Allo-Dementia-Research) |
 
----
+## Why Fusion Care
 
-## 🧭 Why Fusion Care?
+Alzheimer's disease is typically diagnosed after substantial neurological damage has occurred, at a stage where intervention options are limited. Screening approaches that are inexpensive and usable earlier in the disease course have value for early-intervention research, independent of whether they meet diagnostic standards on their own.
 
-Alzheimer's disease is typically diagnosed after significant neurological damage has already occurred, at a stage where intervention options are limited. Screening tools that are inexpensive, accessible, and usable before clinical symptoms are pronounced have direct value for early intervention research, even when they are not diagnostic in themselves.
+Two design choices follow from that premise.
 
-Two design choices follow from that premise:
+**Explainability.** A risk output is only useful if its contributing factors are visible. Stage 2 uses interpretable, factor-based scoring — age, cognitive symptoms, lifestyle, clinical markers, family history — so a result can be traced to its inputs rather than treated as an opaque score.
 
-**Explainability over black-box scoring.** A risk score is only useful to a clinician or researcher if the contributing factors are visible. Fusion Care's Stage 2 model is built on interpretable, factor-based scoring (age, cognitive symptoms, lifestyle, clinical markers, family history) specifically so that a risk output can be traced back to *why* it was generated, rather than treated as an opaque number.
+**Ayurvedic phenotyping as a complementary signal.** Prakriti (constitutional typing) is a longstanding framework for characterizing physiological and behavioral tendencies. It is not a validated biomarker for Alzheimer's risk. This project treats it as an additional phenotypic layer worth testing computationally alongside clinical data, not as a claimed diagnostic mechanism. Clinical validation of this hypothesis is listed under Future Research, not claimed here.
 
-**Ayurvedic phenotyping as a complementary signal, not a replacement.** Prakriti (constitutional typing) is a longstanding framework for characterizing individual physiological and behavioral tendencies. It is not a validated biomarker for Alzheimer's risk on its own. Fusion Care treats it as an additional phenotypic layer alongside clinical data — a hypothesis worth testing computationally, not a claimed diagnostic mechanism. This is explicitly framed as exploratory; clinical validation is listed under Future Roadmap, not claimed here.
+## Overview
 
----
-
-## 🌟 Overview
-
-Fusion Care is a two-stage AI/ML framework for early Alzheimer's disease risk assessment. It integrates **Ayurvedic constitutional phenotyping (Prakriti)** with **modern clinical and lifestyle evaluation**, combining traditional diagnostic knowledge with evidence-based health assessment to produce personalized risk predictions and recommendations.
+Fusion Care is a two-stage AI/ML framework for early Alzheimer's disease risk assessment. It combines **Ayurvedic constitutional phenotyping (Prakriti)** with **modern clinical and lifestyle evaluation** to produce personalized risk predictions and recommendations.
 
 The architecture is designed to extend toward wearable sensors, digital biomarkers, EEG signals, neuroimaging, and digital Nadi (pulse) analytics as the research matures.
 
----
+## My Contribution
 
-## ✨ Key Features
+This repository contains the AI/ML pipeline and FastAPI backend, which I designed and implemented: model development, feature engineering, data processing, API design, and performance optimization. The frontend interface was developed collaboratively with teammates during the original hackathon; this repository documents the ML and backend components specifically.
 
-- 🧠 Two-stage AI/ML pipeline for early Alzheimer's disease risk assessment
-- 🌿 Ayurvedic Prakriti phenotyping across 20 constitutional characteristics
-- 🩺 Modern clinical, cognitive, and lifestyle assessment across 18 factors
-- 🤖 Personalized recommendations combining Ayurveda and modern medicine
-- ⚡ FastAPI backend with a sub-second prediction pipeline
-- 🔬 Extensible architecture for wearables, EEG, neuroimaging, and digital biomarkers
+## Research Companion
 
----
-
-## 👩‍💻 My Contribution
-
-This repository contains the **AI/ML pipeline and FastAPI backend** that I designed and built: model development, feature engineering, data processing, API design, and performance optimization. The frontend interface was developed collaboratively with teammates during the original hackathon — this repository documents the ML and backend work specifically.
-
----
-
-## 📚 Research Companion
-
-This is the **implementation repository**. The accompanying research repository holds the scientific background:
+This repository contains the implementation. The companion repository, [Ayu-Allo Dementia Research](https://github.com/Avgohil/Ayu-Allo-Dementia-Research), contains:
 
 - Literature review and research background
 - AAIC 2026 poster
@@ -88,199 +63,143 @@ This is the **implementation repository**. The accompanying research repository 
 - References
 - Future research roadmap
 
-**Repository:** [Ayu-Allo Dementia Research](https://github.com/Avgohil/Ayu-Allo-Dementia-Research)
-
-### Repository Ecosystem
-
 ```mermaid
 flowchart TD
-    FC["Fusion Care<br/>(this repository)"]
-
-    subgraph Implementation ["Implementation Layer"]
-        FC --> ML[ML Pipeline]
-        FC --> API[FastAPI Backend]
-        FC --> UI[Frontend Interface]
+    subgraph Implementation ["Fusion Care — Implementation Repository"]
+        ML[ML Pipeline]
+        API[FastAPI Backend]
+        UI[Frontend Interface]
     end
 
-    subgraph Research ["Research Companion Repository"]
-        RR[Ayu-Allo Dementia Research]
-        RR --> LIT[Literature Review]
-        RR --> ABS[Conference Abstract]
-        RR --> POST[AAIC 2026 Poster]
-        RR --> FUT[Future Research Roadmap]
+    subgraph Research ["Ayu-Allo Dementia Research — Companion Repository"]
+        LIT[Literature Review]
+        ABS[Conference Abstract]
+        POST[AAIC 2026 Poster]
+        FUT[Future Research Roadmap]
     end
 
-    FC -.references.-> RR
-
-    style FC fill:#2563eb,stroke:#1e40af,color:#fff
-    style RR fill:#7c3aed,stroke:#5b21b6,color:#fff
+    Implementation -. references .-> Research
 ```
 
----
+## Hackathon Context
 
-## 🏆 Hackathon Context
+Fusion Care originated as the Care Catalyst hackathon project. This repository documents the machine learning pipeline and backend architecture: model development, feature engineering, FastAPI design, and performance work. The full-stack hackathon build additionally included a frontend (TailwindCSS, Anime.js), developed collaboratively by the team, and deployment infrastructure that is outside this repository's scope.
 
-Fusion Care originated as the **Care Catalyst** hackathon project. This repository documents the machine learning pipeline and backend architecture I built — model development, data/feature engineering, FastAPI design, and performance work. The full-stack hackathon build additionally included a frontend (TailwindCSS + Anime.js), developed collaboratively by the team, along with deployment infrastructure that isn't part of this repository's scope.
-
----
-
-## 🎯 Features
-
-### Two-Stage ML Assessment Pipeline
+## Features
 
 **Stage 1 — Ayurvedic Prakriti Classification**
 - Analyzes 20 physical and behavioral characteristics
-- Determines constitution: Vata (💨), Pitta (🔥), Kapha (🌿), or a combination
-- Produces personalized Ayurvedic recommendations
+- Determines constitution (Vata, Pitta, Kapha, or a combination)
+- Produces Ayurvedic recommendations corresponding to the determined type
 
 **Stage 2 — Alzheimer's Risk Prediction**
 - Evaluates 18 health and lifestyle factors
 - Generates a risk score (0–100) with Low / Medium / High classification
 - Combines Prakriti type with modern clinical indicators
 
-### Interface
+**Interface**
+- Multi-step form with progressive disclosure
+- Animated, CSS-based risk gauge (replaces earlier server-side Plotly image generation)
+- Responsive layout, real-time input validation
 
-- Multi-step form with progressive disclosure and visual progress indicators
-- Glassmorphism, medical-blue themed design
-- Animated CSS-based risk gauge (replaces earlier Plotly image generation)
-- Responsive layout for desktop and mobile
-- Real-time input validation
+## Technical Leadership
 
----
+**Machine learning**
+- Designed the two-stage assessment pipeline
+- Built the Ayurvedic Prakriti classifier (20+ features)
+- Built the Alzheimer's risk model (18 health indicators)
 
-## 🎯 Technical Leadership
-
-As the ML and backend lead on this project, my work spanned three areas:
-
-**Machine Learning**
-- Designed the two-stage assessment pipeline (Prakriti classification → risk prediction)
-- Built the Ayurvedic Prakriti classifier across 20+ features
-- Built the Alzheimer's risk model across 18 health indicators
-
-**Backend Architecture & Performance**
+**Backend architecture and performance**
 - Designed the FastAPI backend and its endpoints
-- Reduced response time from ~30s to <1s by replacing server-side Plotly image generation with lightweight CSS-based charts
-- Implemented data validation and error handling
+- Reduced response time from approximately 30s to under 1s by replacing server-side Plotly image generation with CSS-based charts
+- Implemented input validation and error handling
 
-**Data Engineering**
-- Built preprocessing pipelines for both Ayurvedic and clinical inputs
+**Data engineering**
+- Built preprocessing pipelines for Ayurvedic and clinical inputs
 - Designed feature engineering across both assessment stages
 - Implemented data encoders and model serialization
 
----
+## Screenshots
 
-## 📸 Screenshots
+| Screen | Suggested placement |
+|---|---|
+| Home page | Below this table |
+| Stage 1 assessment (Prakriti form) | Under Features → Stage 1 |
+| Stage 2 assessment (clinical form) | Under Features → Stage 2 |
+| Prediction results (risk gauge, recommendations) | Under Features → Interface |
+| API documentation (`/docs`) | In API Documentation, before the request/response examples |
+| AAIC poster preview (cropped) | In Recognition, above the Research Summary table |
 
-| # | Screen | Suggested placement |
-|---|--------|---------------------|
-| 1 | Home page | Below this table — sets first impression of the app |
-| 2 | Stage 1 assessment (Prakriti form) | In "Features → Two-Stage ML Assessment Pipeline," under the Stage 1 description |
-| 3 | Stage 2 assessment (clinical form) | Same subsection, under the Stage 2 description |
-| 4 | Prediction result (risk gauge + recommendations) | In "Features → Interface," under the animated risk gauge bullet |
-| 5 | API documentation (`/docs` Swagger UI) | In the API Documentation section, above the request/response examples |
-| 6 | AAIC poster preview (cropped) | In Recognition, replacing the poster-crop placeholder |
+For the AAIC poster specifically, crop and reuse individual panels rather than inserting the full poster: the workflow diagram, the architecture diagram, the results panel, and the research-highlights panel each work as standalone figures at README width; the full poster does not.
 
-> 🖼️ *Insert Screenshot 1 (Home Page) here.*
-
----
-
-## 🔀 System Workflow
+## System Workflow
 
 ```mermaid
 flowchart TD
-    U([User]) --> S1
-
-    subgraph Stage1 ["Stage 1 — Ayurvedic Phenotyping"]
-        S1[Prakriti Classification]
-    end
-
+    U([User]) --> S1[Stage 1: Prakriti Classification]
     S1 --> FE[Feature Engineering]
-
-    subgraph Stage2 ["Stage 2 — Clinical Assessment"]
-        FE --> CA[Clinical Feature Intake]
-        CA --> RPE[AI Risk Prediction Engine]
-    end
-
+    FE --> S2[Stage 2: Clinical Assessment]
+    S2 --> RPE[Risk Prediction Engine]
     RPE --> ERS[Explainable Risk Score]
     ERS --> REC([Personalized Recommendations])
-
-    style U fill:#0d1326,stroke:#3b4478,color:#fff
-    style REC fill:#0d1326,stroke:#3b4478,color:#fff
-    style RPE fill:#2563eb,stroke:#1e40af,color:#fff
 ```
 
----
-
-## 🏗️ Technical Architecture
+## Technical Architecture
 
 ```mermaid
 flowchart TD
-    FE["Frontend<br/>(HTML / TailwindCSS / Anime.js)"] --> BE
+    FE["Frontend (HTML, TailwindCSS, Anime.js)"] --> BE
 
     subgraph BE ["FastAPI Backend"]
-        VAL[Input Validation]
-        VAL --> M1[Stage 1 ML Model<br/>Prakriti Classifier]
+        VAL[Input Validation] --> M1[Stage 1 Model: Prakriti Classifier]
         M1 --> FUS[Feature Fusion]
-        FUS --> M2[Stage 2 ML Model<br/>Risk Predictor]
+        FUS --> M2[Stage 2 Model: Risk Predictor]
         M2 --> RP[Risk Prediction]
         RP --> RE[Recommendation Engine]
     end
 
     RE --> JSON[["JSON Response"]]
     JSON --> FE
-
-    style BE fill:#0d1326,stroke:#3b4478,color:#fff
 ```
 
-### Tech Stack
+**Backend:** `care_catalyst_fast.py` — `/predict` (POST, main assessment endpoint), `/` (GET, serves frontend), `/static/*` (static file serving)
+
+**Frontend:** `static/index_fast.html` — TailwindCSS for styling, Anime.js for animation, vanilla JS for form handling and API communication
+
+**Technical stack**
 
 ```mermaid
 flowchart TD
-    subgraph L1 ["Frontend"]
+    subgraph Frontend
         direction LR
-        HTML[HTML] ~~~ TW[TailwindCSS] ~~~ AJS[Anime.js]
+        HTML --- TW[TailwindCSS] --- AJS[Anime.js]
     end
-    subgraph L2 ["Backend"]
+    subgraph Backend
         direction LR
-        FAPI[FastAPI] ~~~ UV[Uvicorn] ~~~ PYD[Pydantic]
+        FAPI[FastAPI] --- UV[Uvicorn] --- PYD[Pydantic]
     end
-    subgraph L3 ["ML / Data"]
+    subgraph MLData ["ML / Data"]
         direction LR
-        PD[pandas] ~~~ NP[numpy] ~~~ PLT[plotly]
+        PD[pandas] --- NP[numpy] --- PLT[plotly]
     end
-    subgraph L4 ["Models"]
+    subgraph Models
         direction LR
-        PRK[Prakriti Classifier] ~~~ RSK[Risk Predictor]
-    end
-    subgraph L5 ["Deployment"]
-        direction LR
-        DOC[Docker] ~~~ UVD[Uvicorn ASGI]
+        PRK[Prakriti Classifier] --- RSK[Risk Predictor]
     end
 
-    L1 --> L2 --> L3 --> L4 --> L5
+    Frontend --> Backend --> MLData --> Models
 ```
 
-### Data Flow
+**Data flow**
 
 ```mermaid
 flowchart LR
-    A[User Input] --> B[Validation]
-    B --> C[Encoding]
-    C --> D[Feature Engineering]
-    D --> E[ML Inference]
-    E --> F[Prediction]
-    F --> G[Recommendations]
+    A[User Input] --> B[Validation] --> C[Encoding] --> D[Feature Engineering] --> E[ML Inference] --> F[Prediction] --> G[Recommendations]
 ```
 
-**Backend (FastAPI):** `care_catalyst_fast.py` — `/predict` (POST, main assessment endpoint), `/` (GET, serves frontend), `/static/*` (static file serving)
+## Assessment Logic
 
-**Frontend (Vanilla HTML/JS):** `static/index_fast.html` — TailwindCSS for styling, Anime.js for animation, vanilla JS for form handling and API communication
-
----
-
-## 🔬 Assessment Logic
-
-### Assessment Pipeline
+**Assessment pipeline**
 
 ```mermaid
 flowchart TD
@@ -290,35 +209,17 @@ flowchart TD
     D --> E[ML Prediction]
     E --> F[Risk Classification]
     F --> G[Recommendations]
-
-    style B fill:#7c3aed,stroke:#5b21b6,color:#fff
-    style E fill:#2563eb,stroke:#1e40af,color:#fff
 ```
 
-### Prakriti Classification
+**Prakriti classification** uses rule-based scoring: it analyzes key characteristics (body frame, skin, hair, and related traits), assigns points to each dosha based on responses, determines the dominant constitution or mixed type, and returns recommendations appropriate to that type.
 
-Rule-based scoring:
-- Analyzes key characteristics (body frame, skin, hair, etc.)
-- Assigns points to each dosha based on responses
-- Determines the dominant constitution or mixed type
-- Returns recommendations appropriate to the determined type
+**Assessment fields**
 
-### Assessment Fields
+Ayurvedic constitution (20 fields): physical (body frame, skin texture, hair type, eyes), physiological (sleep pattern, appetite, digestion, sweating), behavioral (speech, energy levels, memory, motion tendencies), environmental (body temperature, weather sensitivity).
 
-**Ayurvedic Constitution (20 fields)**
-- Physical: body frame, skin texture, hair type, eyes
-- Physiological: sleep pattern, appetite, digestion, sweating
-- Behavioral: speech, energy levels, memory, motion tendencies
-- Environmental: body temperature, weather sensitivity
+Health assessment (18 fields): demographics (age, gender), lifestyle (diet, sleep quality, stress level, physical activity), cognitive (memory loss, confusion, language difficulty, decision making), behavioral (repetition, social withdrawal, mood swings), medical (blood pressure, blood sugar, BMI, family history, chronic conditions).
 
-**Health Assessment (18 fields)**
-- Demographics: age, gender
-- Lifestyle: diet, sleep quality, stress level, physical activity
-- Cognitive: memory loss, confusion, language difficulty, decision making
-- Behavioral: repetition, social withdrawal, mood swings
-- Medical: blood pressure, blood sugar, BMI, family history, chronic conditions
-
-### Risk Score Calculation
+**Risk score calculation**
 
 ```python
 # Age factors
@@ -343,16 +244,14 @@ bmi > 30: +6 points
 # Family history: +15 points
 ```
 
-**Risk levels:** Low (0–40) — "Healthy but monitor" · Medium (41–60) — "Needs attention" · High (61–100) — "High risk, take action"
+Risk levels: Low (0–40, "Healthy but monitor"), Medium (41–60, "Needs attention"), High (61–100, "High risk, take action").
 
----
-
-## 📁 Project Structure
+## Project Structure
 
 ```mermaid
 flowchart TD
     Root["fusion-care-alzheimer-ml/"]
-    Root --> A[care_catalyst_fast.py — main FastAPI app]
+    Root --> A[care_catalyst_fast.py — main FastAPI application]
     Root --> B[care_catalyst_demo.py — demo version with chart generation]
     Root --> C[test_api.py — API testing script]
     Root --> D[requirements.txt — Python dependencies]
@@ -363,9 +262,6 @@ flowchart TD
     F --> F2[prakriti_encoder.pkl]
     Root --> G[README.md]
 ```
-
-<details>
-<summary>Markdown folder tree</summary>
 
 ```
 fusion-care-alzheimer-ml/
@@ -383,53 +279,37 @@ fusion-care-alzheimer-ml/
 └── README.md
 ```
 
-</details>
+## Quick Start
 
----
+**Prerequisites:** Python 3.8+, pip
 
-## 🚀 Quick Start
-
-### Prerequisites
-- Python 3.8+
-- pip
-
-### Installation
+**Installation**
 
 ```bash
-# Clone the repository
 git clone https://github.com/Avgohil/fusion-care-alzheimer-ml.git
 cd fusion-care-alzheimer-ml
-
-# Install dependencies
 pip install -r requirements.txt
-
-# Start the server
 python care_catalyst_fast.py
 ```
 
-Then open **http://localhost:8003**
+Then open `http://localhost:8003`.
 
----
-
-## 🎯 API Documentation
-
-### API Flow
+## API Documentation
 
 ```mermaid
 flowchart LR
     U([User]) --> FE[Frontend]
-    FE -->|"POST /predict"| API[FastAPI]
+    FE -->|POST /predict| API[FastAPI]
     API --> M[Model Inference]
     M --> J[["JSON"]]
-    J --> FE
-    FE --> U
+    J --> FE --> U
 ```
 
-> 🖼️ *Insert Screenshot 5 (Swagger UI at `/docs`) here.*
+Full interactive API documentation is available at `/docs` when running locally.
 
-### `POST /predict`
+**`POST /predict`**
 
-**Request body**
+Request body:
 ```json
 {
   "Body_Frame": "Medium, muscular",
@@ -442,7 +322,7 @@ flowchart LR
 }
 ```
 
-**Response**
+Response:
 ```json
 {
   "prakriti_result": "Pitta-Vata",
@@ -457,11 +337,7 @@ flowchart LR
 }
 ```
 
-📚 Full interactive API docs are available at `/docs` when running locally.
-
----
-
-## 🔧 Dependencies
+## Dependencies
 
 ```
 fastapi==0.104.1      # Web framework
@@ -472,16 +348,14 @@ plotly==5.17.0        # Interactive charts (optional)
 pydantic==2.5.0       # Data validation
 ```
 
----
-
-## 🚀 Deployment
+## Deployment
 
 **Local development**
 ```bash
 python care_catalyst_fast.py
 ```
 
-**Production with Uvicorn**
+**Production (Uvicorn)**
 ```bash
 uvicorn care_catalyst_fast:app --host 0.0.0.0 --port 8000
 ```
@@ -495,17 +369,13 @@ RUN pip install -r requirements.txt
 CMD ["uvicorn", "care_catalyst_fast:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
----
-
-## 🧪 Testing
+## Testing
 
 ```bash
 python test_api.py
 ```
 
----
-
-## 🔮 Future Research Roadmap
+## Future Research
 
 ```mermaid
 flowchart TD
@@ -514,56 +384,38 @@ flowchart TD
     B --> D[Wearable Integration]
     C --> E[EEG Signal Analysis]
     D --> E
-    E --> F[MRI / Neuroimaging Fusion]
-    F --> G[Real Clinical Trials]
+    E --> F[Neuroimaging Fusion]
+    F --> G[Clinical Trials]
     G --> H([Deployment])
-
-    style A fill:#0d1326,stroke:#3b4478,color:#fff
-    style H fill:#2563eb,stroke:#1e40af,color:#fff
 ```
 
-**Advanced Ayurvedic integration**
 - Nadi Pariksha (pulse diagnosis) integration with IoT sensors for more accurate Prakriti assessment
-- Neuroimaging fusion with traditional Ayurvedic assessment for enhanced Alzheimer's prediction
-
-**AI/ML research**
+- Neuroimaging fusion with Ayurvedic assessment for enhanced Alzheimer's prediction
 - Deep learning models for EEG/fMRI pattern recognition
 - Computer vision for traditional diagnostic methods
 - Real-time biometric data fusion
+- Database integration, authentication, mobile app, multi-language support, wearable device integration, telemedicine connections, expanded training data
 
-**Platform**
-- Database integration for user history · authentication · mobile app · multi-language support · wearable device integration · telemedicine connections · expanded training data
+**Timeline:** Literature review → prototype → Care Catalyst hackathon → Fusion Care → AAIC 2026 poster → clinical validation (planned) → future research.
 
----
-
-## 🤝 Contribution
+## Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'Add amazing feature'`
+4. Push the branch: `git push origin feature/amazing-feature`
+5. Open a pull request
+
+## License
+
+This project is for educational and research purposes. Consult healthcare professionals for medical advice; it is not a diagnostic tool.
+
+## Acknowledgements
+
+- The Ayurveda community, for traditional knowledge and practices
+- Open-source libraries: FastAPI, TailwindCSS, Anime.js, Plotly
+- Prior healthcare research on Alzheimer's risk factors
 
 ---
 
-## 📄 License
-
-This project is for educational and research purposes. Please consult healthcare professionals for medical advice.
-
----
-
-## 🙏 Acknowledgements
-
-- **Ayurveda community** — for traditional knowledge and practices
-- **Open source libraries** — FastAPI, TailwindCSS, Anime.js, Plotly
-- **Healthcare research** — studies on Alzheimer's risk factors
-
----
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Built%20for-Better%20Health%20Outcomes-2563eb?style=for-the-badge" alt="Built for better health outcomes"/>
-</p>
-
-<p align="center">
-  Bridging Ayurvedic knowledge with modern AI · <a href="https://github.com/Avgohil/Ayu-Allo-Dementia-Research">Research Companion Repository</a> · <a href="#-quick-start">Quick Start</a>
-</p>
+If this repository contributes to your research or learning, consider citing the work or starring the repository. For the research background, literature review, and AAIC 2026 poster, see the [companion repository](https://github.com/Avgohil/Ayu-Allo-Dementia-Research).
